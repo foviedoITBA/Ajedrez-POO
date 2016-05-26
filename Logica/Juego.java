@@ -1,3 +1,5 @@
+package Logica;
+
 public class Juego {
 
 	private Tablero elTablero;
