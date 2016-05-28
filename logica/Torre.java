@@ -2,14 +2,27 @@ package logica;
 
 public class Torre extends Pieza{
 	
-	private Movimiento[] movimientos = {new Movimiento(1,0), new Movimiento(0,1), new Movimiento(-1,0), new Movimiento(0,-1)};
+	private static List<Movimiento> movimientos;
 	
-	public Torre(boolean color){
+	static {
+		movimientos = new ArrayList(4);
+		Movimiento arriba = new Movimiento(0, 1, true, true, false, false);
+		Movimiento abajo = new Movimiento(0, -1, true, true, false, false);
+		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, false);
+		Movimiento derecha = new Movimiento(1, 0, true, true, false, false);
+		movimientos.add(arriba);
+		movimientos.add(abajo);
+		movimientos.add(izquierda);
+		movimientos.add(derecha);
+		// Faltaría implementar la posibilidad de enroque
+	}
+
+	public Torre(Color color){
 		super(color);
 	}
 
 	@Override
-	public Movimiento[] getMovimientos() {
+	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
 	

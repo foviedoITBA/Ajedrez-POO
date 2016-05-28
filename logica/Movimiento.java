@@ -14,8 +14,8 @@ public class Movimiento {
 	private boolean comiendo, sinComer, saltando, unaVez;
 
 	public Movimiento(int movX, int movY, boolean comiendo, boolean sinComer, boolean saltando, boolean unaVez){
-		this.movX=movX;
-		this.movY=movY;
+		this.movX = movX;
+		this.movY = movY;
 		this.comiendo = comiendo;
 		this.sinComer = sinComer;
 		this.saltando = saltando;
@@ -45,4 +45,5 @@ public class Movimiento {
 	public boolean esUnaVez() {
 		return unaVez;
 	}
+
 }
