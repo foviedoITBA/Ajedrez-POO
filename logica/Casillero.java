@@ -19,11 +19,11 @@ public class Casillero {
 		}
 	}
 	
-	public void add(Pieza p){
+	public void addPieza(Pieza p){
 		pieza=p;
 	}
 	
-	public void remove(){
+	public void removePieza(){
 		pieza=null;
 	}
 	

@@ -25,7 +25,15 @@ public class Juego {
 	
 	//Agregar constructor para cargar una partida
 	
-
+	public Jugador getTurno(){
+		if(!ultimoJugador.equals(jugador1)){
+			return jugador1;
+		}else{
+			return jugador2;
+		}
+	}
+	
+	
 	/**
 	 * Con este método se le dice al juego qué posición del tablero fue clickeada.
 	 *  Devuelve una Jugada a la interfaz con la jugada, si es que hubo (ej: "7. Cb3")
@@ -37,21 +45,14 @@ public class Juego {
 	public Jugada clickTablero(int posX,int posY){//esta mal no puede devolver una jugada. hay problemas con que guardaria mas cosas de las necesarias en el stack
 		Jugada resp=null;
 		Posicion pos = new Posicion(posX,posY);
-		if(!ultimoJugador.equals(jugador1)){
-			resp=elTablero.click(pos,jugador1);
-		}else{
-			resp=elTablero.click(pos,jugador2);
-		}
+		
+		resp=elTablero.click(pos, getTurno());
 		
 		
 		if(resp != null){
 			registro.add(resp);
 			
-			if(!ultimoJugador.equals(jugador1)){
-				ultimoJugador=jugador1;
-			}else{
-				ultimoJugador=jugador2;
-			}
+			ultimoJugador=getTurno();
 		}
 		
 		return resp;

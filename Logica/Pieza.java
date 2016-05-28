@@ -14,6 +14,6 @@ public abstract class Pieza {
 		return esBlanca;
 	}
 	
-	public abstract Movimiento damePosiciones();
+	public abstract Movimiento[] getMovimientos();
 	
 }

@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.HashSet;
+import java.util.Set;
 
 public class Tablero {
 	
@@ -7,16 +9,12 @@ public class Tablero {
 	
 	private Casillero[][] losCasilleros;	// Una matriz de casilleros, uno por cada escaque
 
-	private Casillero seleccionado;	// Una referencia al casillero seleccionado (lo cual se hace haciéndole click)
+	private Posicion seleccionado;	// Una referencia a la posicion del casillero seleccionado (lo cual se hace haciéndole click)
 	
 	public Tablero(){
 		losCasilleros = new Casillero[SIZE_TABLERO][SIZE_TABLERO];
 		initTablero();
 		seleccionado=null;
-	}
-
-	public static int getSize(){
-		return SIZE_TABLERO;
 	}
 	
 	/*
@@ -33,28 +31,35 @@ public class Tablero {
 		
 		if(seleccionado==null){
 			
+			System.out.println(losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca()==jugador.esBlanco());
+			System.out.println(losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca());
+			System.out.println(jugador.esBlanco());//problema con el ==
+			
 			if(losCasilleros[pos.getX()][pos.getY()].isEmpty() || losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca()==jugador.esBlanco()){
 				return;//nada resp
 			}
 			
-			seleccionado=losCasilleros[pos.getX()][pos.getY()];
+			seleccionado=pos;
 			
-			resp = analizoMovimientos(seleccionado); //una array de movimientos posibles?
+			resp = analizoMovimientos(seleccionado, jugador); //una array de movimientos posibles?
+			
 			
 		}else{
-			if(esMovimientoPosible()){
+			if(esMovimientoPosible(pos, jugador)){
 				if(!losCasilleros[pos.getX()][pos.getY()].isEmpty()){
 					//aviso que mate
 					resp= "Mate";
 				}
-				losCasilleros[pos.getX()][pos.getY()].add(seleccionado.getPieza());
-				seleccionado.remove();
+				losCasilleros[pos.getX()][pos.getY()].addPieza(losCasilleros[seleccionado.getX()][seleccionado.getY()].getPieza());
+				losCasilleros[seleccionado.getX()][seleccionado.getY()].removePieza();
 				//no devuelvo nada
 			}
 			seleccionado=null;
 		}
-		
+
+		System.out.println((Set<Posicion>)resp);
 		return; //resp
+		
 	}
 	
 	
@@ -107,6 +112,53 @@ public class Tablero {
 	}
 	
 	
+	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador){
+		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
+		Set<Posicion> list = new HashSet<>();
+		
+		Movimiento[] movPieza = casillero.getPieza().getMovimientos(); 
+		
+		
+		for(int i=0; i<movPieza.length; i++){
+			int incX=movPieza[i].getMovX();
+			int incY=movPieza[i].getMovY();
+			boolean cont=true;
+			
+			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO; posX+=incX, posY+=incY){
+				
+				if(losCasilleros[posX][posY].isEmpty()){
+					list.add(new Posicion(posX,posY));
+				}else if(losCasilleros[posX][posY].getPieza().esBlanca()==jugador.esBlanco()){//problema con el ==
+					list.add(new Posicion(posX,posY));
+					cont=false;
+				}else{//Pieza del jugador actual
+					cont=false;
+				}
+				
+			}
+			
+		}
+			
+		return list;
+	}
+	
+	
+	private boolean esMovimientoPosible(Posicion pos, Jugador jugador){
+		
+		Set<Posicion> movPosibles = analizoMovimientos(seleccionado, jugador);
+		
+		if(movPosibles.contains(pos)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	/** SOLO PARA TESTEAR **/
@@ -128,6 +180,10 @@ public class Tablero {
 			System.out.print("\n");
 		}
 		
+	}
+	
+	public void agregoNegra(){
+		losCasilleros[6][0].addPieza(new Torre(Pieza.NEGRA));
 	}
 	
 }

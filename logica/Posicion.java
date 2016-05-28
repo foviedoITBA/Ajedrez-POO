@@ -43,5 +43,11 @@ public class Posicion {
 	}
 	
 	
+	/**PARA TESTING**/
+	
+	public String toString(){
+		return "x: "+posX+"y: "+posY;
+	}
+	
 
 }
