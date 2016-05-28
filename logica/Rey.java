@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rey extends Pieza {
 
 	private static List<Movimiento> movimientos;
 
 	static {
-		movimientos = new ArrayList(8);
+		movimientos = new ArrayList<>(8);
 		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, true);
 		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, true);
 		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, true);

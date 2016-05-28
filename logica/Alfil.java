@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Alfil extends Pieza {
 
 	private static List<Movimiento> movimientos;
 
 	static {
-		movimientos = new ArrayList(4)
+		movimientos = new ArrayList<>(4);
 		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, false);
 		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, false);
 		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, false);
@@ -21,7 +24,7 @@ public class Alfil extends Pieza {
 	}
 
 	@Override
-	public List<Movimiento> getMovimientos() {
+	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
 	

@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Dama extends Pieza {
 
 	private static List<Movimiento> movimientos;
 	
 	static {
-		movimientos = new ArrayList(8);
+		movimientos = new ArrayList<>(8);
 		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, false);
 		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, false);
 		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, false);
@@ -29,7 +32,7 @@ public class Dama extends Pieza {
 	}
 	
 	@Override
-	public List<Movimiento> dameMovimiento() {
+	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
 }

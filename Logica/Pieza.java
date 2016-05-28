@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.List;
+
 public abstract class Pieza {
 		
 	private Color elColor;
@@ -25,6 +27,6 @@ public abstract class Pieza {
 		return seMovio;
 	}
 
-	public abstract List<Movimientos> dameMovimientos();
+	public abstract List<Movimiento> dameMovimientos();
 	
 }

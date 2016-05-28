@@ -1,5 +1,8 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Peon extends Pieza{
 
 	/* Los movimientos de los peones no son miembros de clase
@@ -10,13 +13,12 @@ public class Peon extends Pieza{
 
 	public Peon(Color color) {
 		super(color);
-		movimientos = new ArrayList(4);
+		movimientos = new ArrayList<>(4);
 		int avance;
-		switch(color) {
-			case Color.BLANCO:
-				avance = 1;
-			case Color.NEGRO:
-				avance = -1;
+		if(color.equals(Color.BLANCO)){
+			avance = 1;
+		}else{//si es negro
+			avance = -1;
 		}
 		Movimiento adelante = new Movimiento(0, avance, false, true, false, true);
 		Movimiento comerDerecha = new Movimiento(1, avance, true, false, false, true);
@@ -33,7 +35,7 @@ public class Peon extends Pieza{
 
 	@Override
 	@Deprecated
-	public List<Movimiento> dameMovimiento() {
+	public List<Movimiento> dameMovimientos() {
 		
 		return movimientos;
 	}
