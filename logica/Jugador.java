@@ -2,25 +2,21 @@ package logica;
 
 public class Jugador {
 
-	public final static boolean BLANCO=true;
-	public final static boolean NEGRO=false;
+	private Color color;
 	
-	private boolean esBlanco;
-	
-	public Jugador(boolean color){
-		esBlanco=color;
+	public Jugador(Color color){
+		this.color=color;
 	}
 	
-	public boolean esBlanco(){
-		return esBlanco;
+	public Color dameColor() {
+		return color;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (esBlanco ? 1231 : 1237);
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		return result;
 	}
 
@@ -33,9 +29,12 @@ public class Jugador {
 		if (getClass() != obj.getClass())
 			return false;
 		Jugador other = (Jugador) obj;
-		if (esBlanco != other.esBlanco)
+		if (color != other.color)
 			return false;
 		return true;
 	}
+
+	
+	
 	
 }

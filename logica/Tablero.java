@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Tablero {
@@ -31,11 +32,7 @@ public class Tablero {
 		
 		if(seleccionado==null){
 			
-			System.out.println(losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca()==jugador.esBlanco());
-			System.out.println(losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca());
-			System.out.println(jugador.esBlanco());//problema con el ==
-			
-			if(losCasilleros[pos.getX()][pos.getY()].isEmpty() || losCasilleros[pos.getX()][pos.getY()].getPieza().esBlanca()==jugador.esBlanco()){
+			if(losCasilleros[pos.getX()][pos.getY()].isEmpty() || !losCasilleros[pos.getX()][pos.getY()].getPieza().dameColor().equals(jugador.dameColor())){
 				return;//nada resp
 			}
 			
@@ -57,7 +54,8 @@ public class Tablero {
 			seleccionado=null;
 		}
 
-		System.out.println((Set<Posicion>)resp);
+		System.out.println(resp);
+		
 		return; //resp
 		
 	}
@@ -79,30 +77,30 @@ public class Tablero {
 	
 	private void initTablero(){ //coloco el tablero con las piezas en la posicion inicial
 		
-		losCasilleros[0][0]=new Casillero(new Torre(Pieza.NEGRA));
-		losCasilleros[0][1]=new Casillero(new Caballo(Pieza.NEGRA));
-		losCasilleros[0][2]=new Casillero(new Alfil(Pieza.NEGRA));
-		losCasilleros[0][3]=new Casillero(new Reina(Pieza.NEGRA));
-		losCasilleros[0][4]=new Casillero(new Rey(Pieza.NEGRA));
-		losCasilleros[0][5]=new Casillero(new Alfil(Pieza.NEGRA));
-		losCasilleros[0][6]=new Casillero(new Caballo(Pieza.NEGRA));
-		losCasilleros[0][7]=new Casillero(new Torre(Pieza.NEGRA));
+		losCasilleros[0][0]=new Casillero(new Torre(Color.NEGRO));
+		losCasilleros[0][1]=new Casillero(new Caballo(Color.NEGRO));
+		losCasilleros[0][2]=new Casillero(new Alfil(Color.NEGRO));
+		losCasilleros[0][3]=new Casillero(new Dama(Color.NEGRO));
+		losCasilleros[0][4]=new Casillero(new Rey(Color.NEGRO));
+		losCasilleros[0][5]=new Casillero(new Alfil(Color.NEGRO));
+		losCasilleros[0][6]=new Casillero(new Caballo(Color.NEGRO));
+		losCasilleros[0][7]=new Casillero(new Torre(Color.NEGRO));
 		
-		losCasilleros[7][0]=new Casillero(new Torre(Pieza.BLANCA));
-		losCasilleros[7][1]=new Casillero(new Caballo(Pieza.BLANCA));
-		losCasilleros[7][2]=new Casillero(new Alfil(Pieza.BLANCA));
-		losCasilleros[7][3]=new Casillero(new Reina(Pieza.BLANCA));
-		losCasilleros[7][4]=new Casillero(new Rey(Pieza.BLANCA));
-		losCasilleros[7][5]=new Casillero(new Alfil(Pieza.BLANCA));
-		losCasilleros[7][6]=new Casillero(new Caballo(Pieza.BLANCA));
-		losCasilleros[7][7]=new Casillero(new Torre(Pieza.BLANCA));
+		losCasilleros[7][0]=new Casillero(new Torre(Color.BLANCO));
+		losCasilleros[7][1]=new Casillero(new Caballo(Color.BLANCO));
+		losCasilleros[7][2]=new Casillero(new Alfil(Color.BLANCO));
+		losCasilleros[7][3]=new Casillero(new Dama(Color.BLANCO));
+		losCasilleros[7][4]=new Casillero(new Rey(Color.BLANCO));
+		losCasilleros[7][5]=new Casillero(new Alfil(Color.BLANCO));
+		losCasilleros[7][6]=new Casillero(new Caballo(Color.BLANCO));
+		losCasilleros[7][7]=new Casillero(new Torre(Color.BLANCO));
 		
 		for(int i=1;i<SIZE_TABLERO-1;i++){
 			for(int j=0;j<SIZE_TABLERO;j++){
 				if(i==1){
-					losCasilleros[i][j]=new Casillero(new Peon(Pieza.NEGRA));
+					losCasilleros[i][j]=new Casillero(new Peon(Color.NEGRO));
 				}else if(i==SIZE_TABLERO-2){
-					losCasilleros[i][j]=new Casillero(new Peon(Pieza.BLANCA));
+					losCasilleros[i][j]=new Casillero(new Peon(Color.BLANCO));
 				}else{
 					losCasilleros[i][j]=new Casillero();
 				}
@@ -111,27 +109,35 @@ public class Tablero {
 		}
 	}
 	
-	
+	/*
+	 * Recive una posicion y un jugador, sabiendo que en la posicion esa hay una pieza,
+	 * Devuelve un set de Posiciones a las cuales se pude mover la pieza
+	 * */
 	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador){
+		
 		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
-		Set<Posicion> list = new HashSet<>();
+		Set<Posicion> movPosibles = new HashSet<>();
+		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 		
-		Movimiento[] movPieza = casillero.getPieza().getMovimientos(); 
 		
-		
-		for(int i=0; i<movPieza.length; i++){
-			int incX=movPieza[i].getMovX();
-			int incY=movPieza[i].getMovY();
+		for(int i=0; i<movPieza.size(); i++){
+			int incX=movPieza.get(i).dameMovX();
+			int incY=movPieza.get(i).dameMovY();
 			boolean cont=true;
+			boolean unaVez = movPieza.get(i).esUnaVez();
 			
 			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO; posX+=incX, posY+=incY){
 				
 				if(losCasilleros[posX][posY].isEmpty()){
-					list.add(new Posicion(posX,posY));
-				}else if(losCasilleros[posX][posY].getPieza().esBlanca()==jugador.esBlanco()){//problema con el ==
-					list.add(new Posicion(posX,posY));
+					movPosibles.add(new Posicion(posX,posY));
+				}else if(!losCasilleros[posX][posY].getPieza().dameColor().equals(jugador.dameColor())){
+					movPosibles.add(new Posicion(posX,posY));
 					cont=false;
 				}else{//Pieza del jugador actual
+					cont=false;
+				}
+				
+				if(unaVez){
 					cont=false;
 				}
 				
@@ -139,7 +145,7 @@ public class Tablero {
 			
 		}
 			
-		return list;
+		return movPosibles;
 	}
 	
 	
@@ -163,13 +169,14 @@ public class Tablero {
 	
 	/** SOLO PARA TESTEAR **/
 	public void imprimirTablero(){
+		System.out.print("\n\n*************************************************************\n\n");
 		for(int i=0;i<SIZE_TABLERO;i++){
 			for(int j=0;j<SIZE_TABLERO;j++){
 				
 				if(losCasilleros[i][j].isEmpty()){
 					System.out.print("0\t");
 				}else{
-					if(losCasilleros[i][j].getPieza().esBlanca()){
+					if(losCasilleros[i][j].getPieza().dameColor().equals(Color.BLANCO)){
 						System.out.print("1(B)\t");
 					}else{
 						System.out.print("1(N)\t");
@@ -183,7 +190,7 @@ public class Tablero {
 	}
 	
 	public void agregoNegra(){
-		losCasilleros[6][0].addPieza(new Torre(Pieza.NEGRA));
+		losCasilleros[6][0].addPieza(new Torre(Color.NEGRO));
 	}
 	
 }

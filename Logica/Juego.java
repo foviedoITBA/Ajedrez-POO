@@ -19,11 +19,15 @@ public class Juego {
 		registro=new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
-		jugador1=new Jugador(Jugador.BLANCO);
-		jugador2=new Jugador(Jugador.NEGRO);
+		jugador1=new Jugador(Color.BLANCO);
+		jugador2=new Jugador(Color.NEGRO);
 	}
 	
 	//Agregar constructor para cargar una partida
+	
+	
+	
+	
 	
 	public Jugador getTurno(){
 		if(!ultimoJugador.equals(jugador1)){
