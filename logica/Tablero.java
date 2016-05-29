@@ -32,7 +32,7 @@ public class Tablero {
 		
 		if(seleccionado==null){
 			
-			if(losCasilleros[pos.getX()][pos.getY()].isEmpty() || !losCasilleros[pos.getX()][pos.getY()].getPieza().dameColor().equals(jugador.dameColor())){
+			if(losCasilleros[pos.getY()][pos.getX()].isEmpty() || !losCasilleros[pos.getY()][pos.getX()].getPieza().dameColor().equals(jugador.dameColor())){
 				return;//nada resp
 			}
 			
@@ -43,12 +43,12 @@ public class Tablero {
 			
 		}else{
 			if(esMovimientoPosible(pos, jugador)){
-				if(!losCasilleros[pos.getX()][pos.getY()].isEmpty()){
+				if(!losCasilleros[pos.getY()][pos.getX()].isEmpty()){
 					//aviso que mate
 					resp= "Mate";
 				}
-				losCasilleros[pos.getX()][pos.getY()].addPieza(losCasilleros[seleccionado.getX()][seleccionado.getY()].getPieza());
-				losCasilleros[seleccionado.getX()][seleccionado.getY()].removePieza();
+				losCasilleros[pos.getY()][pos.getX()].addPieza(losCasilleros[seleccionado.getY()][seleccionado.getX()].getPieza());
+				losCasilleros[seleccionado.getY()][seleccionado.getX()].removePieza();
 				//no devuelvo nada
 			}
 			seleccionado=null;
@@ -115,7 +115,7 @@ public class Tablero {
 	 * */
 	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador){
 		
-		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
+		Casillero casillero=losCasilleros[pos.getY()][pos.getX()];
 		Set<Posicion> movPosibles = new HashSet<>();
 		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 		
@@ -128,9 +128,9 @@ public class Tablero {
 			
 			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO; posX+=incX, posY+=incY){
 				
-				if(losCasilleros[posX][posY].isEmpty()){
+				if(losCasilleros[posY][posX].isEmpty()){
 					movPosibles.add(new Posicion(posX,posY));
-				}else if(!losCasilleros[posX][posY].getPieza().dameColor().equals(jugador.dameColor())){
+				}else if(!losCasilleros[posY][posX].getPieza().dameColor().equals(jugador.dameColor())){
 					movPosibles.add(new Posicion(posX,posY));
 					cont=false;
 				}else{//Pieza del jugador actual
@@ -144,10 +144,17 @@ public class Tablero {
 			}
 			
 		}
+		
+//		if(losCasilleros[pos.getY()][pos.getX()].getPieza().getClass() == Peon.class){
+//			return movimientosPeon(pos, jugador);
+//		}else{
+//			return movimientosGeneral(pos, jugador);
+//		}
 			
 		return movPosibles;
 	}
 	
+//	
 	
 	private boolean esMovimientoPosible(Posicion pos, Jugador jugador){
 		
