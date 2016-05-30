@@ -9,10 +9,10 @@ public class Torre extends Pieza{
 	
 	static {
 		movimientos = new ArrayList<>(4);
-		Movimiento arriba = new Movimiento(0, 1, true, true, false, false);
-		Movimiento abajo = new Movimiento(0, -1, true, true, false, false);
-		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, false);
-		Movimiento derecha = new Movimiento(1, 0, true, true, false, false);
+		Movimiento arriba = new Movimiento(0, 1, true, true, false, -1);
+		Movimiento abajo = new Movimiento(0, -1, true, true, false, -1);
+		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, -1);
+		Movimiento derecha = new Movimiento(1, 0, true, true, false, -1);
 		movimientos.add(arriba);
 		movimientos.add(abajo);
 		movimientos.add(izquierda);

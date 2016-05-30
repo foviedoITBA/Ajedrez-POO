@@ -9,10 +9,10 @@ public class Alfil extends Pieza {
 
 	static {
 		movimientos = new ArrayList<>(4);
-		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, false);
-		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, false);
-		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, false);
-		Movimiento abajoIzquierda = new Movimiento(-1, -1, true, true, false, false);
+		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, -1);
+		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, -1);
+		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, -1);
+		Movimiento abajoIzquierda = new Movimiento(-1, -1, true, true, false, -1);
 		movimientos.add(arribaDerecha);
 		movimientos.add(abajoDerecha);
 		movimientos.add(arribaIzquierda);

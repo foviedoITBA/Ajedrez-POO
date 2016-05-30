@@ -50,7 +50,9 @@ public class Tablero {
 						resp= "Comi";
 					}
 					clickeado.addPieza(losCasilleros[seleccionado.getX()][seleccionado.getY()].getPieza());
+					losCasilleros[seleccionado.getX()][seleccionado.getY()].getPieza().ponerSeMovio();
 					losCasilleros[seleccionado.getX()][seleccionado.getY()].removePieza();
+					
 				//no devuelvo nada o devuelvo una jugada
 			
 					seleccionado=null;
@@ -114,42 +116,30 @@ public class Tablero {
 		Set<Posicion> movPosibles = new HashSet<>();
 		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 		
-		
 		for(Movimiento elMovimiento: movPieza){
 			int incX=elMovimiento.dameMovX();
 			int incY=elMovimiento.dameMovY();
 			boolean cont=true;
-			boolean unaVez = elMovimiento.esUnaVez();
+			int cantidadDeVeces = elMovimiento.cantidadDeVeces();
 			
-			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO; posX+=incX, posY+=incY){
+			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO && cantidadDeVeces!=0; posX+=incX, posY+=incY, cantidadDeVeces--){
 				
 				if(losCasilleros[posX][posY].isEmpty() && elMovimiento.esSinComer()){
 					movPosibles.add(new Posicion(posX,posY));
-				}else if(losCasilleros[posX][posY].getPieza().dameColor()!=jugador.dameColor() && elMovimiento.esComiendo()){
+				}else if(!losCasilleros[posX][posY].isEmpty() && losCasilleros[posX][posY].getPieza().dameColor()!=jugador.dameColor() && elMovimiento.esComiendo()){
 					movPosibles.add(new Posicion(posX,posY));
 					cont=false;
 				}else{//Pieza del jugador actual
 					cont=false;
 				}
 				
-				if(unaVez){
-					cont=false;
-				}
-				
 			}
 			
 		}
-		
-//		if(losCasilleros[pos.getY()][pos.getX()].getPieza().getClass() == Peon.class){
-//			return movimientosPeon(pos, jugador);
-//		}else{
-//			return movimientosGeneral(pos, jugador);
-//		}
 			
 		return movPosibles;
 	}
 	
-//	
 	
 	private boolean esMovimientoPosible(Posicion pos, Jugador jugador){
 		
@@ -207,5 +197,7 @@ public class Tablero {
 	public void agregoNegra(){
 		losCasilleros[6][0].addPieza(new Torre(Color.NEGRO));
 	}
-	
+	public void agregoPeon(){
+		losCasilleros[2][0].addPieza(new Torre(Color.BLANCO));
+	}
 }

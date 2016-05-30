@@ -10,6 +10,7 @@ public class Test {
 		
 		Tablero tablero = new Tablero();
 		tablero.agregoNegra();
+		tablero.agregoPeon();
 		
 		tablero.imprimirTablero();
 		
@@ -23,13 +24,25 @@ public class Test {
 		
 		tablero.imprimirTablero();
 		
-		tablero.click(new Posicion(4,0), jugador2);
+//		tablero.click(new Posicion(4,0), jugador2);
+//		
+//		tablero.imprimirTablero();
+		
+//		tablero.click(new Posicion(6,1), jugador2);
+		
+		tablero.click(new Posicion(4,0), jugador1);
+		tablero.click(new Posicion(5,0), jugador1);
+		
+		tablero.click(new Posicion(6,1), jugador2);
 		
 		tablero.imprimirTablero();
 		
-		tablero.click(new Posicion(7,1), jugador2);
+		tablero.click(new Posicion(5,0), jugador2);
 		
+		tablero.imprimirTablero();
 		
+		tablero.click(new Posicion(1,0), jugador1);
 		
+		tablero.click(new Posicion(5,0), jugador2);
 	}
 }

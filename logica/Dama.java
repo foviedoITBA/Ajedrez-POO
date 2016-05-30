@@ -9,14 +9,14 @@ public class Dama extends Pieza {
 	
 	static {
 		movimientos = new ArrayList<>(8);
-		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, false);
-		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, false);
-		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, false);
-		Movimiento abajoIzquierda = new Movimiento(-1, -1, true, true, false, false);
-		Movimiento arriba = new Movimiento(0, 1, true, true, false, false);
-		Movimiento abajo = new Movimiento(0, -1, true, true, false, false);
-		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, false);
-		Movimiento derecha = new Movimiento(1, 0, true, true, false, false);
+		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, -1);
+		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, -1);
+		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, -1);
+		Movimiento abajoIzquierda = new Movimiento(-1, -1, true, true, false, -1);
+		Movimiento arriba = new Movimiento(0, 1, true, true, false, -1);
+		Movimiento abajo = new Movimiento(0, -1, true, true, false, -1);
+		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, -1);
+		Movimiento derecha = new Movimiento(1, 0, true, true, false, -1);
 		movimientos.add(arribaDerecha);
 		movimientos.add(abajoDerecha);
 		movimientos.add(arribaIzquierda);

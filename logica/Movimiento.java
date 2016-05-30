@@ -11,15 +11,16 @@ public class Movimiento {
 	 * unaVez: indica cuántas veces se puede mover en esa dirección
 	 * (El Rey tiene el mismo movimiento que la dama, salvo que el rey lo hace una vez y la dama todas las que quiera
 	*/
-	private boolean comiendo, sinComer, saltando, unaVez;
+	private boolean comiendo, sinComer, saltando;
+	private int cantidad;
 
-	public Movimiento(int movX, int movY, boolean comiendo, boolean sinComer, boolean saltando, boolean unaVez){
+	public Movimiento(int movX, int movY, boolean comiendo, boolean sinComer, boolean saltando, int cantidad){
 		this.movX = movX;
 		this.movY = movY;
 		this.comiendo = comiendo;
 		this.sinComer = sinComer;
 		this.saltando = saltando;
-		this.unaVez = unaVez;
+		this.cantidad = cantidad;
 	}
 	
 	public int dameMovX(){
@@ -43,15 +44,19 @@ public class Movimiento {
 	}
 
 	public boolean esUnaVez() {
-		return unaVez;
+		return 1==cantidad;
 	}
 
+	public int cantidadDeVeces(){
+		return cantidad;
+	}
+	
 	public boolean equals(Object otroObjeto) {
 		if (this == otroObjeto)
 			return true;
 		if (otroObjeto == null || !this.getClass().equals(otroObjeto.getClass()))
 			return false;
-		if (this.movX == ((Movimiento)otroObjeto).movX && this.movY == ((Movimiento)otroObjeto).movY && this.comiendo == ((Movimiento)otroObjeto).comiendo && this.sinComer == ((Movimiento)otroObjeto).sinComer && this.saltando == ((Movimiento)otroObjeto).saltando && this.unaVez == ((Movimiento)otroObjeto).unaVez)
+		if (this.movX == ((Movimiento)otroObjeto).movX && this.movY == ((Movimiento)otroObjeto).movY && this.comiendo == ((Movimiento)otroObjeto).comiendo && this.sinComer == ((Movimiento)otroObjeto).sinComer && this.saltando == ((Movimiento)otroObjeto).saltando && this.cantidad == ((Movimiento)otroObjeto).cantidad)
 			return true;
 		return false;
 	}

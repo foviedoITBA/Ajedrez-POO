@@ -10,31 +10,30 @@ public class Peon extends Pieza {
 	 * y según el color, eontonces es una característica de cada peón.
 	 */
 	private List<Movimiento> movimientos;
-	private Movimiento dosAdelante;
+	private Movimiento adelante;
+	private int avance;
 
 	public Peon(Color color) {
 		super(color);
 		movimientos = new ArrayList<>(4);
-		int avance;
 		if(color == Color.BLANCO ) {
 			avance = -1;
 		} else {//si es negro
 			avance = 1;
 		}
-		Movimiento adelante = new Movimiento(0, avance, false, true, false, true);
-		Movimiento comerDerecha = new Movimiento(1, avance, true, false, false, true);
-		Movimiento comerIzquierda = new Movimiento(-1, avance, true, false, false, true);
-		dosAdelante = new Movimiento(0, 2*avance, false, true, false, true);
+		adelante = new Movimiento(avance, 0, false, true, false, 2);
+		Movimiento comerDerecha = new Movimiento(avance, 1, true, false, false, 1);
+		Movimiento comerIzquierda = new Movimiento(avance, -1, true, false, false, 1);
 		movimientos.add(adelante);
 		movimientos.add(comerDerecha);
 		movimientos.add(comerIzquierda);
-		movimientos.add(dosAdelante);
 	}
 
 	@Override
 	public void ponerSeMovio() {
 		super.ponerSeMovio();
-		movimientos.remove(dosAdelante);
+		movimientos.remove(adelante);
+		movimientos.add( new Movimiento(avance, 0, false, true, false, 1));
 	}
 
 	@Override
