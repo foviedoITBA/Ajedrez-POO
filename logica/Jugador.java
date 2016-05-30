@@ -32,9 +32,5 @@ public class Jugador {
 		if (color != other.color)
 			return false;
 		return true;
-	}
-
-	
-	
-	
+	}	
 }

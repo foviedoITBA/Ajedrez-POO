@@ -17,9 +17,9 @@ public class Peon extends Pieza {
 		movimientos = new ArrayList<>(4);
 		int avance;
 		if(color == Color.BLANCO ) {
-			avance = 1;
-		} else {//si es negro
 			avance = -1;
+		} else {//si es negro
+			avance = 1;
 		}
 		Movimiento adelante = new Movimiento(0, avance, false, true, false, true);
 		Movimiento comerDerecha = new Movimiento(1, avance, true, false, false, true);

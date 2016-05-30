@@ -18,7 +18,7 @@ public class Tablero {
 		seleccionado=null;
 	}
 	
-	/*
+	/**
 	 * recibo una posicion
 	 * veo si seleccionado esta en null
 	 * si esta en null significa que aprete para ver los movimientos de la pieza -> pido movimientos a la pieza y devuelvo los que estan vacios o tienen pieza del oponente
@@ -29,10 +29,11 @@ public class Tablero {
 	public void click(Posicion pos, Jugador jugador){ // cambiar a qeu devueleve una jugada
 		
 		Object resp=null;//que es?
+		Casillero clickeado= losCasilleros[pos.getX()][pos.getY()];
 		
 		if(seleccionado==null){
 			
-			if(losCasilleros[pos.getY()][pos.getX()].isEmpty() || !losCasilleros[pos.getY()][pos.getX()].getPieza().dameColor().equals(jugador.dameColor())){
+			if(clickeado.isEmpty() || clickeado.getPieza().dameColor() != jugador.dameColor()){
 				return;//nada resp
 			}
 			
@@ -42,16 +43,23 @@ public class Tablero {
 			
 			
 		}else{
-			if(esMovimientoPosible(pos, jugador)){
-				if(!losCasilleros[pos.getY()][pos.getX()].isEmpty()){
-					//aviso que mate
-					resp= "Mate";
+			if (clickeado.isEmpty() || clickeado.getPieza().dameColor() != jugador.dameColor()) {
+				if(esMovimientoPosible(pos, jugador)){
+					if(!clickeado.isEmpty()){
+						//aviso que comi
+						resp= "Comi";
+					}
+					clickeado.addPieza(losCasilleros[seleccionado.getX()][seleccionado.getY()].getPieza());
+					losCasilleros[seleccionado.getX()][seleccionado.getY()].removePieza();
+				//no devuelvo nada o devuelvo una jugada
+			
+					seleccionado=null;
 				}
-				losCasilleros[pos.getY()][pos.getX()].addPieza(losCasilleros[seleccionado.getY()][seleccionado.getX()].getPieza());
-				losCasilleros[seleccionado.getY()][seleccionado.getX()].removePieza();
-				//no devuelvo nada
+			} else {
+				seleccionado = pos;
+				resp = analizoMovimientos(seleccionado, jugador);
 			}
-			seleccionado=null;
+			
 		}
 
 		System.out.println(resp);
@@ -60,20 +68,7 @@ public class Tablero {
 		
 	}
 	
-	
-	// Este método lo usa el juego para decirle qué casillero fue clickeado
-										// Entonces el tablero decide en base al casillero clickeado y al seleccionado
-										// (anteriormente) si debe hacerse una jugada o no. Si se hace, se devuelve en el
-										// método y se pone seleccionado en null; si no se hace, se pone seleccionado en el que // se clickeó ((pos_x, pos_y) sería) y se devuelve null.
 
-	
-	
-	
-//	void revertir(Jugada laJugada);		// A ḿétodo lo llama 'revertir()' de la clase Juego. Le pasa la jugada para que la
-										// deshaga (fíjense que el tablero no sabe cuál fue la última jugada, entonces hay que
-										// decírselo)
-
-	/* Otros métodos y miembros que hagan falta */
 	
 	private void initTablero(){ //coloco el tablero con las piezas en la posicion inicial
 		
@@ -109,28 +104,28 @@ public class Tablero {
 		}
 	}
 	
-	/*
-	 * Recive una posicion y un jugador, sabiendo que en la posicion esa hay una pieza,
+	/**
+	 * Recibe una posicion y un jugador, sabiendo que en la posicion esa hay una pieza,
 	 * Devuelve un set de Posiciones a las cuales se pude mover la pieza
 	 * */
 	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador){
 		
-		Casillero casillero=losCasilleros[pos.getY()][pos.getX()];
+		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
 		Set<Posicion> movPosibles = new HashSet<>();
 		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 		
 		
-		for(int i=0; i<movPieza.size(); i++){
-			int incX=movPieza.get(i).dameMovX();
-			int incY=movPieza.get(i).dameMovY();
+		for(Movimiento elMovimiento: movPieza){
+			int incX=elMovimiento.dameMovX();
+			int incY=elMovimiento.dameMovY();
 			boolean cont=true;
-			boolean unaVez = movPieza.get(i).esUnaVez();
+			boolean unaVez = elMovimiento.esUnaVez();
 			
 			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO; posX+=incX, posY+=incY){
 				
-				if(losCasilleros[posY][posX].isEmpty()){
+				if(losCasilleros[posX][posY].isEmpty() && elMovimiento.esSinComer()){
 					movPosibles.add(new Posicion(posX,posY));
-				}else if(!losCasilleros[posY][posX].getPieza().dameColor().equals(jugador.dameColor())){
+				}else if(losCasilleros[posX][posY].getPieza().dameColor()!=jugador.dameColor() && elMovimiento.esComiendo()){
 					movPosibles.add(new Posicion(posX,posY));
 					cont=false;
 				}else{//Pieza del jugador actual
@@ -168,6 +163,19 @@ public class Tablero {
 	}
 	
 	
+	// Este método lo usa el juego para decirle qué casillero fue clickeado
+										// Entonces el tablero decide en base al casillero clickeado y al seleccionado
+										// (anteriormente) si debe hacerse una jugada o no. Si se hace, se devuelve en el
+										// método y se pone seleccionado en null; si no se hace, se pone seleccionado en el que // se clickeó ((pos_x, pos_y) sería) y se devuelve null.
+
+	
+	
+	
+//	void revertir(Jugada laJugada);		// A ḿétodo lo llama 'revertir()' de la clase Juego. Le pasa la jugada para que la
+										// deshaga (fíjense que el tablero no sabe cuál fue la última jugada, entonces hay que
+										// decírselo)
+
+	/* Otros métodos y miembros que hagan falta */
 	
 	
 	
