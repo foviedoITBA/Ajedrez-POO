@@ -46,4 +46,14 @@ public class Movimiento {
 		return unaVez;
 	}
 
+	public boolean equals(Object otroObjeto) {
+		if (this == otroObjeto)
+			return true;
+		if (otroObjeto == null || !this.getClass().equals(otroObjeto.getClass()))
+			return false;
+		if (this.movX == ((Movimiento)otroObjeto).movX && this.movY == ((Movimiento)otroObjeto).movY && this.comiendo == ((Movimiento)otroObjeto).comiendo && this.sinComer == ((Movimiento)otroObjeto).sinComer && this.saltando == ((Movimiento)otroObjeto).saltando && this.unaVez == ((Movimiento)otroObjeto).unaVez)
+			return true;
+		return false;
+	}
+
 }
