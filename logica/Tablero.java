@@ -3,6 +3,7 @@ package logica;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 public class Tablero {
 
@@ -28,22 +29,22 @@ public class Tablero {
 	 * */
 	public void click(Posicion pos, Jugador jugador){ // cambiar a qeu devueleve una jugada
 
-		Object resp=null;//que es?
-		Casillero casClickeado= losCasilleros[pos.getX()][pos.getY()];
-		Casillero casSelecc = losCasilleros[seleccionado.getX()][seleccionado.getY()];
+		Object resp = null;//que es?
+		Casillero casClickeado = losCasilleros[pos.getX()][pos.getY()];
+		
+		if(seleccionado == null) {
 
-		if(seleccionado==null){
-
-			if(casClickeado.isEmpty() || casClickeado.getPieza().dameColor() != jugador.dameColor()){
+			if(casClickeado.isEmpty() || casClickeado.getPieza().dameColor() != jugador.dameColor()) {
 				return;//nada resp
 			}
 
 			seleccionado=pos;
 
-			resp = analizoMovimientos(seleccionado, jugador); //una array de movimientos posibles?
+			resp = posicionesPosibles(seleccionado, jugador); //una array de movimientos posibles?
 
 
-		}else{
+		} else {
+			Casillero casSelecc = losCasilleros[seleccionado.getX()][seleccionado.getY()];
 			if (casClickeado.isEmpty() || casClickeado.getPieza().dameColor() != jugador.dameColor()) {
 				if(esMovimientoPosible(pos, jugador)){
 					if(!casClickeado.isEmpty()){
@@ -60,7 +61,7 @@ public class Tablero {
 				}
 			} else {
 				seleccionado = pos;
-				resp = analizoMovimientos(seleccionado, jugador);
+				resp = posicionesPosibles(seleccionado, jugador);
 			}
 
 		}
@@ -105,11 +106,78 @@ public class Tablero {
 		}
 	}
 
-	/**
-	 * Recibe una posicion y un jugador, sabiendo que en la posicion esa hay una pieza,
-	 * Devuelve un set de Posiciones a las cuales se pude mover la pieza
-	 * */
-	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador){
+		/* Devuelve todos las posiciones posibles de la pieza en pos considerando que no debe quedar el rey en jaque */
+	private Set<Posicion> posicionesPosibles(Posicion pos, Jugador jugador) {
+		// Obtengo todos los lugares a los que podría potencialmente ir la pieza
+		Set<Posicion> posicionesPosibles = analizoMovimientos(pos, jugador, false);
+		// Ahora hay que ver cuáles de esas jugadas dejan al rey en jaque y sacarlas de movPosibles
+		// Para eso primero busco la posición del rey del jugador que tiene el turno
+		Posicion posRey = null; // Hay que darle un valor sí o sí para que compile
+		boolean encontreAlRey = false;
+		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == jugador.dameColor() && losCasilleros[i][j].getPieza() instanceof Rey) {
+					posRey = new Posicion(i,j);
+					encontreAlRey = true;
+				}
+			}
+		}
+		// Luego, recorro todas las jugadas posibles de la pieza seleccionada y para cada una de ellas me fijo
+		// en todos los movimientos posibles de todas las piezas del adversario que sean comiendo para ver que
+		// no esté el rey entre las posiciones posibles (o sea, me fijo que el rey no quede en jaque)
+		Casillero casilleroFuente = losCasilleros[pos.getX()][pos.getY()];		
+		Pieza piezaMoviendo = casilleroFuente.getPieza();
+		Stack<Posicion> posicionesParaBorrar = new Stack<>();
+		Jugador adversario;
+		if (jugador.dameColor() == Color.BLANCO)
+			adversario = new Jugador(Color.NEGRO);
+		else
+			adversario = new Jugador(Color.BLANCO);
+		// Recorro las posiciones posibles para la pieza que se quiere mover
+		for (Posicion posicionPosible: posicionesPosibles) {
+			boolean esPosible = true;
+			Casillero casilleroDestino = losCasilleros[posicionPosible.getX()][posicionPosible.getY()];
+			// "Hago" la jugada
+			Pieza piezaRespaldo = casilleroDestino.getPieza();
+			casilleroDestino.addPieza(piezaMoviendo);
+			casilleroFuente.removePieza();
+			// Si estoy tratando de mover al rey, tengo que cambiar posRey
+			if (piezaMoviendo instanceof Rey)
+				posRey = posicionPosible;
+			// Recorro el tablero buscando las piezas del oponente que puedan estar dejando en jaque al rey
+			for (int i = 0; i < SIZE_TABLERO && esPosible; i++) {
+				for (int j = 0; j < SIZE_TABLERO && esPosible; j++) {
+					// Si en el casillero no hay una pieza del adversario, sigo de largo
+					if (losCasilleros[i][j].isEmpty() || losCasilleros[i][j].getPieza().dameColor() == jugador.dameColor())
+						continue;
+					// Si hay una del adversario, me fijo que no pueda "comerse" al rey del que mueve
+					Posicion estaPos = new Posicion(i,j);
+					Set<Posicion> posicionesComiendo = analizoMovimientos(estaPos, adversario, true);
+					if (posicionesComiendo.contains(posRey)) {
+						// Acá querría sacarlo del set de posiciones posibles,
+						// pero no lo puedo hacer porque lo estoy iterando.
+						// Entonces me lo guardo en un stack y después lo saco
+						posicionesParaBorrar.push(posicionPosible);
+						esPosible = false;
+					}
+
+				}
+			}
+
+			// Restauro el tablero a como estaba
+			casilleroFuente.addPieza(piezaMoviendo);
+			casilleroDestino.addPieza(piezaRespaldo);
+
+		}
+		// Ahora saco las posiciones que no son válidas por dejar al rey en jaque del set de posiciones posibles
+		while(!posicionesParaBorrar.empty())
+			posicionesPosibles.remove(posicionesParaBorrar.pop());
+
+		return posicionesPosibles;
+	}
+
+	/* Devuelve todos los movimientos posibles de la pieza en pos sin considerar que el rey pueda quedar en jaque */
+	private Set<Posicion> analizoMovimientos(Posicion pos, Jugador jugador, boolean soloComiendo){
 
 		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
 		Set<Posicion> movPosibles = new HashSet<>();
@@ -124,8 +192,9 @@ public class Tablero {
 			for(int posX=pos.getX()+incX, posY=pos.getY()+incY; cont && dentroTablero(posX,posY) && cantidadDeVeces!=0; posX+=incX, posY+=incY, cantidadDeVeces--){
 
 				if(losCasilleros[posX][posY].isEmpty() && elMovimiento.esSinComer()){
-					movPosibles.add(new Posicion(posX,posY));
-				}else if(!losCasilleros[posX][posY].isEmpty() && losCasilleros[posX][posY].getPieza().dameColor()!=jugador.dameColor() && elMovimiento.esComiendo()){
+					if (!soloComiendo)
+						movPosibles.add(new Posicion(posX,posY));
+				}else if(!losCasilleros[posX][posY].isEmpty() && losCasilleros[posX][posY].getPieza().dameColor() != jugador.dameColor() && elMovimiento.esComiendo()){
 					movPosibles.add(new Posicion(posX,posY));
 					cont=false;
 				}else{//Pieza del jugador actual
@@ -145,9 +214,9 @@ public class Tablero {
 
 	private boolean esMovimientoPosible(Posicion pos, Jugador jugador){
 
-		Set<Posicion> movPosibles = analizoMovimientos(seleccionado, jugador);
+		Set<Posicion> posPosibles = posicionesPosibles(seleccionado, jugador);
 
-		if(movPosibles.contains(pos)){
+		if(posPosibles.contains(pos)){
 			return true;
 		}else{
 			return false;
