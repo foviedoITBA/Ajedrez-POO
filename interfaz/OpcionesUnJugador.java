@@ -1,14 +1,14 @@
-package interfaz;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class OpcionesUnJugador extends Pane{
+public class OpcionesUnJugador extends OpcionesDosJugadores{
 
 	public OpcionesUnJugador(){
 		
@@ -16,55 +16,33 @@ public class OpcionesUnJugador extends Pane{
 		
 		this.setPrefSize(700, 800);
 
-		Label color = new Label();
-		color.setPrefSize(200, 50);
-		color.setTranslateX(310);
-		color.setTranslateY(50);
-		color.setText("Elija un color");
+		Label color = new MyLabel("Elija un color ",310,50,200,50);
 
+		RadioButton blanca = new MyRadioButton(265,125,100,50);
 
-		RadioButton blanca = new RadioButton();
-		blanca.setPrefSize(100, 50);
-		blanca.setTranslateX(265);
-		blanca.setTranslateY(125);
+		Label blancaLabel = new MyLabel("Blanca",250,100,100,50);
 
-		Label blancaLabel = new Label();
-		blancaLabel.setPrefSize(100, 50);
-		blancaLabel.setTranslateX(1.5*166.667);
-		blancaLabel.setTranslateY(100);
-		blancaLabel.setText("Blanca");
+		RadioButton negra = new MyRadioButton(425,125,100,50);
+		
+		negra.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent event){
+				negra.setSelected(true);
+				blanca.setSelected(false);
+			}
+		});
+		
+		blanca.setOnAction(new EventHandler<ActionEvent>(){
+			public void handle(ActionEvent event){
+				negra.setSelected(false);
+				blanca.setSelected(true);
+			}
+		});
 
+		Label negraLabel = new MyLabel("Negra",417,100,100,50);
 
-		RadioButton negra = new RadioButton();
-		negra.setPrefSize(100, 50);
-		negra.setTranslateX(425);
-		negra.setTranslateY(125);
+		Button iniciarJuego = new MyButton(" Jugar ",270,350,200,50);
 
-		Label negraLabel = new Label();
-		negraLabel.setPrefSize(100, 50);
-		negraLabel.setTranslateX(2.5*166.67);
-		negraLabel.setTranslateY(100);
-		negraLabel.setText("Negra");
-
-
-		RadioButton tiempo = new RadioButton();
-		tiempo.setPrefSize(100, 50);
-		tiempo.setTranslateX(360);
-		tiempo.setTranslateY(250);
-
-		Label tiempoLabel = new Label();
-		tiempoLabel.setPrefSize(300, 25);
-		tiempoLabel.setTranslateX(255);
-		tiempoLabel.setTranslateY(225);
-		tiempoLabel.setText("Jugar con limite de tiempo");
-
-		Button iniciarJuego = new Button();
-		iniciarJuego.setText(" Start Game ");
-		iniciarJuego.setPrefSize(200,50);
-		iniciarJuego.setTranslateX(270);
-		iniciarJuego.setTranslateY(350);
-
-		this.getChildren().addAll(color,blancaLabel,blanca,negraLabel,negra,tiempoLabel,tiempo,iniciarJuego);
+		this.getChildren().addAll(color,blancaLabel,blanca,negraLabel,negra,iniciarJuego);
 		
 		this.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		

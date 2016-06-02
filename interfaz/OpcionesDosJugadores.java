@@ -1,4 +1,3 @@
-package interfaz;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,22 +15,11 @@ public class OpcionesDosJugadores extends Pane{
 		
 		this.setPrefSize(700, 800);
 		
-		RadioButton tiempo = new RadioButton();
-		tiempo.setPrefSize(100, 50);
-		tiempo.setTranslateX(360);
-		tiempo.setTranslateY(250);
+		RadioButton tiempo = new MyRadioButton(360,250,100,50);
 
-		Label tiempoLabel = new Label();
-		tiempoLabel.setPrefSize(300, 25);
-		tiempoLabel.setTranslateX(255);
-		tiempoLabel.setTranslateY(225);
-		tiempoLabel.setText("Jugar con limite de tiempo");
+		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",255,225,300,25);
 
-		Button iniciarJuego = new Button();
-		iniciarJuego.setText(" Start Game ");
-		iniciarJuego.setPrefSize(200,50);
-		iniciarJuego.setTranslateX(270);
-		iniciarJuego.setTranslateY(350);
+		Button iniciarJuego = new MyButton(" Jugar ",270,350,200,50);
 
 		this.getChildren().addAll(tiempoLabel,tiempo,iniciarJuego);
 		

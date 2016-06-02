@@ -1,4 +1,3 @@
-package interfaz;
 import javafx.scene.layout.Pane;
 
 public class PantallaJuego extends Pane{
@@ -7,6 +6,7 @@ public class PantallaJuego extends Pane{
 		super();
 		this.setPrefSize(700, 800);
 		this.getChildren().addAll(new MenuPantallaJuego());
+		this.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	}
-	
+
 }
