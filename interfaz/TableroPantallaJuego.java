@@ -1,3 +1,5 @@
+package interfaz;
+
 import javafx.geometry.Pos;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;

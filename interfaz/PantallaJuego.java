@@ -1,3 +1,5 @@
+package interfaz;
+
 import javafx.scene.layout.Pane;
 
 public class PantallaJuego extends Pane{

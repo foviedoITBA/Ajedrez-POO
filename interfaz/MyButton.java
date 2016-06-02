@@ -1,3 +1,5 @@
+package interfaz;
+
 
 import javafx.scene.control.Button;
 

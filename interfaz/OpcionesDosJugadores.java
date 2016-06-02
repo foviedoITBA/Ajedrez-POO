@@ -1,3 +1,5 @@
+package interfaz;
+
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -23,10 +25,10 @@ public class OpcionesDosJugadores extends Pane{
 
 		this.getChildren().addAll(tiempoLabel,tiempo,iniciarJuego);
 		
-		this.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		this.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 		
 		Scene escena = new Scene(new PantallaJuego());
-		escena.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		escena.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 		 
 		iniciarJuego.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena));
 	}

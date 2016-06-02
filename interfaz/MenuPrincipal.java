@@ -1,3 +1,5 @@
+package interfaz;
+
 
 
 
@@ -31,8 +33,8 @@ public class MenuPrincipal extends Application {
 			root.getChildren().addAll(titulo,buttonUnJugador,buttonDosJugadores,buttonResumirJuego);
 			
 			Scene scene = new Scene(root,700,800);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			
+			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
