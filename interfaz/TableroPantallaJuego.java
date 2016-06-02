@@ -42,7 +42,7 @@ public class TableroPantallaJuego extends GridPane{
 		for (int i = 0; i < rowCount; i++) {
 			grid.getRowConstraints().add(rc);
 		}
-		grid.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		grid.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
 		grid.setId("tablero");
 		this.getChildren().add(grid);
 	}
