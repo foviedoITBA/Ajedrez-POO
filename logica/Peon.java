@@ -35,7 +35,11 @@ public class Peon extends Pieza {
 		movimientos.remove(adelante);
 		movimientos.add( new Movimiento(avance, 0, false, true, false, 1));
 	}
-
+	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.PEON;
+	}
 	@Override
 	@Deprecated
 	public List<Movimiento> dameMovimientos() {

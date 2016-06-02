@@ -29,4 +29,9 @@ public class Torre extends Pieza{
 		return movimientos;
 	}
 	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.TORRE;
+	}
+	
 }

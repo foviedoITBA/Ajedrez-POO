@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayDeque;
+import java.util.Set;
 
 public class Juego {
 
@@ -25,7 +26,21 @@ public class Juego {
 	
 	//Agregar constructor para cargar una partida
 	
+	public boolean hayAlgo(PosicionAjedrez posicion) {
+		return elTablero.hayAlgo(posicion);
+	}
 	
+	public PiezaColor queHay(PosicionAjedrez posicion) throws Exception {
+		return elTablero.queHay(posicion);
+	}
+	
+	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion){
+		return elTablero.dameMovimientos(posicion);
+	}
+	
+	public boolean mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal){
+		return elTablero.mover(posInicial, posFinal);
+	}
 	
 	
 	
@@ -46,9 +61,10 @@ public class Juego {
 	 * @param pos_y
 	 * @return un string con la jugada
 	 */
+	@Deprecated
 	public Jugada clickTablero(int posX,int posY){//esta mal no puede devolver una jugada. hay problemas con que guardaria mas cosas de las necesarias en el stack
 		Jugada resp=null;
-		Posicion pos = new Posicion(posX,posY);
+		PosicionTablero pos = new PosicionTablero(posX,posY);
 		
 		resp=elTablero.click(pos, getTurno());
 		

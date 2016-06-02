@@ -35,4 +35,9 @@ public class Caballo extends Pieza{
 	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
+	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.CABALLO;
+	}
 }

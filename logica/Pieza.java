@@ -19,6 +19,8 @@ public abstract class Pieza {
 		return elColor;
 	}
 
+	public abstract NombrePieza dameNombre();
+	
 	public void ponerSeMovio() {
 		seMovio = true;
 	}

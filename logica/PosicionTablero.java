@@ -1,10 +1,10 @@
 package logica;
 
-public class Posicion {
+public class PosicionTablero {
 	
 	private int posX, posY;
 	
-	public Posicion(int posX, int posY){
+	public PosicionTablero(int posX, int posY){
 		this.posX=posX;
 		this.posY=posY;
 	}
@@ -34,7 +34,7 @@ public class Posicion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Posicion other = (Posicion) obj;
+		PosicionTablero other = (PosicionTablero) obj;
 		if (posX != other.posX)
 			return false;
 		if (posY != other.posY)

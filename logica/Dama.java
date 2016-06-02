@@ -35,4 +35,9 @@ public class Dama extends Pieza {
 	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
+	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.DAMA;
+	}
 }
