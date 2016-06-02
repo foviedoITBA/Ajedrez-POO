@@ -1,0 +1,26 @@
+
+.root{
+	-fx-background-color:#e67eee;
+}
+
+.label{
+	-fx-font-size:15pt;
+	-fx-text-fill:#FFFFFF;
+}
+
+.button{
+	-fx-font-size:15pt;
+	-fx-text-fill:#FFFFFF;
+	-fx-background-color:#A41E84;
+}
+
+#labelChess{
+	-fx-font-size:30pt;
+}
+
+#tablero{
+	-fx-background-image: url("imagen_tablero.jpg");
+	-fx-background-repeat: stretch;   
+    -fx-background-size: 700 700;
+    -fx-background-position: center center;
+}
