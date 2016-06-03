@@ -12,9 +12,11 @@ public class Juego {
 
 	private  Stack<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
-	boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
-	boolean ahogado;	// Una variable que registra si hubo ahogado o no
+	private boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
+	private boolean ahogado;	// Una variable que registra si hubo ahogado o no
 	
+
+
 	public Juego() {
 		elTablero = new Tablero();
 		registro = new Stack<Jugada>();
@@ -43,6 +45,8 @@ public class Juego {
 	}
 	
 	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws Exception {
+		if (jaqueMate || ahogado)
+			return null;
 		if (!hayAlgo(posInicial))
 			return null;
 		if (queHay(posInicial).dameColor() != jugadorTurno.dameColor())
@@ -51,7 +55,9 @@ public class Juego {
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
 			registro.push(laJugada);
 			cambiarTurno();
-			
+			jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
+			if (!jaqueMate)
+				ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
 			/**TEST**/
 			elTablero.imprimirTablero();
 			
@@ -70,10 +76,20 @@ public class Juego {
 			return;
 		elTablero.revertir(registro.pop());
 		cambiarTurno();
+		jaqueMate = false;
+		ahogado = false;
 		/**TEST**/
 		elTablero.imprimirTablero();
 	}
 	
+	public boolean hayJaqueMate() {
+		return jaqueMate;
+	}
+
+	public boolean hayAhogado() {
+		return ahogado;
+	}
+
 	private void cambiarTurno() {
 		if (jugadorTurno.equals(jugadorBlanco))
 			jugadorTurno = jugadorNegro;

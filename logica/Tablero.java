@@ -85,6 +85,80 @@ public class Tablero {
 		laJugada.damePiezaMovida().sacarSeMovio();
 	}
 	
+	public boolean hayJaqueMate(Color perdedor) {
+		return (elReyEstaEnJaque(perdedor) && !hayMovimientosPosibles(perdedor));
+	}
+
+	public boolean hayAhogado(Color ahogado) {
+		return (!elReyEstaEnJaque(ahogado) && !hayMovimientosPosibles(ahogado));
+	}
+
+	private boolean elReyEstaEnJaque(Color perdedor) {
+		// Busco al Rey en el tablero
+		boolean encontreAlRey = false;
+		PosicionTablero posRey = null;	
+		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor && losCasilleros[i][j].getPieza() instanceof Rey) {
+					posRey = new PosicionTablero(i,j);
+					encontreAlRey = true;
+				}
+			}
+		}
+
+		// Me fijo si hay alguna pieza del adversario que se la pueda comer
+		boolean estaEnJaque = false;
+		Color ganador = null;
+		if (perdedor == Color.BLANCO)
+			ganador = Color.NEGRO;
+		else
+			ganador = Color.BLANCO;
+		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !estaEnJaque; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == ganador) {
+					try {
+						if (analizoMovimientos(new PosicionTablero(i,j), true).contains(posRey))
+							estaEnJaque = true;
+					}
+					catch(Exception e){}
+				}
+			}
+		}
+
+		return estaEnJaque;
+
+	}
+
+	private boolean hayMovimientosPosibles(Color perdedor) {
+		// Busco al Rey en el tablero
+		boolean encontreAlRey = false;
+		PosicionTablero posRey = null;	
+		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor && losCasilleros[i][j].getPieza() instanceof Rey) {
+					posRey = new PosicionTablero(i,j);
+					encontreAlRey = true;
+				}
+			}
+		}
+
+		// Busco todas las piezas del jugador y me fijo si se pueden mover
+		boolean hayJugadas = false;
+		for (int i = 0; i < SIZE_TABLERO && !hayJugadas; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !hayJugadas; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor) {
+					try {	
+						if (!posicionesPosibles(new PosicionTablero(i,j)).isEmpty())
+							hayJugadas = true;
+					}
+					catch (Exception e){}
+				}
+			}
+		}
+
+		return hayJugadas;
+	}
+
 	private PosicionTablero transformarPosicion(PosicionAjedrez posAjedrez) {
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
