@@ -11,12 +11,12 @@ public class Tablero {
 
 	private Casillero[][] losCasilleros;	// Una matriz de casilleros, uno por cada escaque
 
-	private PosicionTablero seleccionado;	// Una referencia a la posicion del casillero seleccionado (lo cual se hace haciéndole click)
+	//private PosicionTablero seleccionado;	// Una referencia a la posicion del casillero seleccionado (lo cual se hace haciéndole click)
 
 	public Tablero(){
 		losCasilleros = new Casillero[SIZE_TABLERO][SIZE_TABLERO];
 		initTablero();
-		seleccionado=null;
+		//seleccionado=null;
 	}
 
 	/**
@@ -121,6 +121,18 @@ public class Tablero {
 		return false;
 	}
 	
+	public Jugada moverPieza(PosicionAjedrez posOrigen, PosicionAjedrez posDestino){
+		PosicionTablero posOrigenT = transformarPosicion(posOrigen);
+		PosicionTablero posDestinoT = transformarPosicion(posDestino);
+		Casillero casOrigen = losCasilleros[posOrigenT.getX()][posOrigenT.getY()];
+		Casillero casDestino = losCasilleros[posDestinoT.getX()][posDestinoT.getY()];
+		Pieza piezaMoviendo = casOrigen.getPieza();
+		casDestino.addPieza(piezaMoviendo);
+		piezaMoviendo.ponerSeMovio();
+		casOrigen.removePieza();
+		return new Jugada(posOrigen,posDestino);
+	}
+	
 	private PosicionTablero transformarPosicion(PosicionAjedrez posAjedrez) {
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
@@ -171,9 +183,9 @@ public class Tablero {
 				}else{
 					losCasilleros[i][j]=new Casillero();
 				}
-
 			}
 		}
+		
 	}
 
 	/* Devuelve todos las posiciones posibles de la pieza en pos considerando que no debe quedar el rey en jaque */

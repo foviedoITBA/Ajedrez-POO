@@ -34,12 +34,19 @@ public class Juego {
 		return elTablero.queHay(posicion);
 	}
 	
-	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion){
-		return elTablero.dameMovimientos(posicion);
+	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws Exception{
+		return elTablero.damePosicionesPosibles(posicion);
 	}
 	
-	public boolean mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal){
-		return elTablero.mover(posInicial, posFinal);
+	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal){
+		if(elTablero.esMovimientoPosible(posInicial,posFinal)){
+			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
+			registro.add(laJugada);
+			cambiarTurno();
+			return laJugada;
+		}else{
+			return null;
+		}
 	}
 	
 	
@@ -52,6 +59,10 @@ public class Juego {
 		}
 	}
 	
+	private void cambiarTurno(){
+		ultimoJugador=getTurno();
+	}
+	
 	
 	/**
 	 * Con este método se le dice al juego qué posición del tablero fue clickeada.
@@ -60,7 +71,7 @@ public class Juego {
 	 * @param pos_x
 	 * @param pos_y
 	 * @return un string con la jugada
-	 */
+	 *//*
 	@Deprecated
 	public Jugada clickTablero(int posX,int posY){//esta mal no puede devolver una jugada. hay problemas con que guardaria mas cosas de las necesarias en el stack
 		Jugada resp=null;
@@ -77,7 +88,7 @@ public class Juego {
 		
 		return resp;
 		
-	};					
+	};		*/			
 
 	//public void revertir();	// Revierte la última jugada hecha, sacándola de la pila del registro y mandándosela al tablero para
 							// que la deshaga
