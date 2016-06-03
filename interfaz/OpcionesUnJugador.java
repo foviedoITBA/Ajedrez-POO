@@ -27,7 +27,7 @@ public class OpcionesUnJugador extends Pane{
 		Label color = new MyLabel("Elija un color ",290,170,200,50);
 
 		RadioButton blanca = new MyRadioButton(250,239,100,50);
-
+			blanca.setSelected(true);
 		Label blancaLabel = new MyLabel("Blancas",160,240,100,50);
 
 		RadioButton negra = new MyRadioButton(520,239,100,50);
@@ -49,9 +49,9 @@ public class OpcionesUnJugador extends Pane{
 		Label negraLabel = new MyLabel("Negras",440,240,100,50);
 		
 
-		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,340,300,50);
+		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,340,260,50);
 		
-		RadioButton tiempo = new MyRadioButton(460,339,100,50);
+		RadioButton tiempo = new MyRadioButton(460,339,30,50);
 
 		Button iniciarJuego = new MyButton(" Jugar ",225,420,250,60);
 

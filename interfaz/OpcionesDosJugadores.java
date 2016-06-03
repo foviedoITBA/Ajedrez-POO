@@ -11,22 +11,28 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OpcionesDosJugadores extends Pane{
-
+	Label titulo;
+	Label tiempoLabel;
+	RadioButton tiempo;
+	Button iniciarJuego;
+	
+	
+	
 	public OpcionesDosJugadores(){
 		
 		super();
 		
 		this.setPrefSize(700, 800);
 		
-		Label titulo = new MyLabel("",100,50,500,100);
+		titulo = new MyLabel("",100,50,500,100);
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");
 		
-		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,200,300,50);
+		tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,200,300,50);
 		
-		RadioButton tiempo = new MyRadioButton(460,199,100,50);
+		tiempo = new MyRadioButton(460,199,100,50);
 
-		Button iniciarJuego = new MyButton(" Jugar ",225,270,250,60);
+		iniciarJuego = new MyButton(" Jugar ",225,270,250,60);
 
 		this.getChildren().addAll(titulo,tiempoLabel,tiempo,iniciarJuego);
 		

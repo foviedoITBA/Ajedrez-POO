@@ -1,5 +1,5 @@
 @font-face {
-    font-family: "Walkway-rounded";
+    font-family: Walkway-rounded;
     src: url("Walkwayrounded.ttf");
 }
 
@@ -14,13 +14,13 @@
 .label{
 	-fx-font-size:15pt;
 	-fx-text-fill:#3c2c20;
-	-fx-font-family: "Walkway-rounded";
+	-fx-font-family: Walkway Rounded;
 }
 
 .button{
 	-fx-font-size:1.6em;
 	-fx-text-fill:#3c2c20;
-	-fx-font-family: "Walkway-rounded";
+	-fx-font-family: Walkway Rounded;
 	
 	-fx-background-color:Transparent;
 	-fx-background-image: url('plainRoundedButton.png');
