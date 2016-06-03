@@ -94,17 +94,8 @@ public class Tablero {
 	}
 
 	private boolean elReyEstaEnJaque(Color perdedor) {
-		// Busco al Rey en el tablero
-		boolean encontreAlRey = false;
-		PosicionTablero posRey = null;	
-		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
-			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
-				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor && losCasilleros[i][j].getPieza() instanceof Rey) {
-					posRey = new PosicionTablero(i,j);
-					encontreAlRey = true;
-				}
-			}
-		}
+		
+		PosicionTablero posRey = buscoAlRey(perdedor);
 
 		// Me fijo si hay alguna pieza del adversario que se la pueda comer
 		boolean estaEnJaque = false;
@@ -213,16 +204,7 @@ public class Tablero {
 		Set<PosicionTablero> posicionesPosibles = analizoMovimientos(pos, false);
 		// Ahora hay que ver cuáles de esas jugadas dejan al rey en jaque y sacarlas de posicionesPosibles
 		// Para eso primero busco la posición del rey del jugador que tiene el turno
-		PosicionTablero posRey = null; // Hay que darle un valor sí o sí para que compile
-		boolean encontreAlRey = false;
-		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
-			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
-				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == piezaMoviendo.dameColor() && losCasilleros[i][j].getPieza() instanceof Rey) {
-					posRey = new PosicionTablero(i,j);
-					encontreAlRey = true;
-				}
-			}
-		}
+		PosicionTablero posRey = buscoAlRey(piezaMoviendo.dameColor());
 		// Luego, recorro todas las jugadas posibles de la pieza seleccionada y para cada una de ellas me fijo
 		// en todos los movimientos posibles de todas las piezas del adversario que sean comiendo para ver que
 		// no esté el rey entre las posiciones posibles (o sea, me fijo que el rey no quede en jaque)
@@ -309,6 +291,19 @@ public class Tablero {
 		return posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO;
 	}
 
+	private PosicionTablero buscoAlRey(Color colorDelRey) {
+		PosicionTablero posRey = null;
+		boolean encontreAlRey = false;
+		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == colorDelRey && losCasilleros[i][j].getPieza() instanceof Rey) {
+					posRey = new PosicionTablero(i,j);
+					encontreAlRey = true;
+				}
+			}
+		}
+		return posRey;
+	}
 
 	/***************SÓLO PARA TESTEAR**********************/
 	public void imprimirTablero(){
