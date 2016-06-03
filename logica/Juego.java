@@ -15,7 +15,7 @@ public class Juego {
 	boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
 	boolean ahogado;	// Una variable que registra si hubo ahogado o no
 	
-	public Juego(){
+	public Juego() {
 		elTablero = new Tablero();
 		registro=new ArrayDeque<Jugada>();
 		jaqueMate=false;
