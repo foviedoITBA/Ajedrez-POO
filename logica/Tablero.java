@@ -130,18 +130,7 @@ public class Tablero {
 	}
 
 	private boolean hayMovimientosPosibles(Color perdedor) {
-		// Busco al Rey en el tablero
-		boolean encontreAlRey = false;
-		PosicionTablero posRey = null;	
-		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
-			for (int j = 0; j < SIZE_TABLERO && !encontreAlRey; j++) {
-				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor && losCasilleros[i][j].getPieza() instanceof Rey) {
-					posRey = new PosicionTablero(i,j);
-					encontreAlRey = true;
-				}
-			}
-		}
-
+		
 		// Busco todas las piezas del jugador y me fijo si se pueden mover
 		boolean hayJugadas = false;
 		for (int i = 0; i < SIZE_TABLERO && !hayJugadas; i++) {
