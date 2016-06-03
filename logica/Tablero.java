@@ -302,7 +302,7 @@ public class Tablero {
 	/* Otros métodos y miembros que hagan falta */
 
 	/** SOLO PARA TESTEAR **/
-/*	public void imprimirTablero(){
+	public void imprimirTablero(){
 		System.out.print("\n\n*************************************************************\n\n");
 		for(int i=0;i<SIZE_TABLERO;i++){
 			for(int j=0;j<SIZE_TABLERO;j++){
@@ -321,7 +321,7 @@ public class Tablero {
 			System.out.print("\n");
 		}
 
-	}
+	}/*
 	public void agregoNegra(){
 		losCasilleros[6][0].addPieza(new Torre(Color.NEGRO));
 	}

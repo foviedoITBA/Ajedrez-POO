@@ -1,10 +1,67 @@
 package logica;
 
+import java.util.Set;
+
 public class Test {
 	
 	public static void main(String[] args) {
 		
-		Jugador jugador1=new Jugador(Color.NEGRO);
+		
+		Juego juego = new Juego();
+		
+		try {
+			System.out.println(juego.hayAlgo(new PosicionAjedrez((byte)2,'a')));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			//System.out.println(juego.dameMovimientos(new PosicionAjedrez((byte)7,'a')));
+			for(PosicionAjedrez i: juego.dameMovimientos(new PosicionAjedrez((byte)2,'a'))){
+				System.out.println(String.valueOf(i.dameColumna())+i.dameFila());
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			juego.mover(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)4,'a'));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			System.out.println(juego.hayAlgo(new PosicionAjedrez((byte)8,'c')));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			
+			for(PosicionAjedrez i: juego.dameMovimientos(new PosicionAjedrez((byte)8,'c'))){
+				System.out.println(String.valueOf(i.dameColumna())+i.dameFila());
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		try {
+//			juego.mover(new PosicionAjedrez((byte)8,'c'), new PosicionAjedrez((byte),'a'));
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
+		/*Jugador jugador1=new Jugador(Color.NEGRO);
 		Jugador jugador2=new Jugador(Color.BLANCO);
 		PosicionTablero pos = new PosicionTablero(6,0);
 		

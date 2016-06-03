@@ -8,7 +8,7 @@ public class Juego {
 	private Tablero elTablero; // Esta es una referencia al tablero
 	
 	private Jugador jugador1,jugador2;
-	private Jugador ultimoJugador=jugador2;
+	private Jugador ultimoJugador=null;
 
 	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
@@ -22,6 +22,9 @@ public class Juego {
 		ahogado=false;
 		jugador1=new Jugador(Color.BLANCO);
 		jugador2=new Jugador(Color.NEGRO);
+		
+		/**TEST**/
+		elTablero.imprimirTablero();
 	}
 	
 	//Agregar constructor para cargar una partida
@@ -43,16 +46,22 @@ public class Juego {
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
 			registro.add(laJugada);
 			cambiarTurno();
+			
+			/**TEST**/
+			elTablero.imprimirTablero();
+			
 			return laJugada;
 		}else{
 			return null;
 		}
+		
+		
 	}
 	
 	
 	
 	public Jugador getTurno(){
-		if(!ultimoJugador.equals(jugador1)){
+		if(ultimoJugador == null || !ultimoJugador.equals(jugador1)){
 			return jugador1;
 		}else{
 			return jugador2;
