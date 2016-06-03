@@ -1,6 +1,7 @@
 package interfaz;
 
 
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,18 +18,22 @@ public class OpcionesDosJugadores extends Pane{
 		
 		this.setPrefSize(700, 800);
 		
-		RadioButton tiempo = new MyRadioButton(360,250,100,50);
-
-		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",255,225,300,25);
-
-		Button iniciarJuego = new MyButton(" Jugar ",270,350,200,50);
-
-		this.getChildren().addAll(tiempoLabel,tiempo,iniciarJuego);
+		Label titulo = new MyLabel("",100,50,500,100);
+		titulo.setAlignment(Pos.TOP_CENTER);
+		titulo.setId("labelChess");
 		
-		this.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,200,300,50);
+		
+		RadioButton tiempo = new MyRadioButton(460,199,100,50);
+
+		Button iniciarJuego = new MyButton(" Jugar ",225,270,250,60);
+
+		this.getChildren().addAll(titulo,tiempoLabel,tiempo,iniciarJuego);
+		
+		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		
 		Scene escena = new Scene(new PantallaJuego());
-		escena.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+		escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		 
 		iniciarJuego.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena));
 	}

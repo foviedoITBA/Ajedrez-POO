@@ -19,7 +19,7 @@ public class TableroPantallaJuego extends GridPane{
 		
 		grid.setPrefSize(500, 500);
 		grid.setTranslateX(100);
-		grid.setTranslateY(100);
+		grid.setTranslateY(150);
 		
 		grid.setHgap(10);
 		grid.setVgap(10);
@@ -42,7 +42,7 @@ public class TableroPantallaJuego extends GridPane{
 		for (int i = 0; i < rowCount; i++) {
 			grid.getRowConstraints().add(rc);
 		}
-		grid.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+		grid.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		grid.setId("tablero");
 		this.getChildren().add(grid);
 	}

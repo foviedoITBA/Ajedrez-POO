@@ -1,0 +1,46 @@
+@font-face {
+    font-family: "Walkway-rounded";
+    src: url("Walkwayrounded.ttf");
+}
+
+.root{
+	-fx-background-color:#D3D3D3;
+	-fx-background-image: url('bg.jpg');
+    -fx-background-size:cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.label{
+	-fx-font-size:15pt;
+	-fx-text-fill:#3c2c20;
+	-fx-font-family: "Walkway-rounded";
+}
+
+.button{
+	-fx-font-size:1.6em;
+	-fx-text-fill:#3c2c20;
+	-fx-font-family: "Walkway-rounded";
+	
+	-fx-background-color:Transparent;
+	-fx-background-image: url('plainRoundedButton.png');
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    
+}
+
+#labelChess{
+	
+	-fx-background-image: url('title.png');
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+#tablero{
+	-fx-background-image: url('tablero.png');
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}

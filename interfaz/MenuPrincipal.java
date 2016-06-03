@@ -18,23 +18,23 @@ public class MenuPrincipal extends Application {
 		
 			Pane root = new Pane();
 			
-			Label titulo = new MyLabel("CHESS",250,50,200,100);
+			Label titulo = new MyLabel("",100,50,500,100);
 			titulo.setAlignment(Pos.TOP_CENTER);
 			titulo.setId("labelChess");
 
-			Button buttonUnJugador = new MyButton(" Un Jugador ", 250,200,200,100);
+			Button buttonUnJugador = new MyButton("Un Jugador", 200,200,300,100);
 			buttonUnJugador.setOnAction(e -> primaryStage.setScene(new Scene(new OpcionesUnJugador())));
 
-			Button buttonDosJugadores = new MyButton("Dos Jugadores",250,400,200,100);
+			Button buttonDosJugadores = new MyButton("Dos Jugadores",200,320,300,100);
 			buttonDosJugadores.setOnAction(e -> primaryStage.setScene(new Scene(new OpcionesDosJugadores())));
 
-			Button buttonResumirJuego = new MyButton(" Resumir el juego ",250,600,200,100);
+			Button buttonResumirJuego = new MyButton("Resumir el juego",200,440,300,100);
 
 			root.getChildren().addAll(titulo,buttonUnJugador,buttonDosJugadores,buttonResumirJuego);
 			
 			Scene scene = new Scene(root,700,800);
 			
-			scene.getStylesheets().add(getClass().getResource("../application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
