@@ -10,49 +10,61 @@ public class Test {
 		Juego juego = new Juego();
 		
 		try {
-			System.out.println(juego.hayAlgo(new PosicionAjedrez((byte)2,'a')));
+			juego.mover(new PosicionAjedrez((byte)2,'e'), new PosicionAjedrez((byte)4,'e'));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		try {
-			//System.out.println(juego.dameMovimientos(new PosicionAjedrez((byte)7,'a')));
-			for(PosicionAjedrez i: juego.dameMovimientos(new PosicionAjedrez((byte)2,'a'))){
-				System.out.println(String.valueOf(i.dameColumna())+i.dameFila());
-			}
-			
+			juego.mover(new PosicionAjedrez((byte)7,'d'), new PosicionAjedrez((byte)5,'d'));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			juego.mover(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)4,'a'));
+			juego.mover(new PosicionAjedrez((byte)4,'e'), new PosicionAjedrez((byte)5,'d'));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		try {
-			System.out.println(juego.hayAlgo(new PosicionAjedrez((byte)8,'c')));
+			juego.mover(new PosicionAjedrez((byte)8,'d'), new PosicionAjedrez((byte)5,'d'));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			
-			for(PosicionAjedrez i: juego.dameMovimientos(new PosicionAjedrez((byte)8,'c'))){
-				System.out.println(String.valueOf(i.dameColumna())+i.dameFila());
-			}
-			
+			juego.mover(new PosicionAjedrez((byte)1,'b'), new PosicionAjedrez((byte)3,'c'));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
+		try {
+			juego.mover(new PosicionAjedrez((byte)5,'d'), new PosicionAjedrez((byte)5,'e'));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			juego.mover(new PosicionAjedrez((byte)1,'f'), new PosicionAjedrez((byte)2,'e'));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+				juego.revertir();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}		
+
 //		try {
 //			juego.mover(new PosicionAjedrez((byte)8,'c'), new PosicionAjedrez((byte),'a'));
 //		} catch (Exception e) {

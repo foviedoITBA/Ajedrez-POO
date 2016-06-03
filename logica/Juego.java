@@ -1,28 +1,29 @@
 package logica;
 
-import java.util.ArrayDeque;
+import java.util.Stack;
 import java.util.Set;
 
 public class Juego {
 
 	private Tablero elTablero; // Esta es una referencia al tablero
 	
-	private Jugador jugador1,jugador2;
-	private Jugador ultimoJugador=null;
+	private Jugador jugadorBlanco,jugadorNegro;
+	private Jugador jugadorTurno;
 
-	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
+	private  Stack<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
 	boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
 	boolean ahogado;	// Una variable que registra si hubo ahogado o no
 	
 	public Juego() {
 		elTablero = new Tablero();
-		registro=new ArrayDeque<Jugada>();
+		registro = new Stack<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
-		jugador1=new Jugador(Color.BLANCO);
-		jugador2=new Jugador(Color.NEGRO);
-		
+		jugadorBlanco=new Jugador(Color.BLANCO);
+		jugadorNegro=new Jugador(Color.NEGRO);
+		jugadorTurno = jugadorBlanco;
+
 		/**TEST**/
 		elTablero.imprimirTablero();
 	}
@@ -37,72 +38,49 @@ public class Juego {
 		return elTablero.queHay(posicion);
 	}
 	
-	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws Exception{
+	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws Exception {
 		return elTablero.damePosicionesPosibles(posicion);
 	}
 	
-	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal){
+	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws Exception {
+		if (!hayAlgo(posInicial))
+			return null;
+		if (queHay(posInicial).dameColor() != jugadorTurno.dameColor())
+			return null;
 		if(elTablero.esMovimientoPosible(posInicial,posFinal)){
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
-			registro.add(laJugada);
+			registro.push(laJugada);
 			cambiarTurno();
 			
 			/**TEST**/
 			elTablero.imprimirTablero();
 			
 			return laJugada;
-		}else{
+		} else
 			return null;
-		}
+	}
 		
-		
+	public Jugador getTurno() {
+		return jugadorTurno;
 	}
 	
-	
-	
-	public Jugador getTurno(){
-		if(ultimoJugador == null || !ultimoJugador.equals(jugador1)){
-			return jugador1;
-		}else{
-			return jugador2;
-		}
+	// Revierte la última jugada hecha, sacándola de la pila del registro y mandándosela al tablero para que la deshaga 
+	public void revertir() {
+		if (registro.isEmpty())
+			return;
+		elTablero.revertir(registro.pop());
+		cambiarTurno();
+		/**TEST**/
+		elTablero.imprimirTablero();
 	}
 	
-	private void cambiarTurno(){
-		ultimoJugador=getTurno();
+	private void cambiarTurno() {
+		if (jugadorTurno.equals(jugadorBlanco))
+			jugadorTurno = jugadorNegro;
+		else
+			jugadorTurno = jugadorBlanco;
 	}
-	
-	
-	/**
-	 * Con este método se le dice al juego qué posición del tablero fue clickeada.
-	 *  Devuelve una Jugada a la interfaz con la jugada, si es que hubo (ej: "7. Cb3")
-	 *  Si no hubo jugada, devuelve null.
-	 * @param pos_x
-	 * @param pos_y
-	 * @return un string con la jugada
-	 *//*
-	@Deprecated
-	public Jugada clickTablero(int posX,int posY){//esta mal no puede devolver una jugada. hay problemas con que guardaria mas cosas de las necesarias en el stack
-		Jugada resp=null;
-		PosicionTablero pos = new PosicionTablero(posX,posY);
-		
-		resp=elTablero.click(pos, getTurno());
-		
-		
-		if(resp != null){
-			registro.add(resp);
-			
-			ultimoJugador=getTurno();
-		}
-		
-		return resp;
-		
-	};		*/			
 
-	//public void revertir();	// Revierte la última jugada hecha, sacándola de la pila del registro y mandándosela al tablero para
-							// que la deshaga
-	
-	/* Falta algo que diga de quién es el turno, pero todavía no se me ocurrió si implementar clases 'Jugador' o simplemente decir 'blancas' o 'negras' */
 
 	/* Otros métodos y miembros que hagan falta */
 }

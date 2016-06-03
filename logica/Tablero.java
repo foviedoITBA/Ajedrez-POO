@@ -11,70 +11,11 @@ public class Tablero {
 
 	private Casillero[][] losCasilleros;	// Una matriz de casilleros, uno por cada escaque
 
-	//private PosicionTablero seleccionado;	// Una referencia a la posicion del casillero seleccionado (lo cual se hace haciéndole click)
-
 	public Tablero(){
 		losCasilleros = new Casillero[SIZE_TABLERO][SIZE_TABLERO];
 		initTablero();
-		//seleccionado=null;
 	}
 
-	/**
-	 * recibo una posicion
-	 * veo si seleccionado esta en null
-	 * si esta en null significa que aprete para ver los movimientos de la pieza -> pido movimientos a la pieza y devuelvo los que estan vacios o tienen pieza del oponente
-	 * si no esta en null es porque quiero mover la pieza ahi -> comparo si es uno de los movimientos posibles
-	 * 		si es posible miro si esta vacio -> muevo a esa posicion
-	 * 		si esta lleno significa que tiene una pieza del oponente -> mato y guardo la jugada en Juego
-	 * */
-	
-	/*
-	@Deprecated
-	public void click(PosicionTablero pos, Jugador jugador){ // cambiar a qeu devueleve una jugada
-
-		Object resp = null;//que es?
-		Casillero casClickeado = losCasilleros[pos.getX()][pos.getY()];
-		
-		if(seleccionado == null) {
-
-			if(casClickeado.isEmpty() || casClickeado.getPieza().dameColor() != jugador.dameColor()) {
-				return;//nada resp
-			}
-
-			seleccionado=pos;
-
-			resp = posicionesPosibles(seleccionado, jugador); //una array de movimientos posibles?
-
-
-		} else {
-			Casillero casSelecc = losCasilleros[seleccionado.getX()][seleccionado.getY()];
-			if (casClickeado.isEmpty() || casClickeado.getPieza().dameColor() != jugador.dameColor()) {
-				if(esMovimientoPosible(pos, jugador)){
-					if(!casClickeado.isEmpty()){
-						//aviso que comi
-						resp= "Comi";
-					}
-					casClickeado.addPieza(casSelecc.getPieza());
-					casSelecc.getPieza().ponerSeMovio();
-					casSelecc.removePieza();
-
-					//no devuelvo nada o devuelvo una jugada
-
-					seleccionado=null;
-				}
-			} else {
-				seleccionado = pos;
-				resp = posicionesPosibles(seleccionado, jugador);
-			}
-
-		}
-
-		System.out.println(resp);
-
-		return; //resp
-
-	}
-	*/
 
 	public boolean hayAlgo(PosicionAjedrez posAjedrez) {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
@@ -127,10 +68,21 @@ public class Tablero {
 		Casillero casOrigen = losCasilleros[posOrigenT.getX()][posOrigenT.getY()];
 		Casillero casDestino = losCasilleros[posDestinoT.getX()][posDestinoT.getY()];
 		Pieza piezaMoviendo = casOrigen.getPieza();
+		Pieza piezaComida = casDestino.getPieza();
 		casDestino.addPieza(piezaMoviendo);
 		piezaMoviendo.ponerSeMovio();
 		casOrigen.removePieza();
-		return new Jugada(posOrigen,posDestino);
+		return new Jugada(posOrigen, posDestino, piezaMoviendo, piezaComida);
+	}
+
+	public void revertir(Jugada laJugada) {
+		PosicionTablero posOrigenT = transformarPosicion(laJugada.damePosicionOrigen());
+		PosicionTablero posDestinoT = transformarPosicion(laJugada.damePosicionDestino());
+		Casillero casOrigen = losCasilleros[posOrigenT.getX()][posOrigenT.getY()];
+		Casillero casDestino = losCasilleros[posDestinoT.getX()][posDestinoT.getY()];
+		casOrigen.addPieza(laJugada.damePiezaMovida());
+		casDestino.addPieza(laJugada.damePiezaComida());
+		laJugada.damePiezaMovida().sacarSeMovio();
 	}
 	
 	private PosicionTablero transformarPosicion(PosicionAjedrez posAjedrez) {
@@ -295,13 +247,7 @@ public class Tablero {
 	}
 
 
-	//	void revertir(Jugada laJugada);		// A ḿétodo lo llama 'revertir()' de la clase Juego. Le pasa la jugada para que la
-	// deshaga (fíjense que el tablero no sabe cuál fue la última jugada, entonces hay que
-	// decírselo)
-
-	/* Otros métodos y miembros que hagan falta */
-
-	/** SOLO PARA TESTEAR **/
+	/***************SÓLO PARA TESTEAR**********************/
 	public void imprimirTablero(){
 		System.out.print("\n\n*************************************************************\n\n");
 		for(int i=0;i<SIZE_TABLERO;i++){
@@ -321,12 +267,7 @@ public class Tablero {
 			System.out.print("\n");
 		}
 
-	}/*
-	public void agregoNegra(){
-		losCasilleros[6][0].addPieza(new Torre(Color.NEGRO));
 	}
-	public void agregoPeon(){
-		losCasilleros[2][0].addPieza(new Torre(Color.BLANCO));
-	}
-*/
+	
+
 }
