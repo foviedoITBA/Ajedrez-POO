@@ -60,8 +60,8 @@ public class Juego {
 			return null;
 	}
 		
-	public Jugador getTurno() {
-		return jugadorTurno;
+	public Color dameTurno() {
+		return jugadorTurno.dameColor();
 	}
 	
 	// Revierte la última jugada hecha, sacándola de la pila del registro y mandándosela al tablero para que la deshaga 
