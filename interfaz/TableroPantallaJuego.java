@@ -15,8 +15,6 @@ public class TableroPantallaJuego extends Pane {
 	
 	private static double DEFSAJE_X=100;
 	private static double DEFSAJE_Y=150;
-	
-	Image img;
 	private Canvas[][] tablero= new Canvas[8][8];
 	
 	public TableroPantallaJuego(){
@@ -24,11 +22,10 @@ public class TableroPantallaJuego extends Pane {
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
 		this.setTranslateY(DEFSAJE_Y);
-		img=new Image("/assets/peonNegro.png");
+
 		for(int i=0; i<8;i++){//hay que usar un enum o algo que diga ancho ya alto del tablero en vez de 8
 			for(int j=0; j<8;j++){
 				tablero[i][j]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
-				//tablero[i][j].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
 				tablero[i][j].setTranslateX(CASILLERO_ANCHO*i);
 				tablero[i][j].setTranslateY(CASILLERO_ALTO*j);
 
@@ -85,45 +82,3 @@ public class TableroPantallaJuego extends Pane {
 	dibujarPieza(new Image("/assets/damaNegro.png"),0,3);
 }
 }
-
-//public class TableroPantallaJuego extends GridPane{
-//
-//	private static final int columnCount = 8;
-//	private static final int rowCount = 8;
-//
-//
-//	public TableroPantallaJuego(){
-//		super();
-//		this.setAlignment(Pos.CENTER);
-//		GridPane grid = new GridPane();
-//		
-//		grid.setPrefSize(500, 500);
-//		grid.setTranslateX(100);
-//		grid.setTranslateY(150);
-//		
-//		grid.setHgap(10);
-//		grid.setVgap(10);
-//		grid.prefWidthProperty().bind(primaryStage.widthProperty());
-//		grid.prefHeightProperty().bind(primaryStage.heightProperty());
-//		grid.setBackground(new Background(new BackgroundFill(backgroundColor, null, null)));
-//
-//		ColumnConstraints cc = new ColumnConstraints();
-//		cc.setFillWidth(true);
-//		cc.setHgrow(Priority.ALWAYS);
-//
-//		for (int i = 0; i < columnCount; i++) {
-//			grid.getColumnConstraints().add(cc);
-//		}
-//
-//		RowConstraints rc = new RowConstraints();
-//		rc.setFillHeight(true);
-//		rc.setVgrow(Priority.ALWAYS);
-//
-//		for (int i = 0; i < rowCount; i++) {
-//			grid.getRowConstraints().add(rc);
-//		}
-//		grid.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
-//		grid.setId("tablero");
-//		this.getChildren().add(grid);
-//	}
-//}
