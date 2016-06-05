@@ -53,32 +53,32 @@ public class TableroPantallaJuego extends Pane {
 	
 	private void inicializarPiezas(){
 		for(int i=0; i<8 ;i++){ 
-		dibujarPieza(new Image("/assets/peonNegro.png"),1,i);
-		dibujarPieza(new Image("/assets/peonBlanco.png"),6,i);
-	}
+			dibujarPieza(new Image("/assets/peonNegro.png"),1,i);
+			dibujarPieza(new Image("/assets/peonBlanco.png"),6,i);
+		}
+			
+		dibujarPieza(new Image("/assets/torreNegro.png"),0,0);
+		dibujarPieza(new Image("/assets/torreNegro.png"),0,7);
 		
-	dibujarPieza(new Image("/assets/torreNegro.png"),0,0);
-	dibujarPieza(new Image("/assets/torreNegro.png"),0,7);
-	
-	dibujarPieza(new Image("/assets/torreBlanco.png"),7,0);
-	dibujarPieza(new Image("/assets/torreBlanco.png"),7,7);
-	
-	dibujarPieza(new Image("/assets/caballoBlanco.png"),7,1);
-	dibujarPieza(new Image("/assets/caballoBlanco.png"),7,6);
-	
-	dibujarPieza(new Image("/assets/caballoNegro.png"),0,1);
-	dibujarPieza(new Image("/assets/caballoNegro.png"),0,6);
-	
-	dibujarPieza(new Image("/assets/alfilNegro.png"),0,2);
-	dibujarPieza(new Image("/assets/alfilNegro.png"),0,5);
-	
-	dibujarPieza(new Image("/assets/alfilBlanco.png"),7,2);
-	dibujarPieza(new Image("/assets/alfilBlanco.png"),7,5);
-	
-	dibujarPieza(new Image("/assets/reyBlanco.png"),7,4);
-	dibujarPieza(new Image("/assets/damaBlanco.png"),7,3);
-	
-	dibujarPieza(new Image("/assets/reyNegro.png"),0,4);
-	dibujarPieza(new Image("/assets/damaNegro.png"),0,3);
-}
+		dibujarPieza(new Image("/assets/torreBlanco.png"),7,0);
+		dibujarPieza(new Image("/assets/torreBlanco.png"),7,7);
+		
+		dibujarPieza(new Image("/assets/caballoBlanco.png"),7,1);
+		dibujarPieza(new Image("/assets/caballoBlanco.png"),7,6);
+		
+		dibujarPieza(new Image("/assets/caballoNegro.png"),0,1);
+		dibujarPieza(new Image("/assets/caballoNegro.png"),0,6);
+		
+		dibujarPieza(new Image("/assets/alfilNegro.png"),0,2);
+		dibujarPieza(new Image("/assets/alfilNegro.png"),0,5);
+		
+		dibujarPieza(new Image("/assets/alfilBlanco.png"),7,2);
+		dibujarPieza(new Image("/assets/alfilBlanco.png"),7,5);
+		
+		dibujarPieza(new Image("/assets/reyBlanco.png"),7,4);
+		dibujarPieza(new Image("/assets/damaBlanco.png"),7,3);
+		
+		dibujarPieza(new Image("/assets/reyNegro.png"),0,4);
+		dibujarPieza(new Image("/assets/damaNegro.png"),0,3);
+	}
 }

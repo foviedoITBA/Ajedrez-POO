@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logica.Color;
 
 public class OpcionesDosJugadores extends Pane{
 	Label titulo;
@@ -17,7 +18,7 @@ public class OpcionesDosJugadores extends Pane{
 	CheckBox tiempo;
 	Button iniciarJuego;
 	
-	
+	private boolean hayTiempo;
 	
 	public OpcionesDosJugadores(){
 		
@@ -42,9 +43,13 @@ public class OpcionesDosJugadores extends Pane{
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		
-		Scene escena = new Scene(new PantallaJuego());
-		escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
-		 
-		iniciarJuego.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena));
+		iniciarJuego.setOnAction(e -> {
+			
+			hayTiempo = tiempo.isSelected();
+			
+			Scene escena = new Scene(new PantallaJuego(2,Color.BLANCO,hayTiempo));
+			escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
+			((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena);
+		});
 	}
 }

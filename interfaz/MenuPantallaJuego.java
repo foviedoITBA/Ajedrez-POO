@@ -29,10 +29,8 @@ public class MenuPantallaJuego extends Group{
 		Button buttonMenuPrincipal = new MyButton("Menu Principal",470,700,200,50);
 		buttonMenuPrincipal.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio())));
 		buttonMenuPrincipal.getStyleClass().add("roundedButton");
-		
-		TableroPantallaJuego tablero = new TableroPantallaJuego();
 	
-		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,tablero,buttonMenuPrincipal);
+		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,buttonMenuPrincipal);
 		
 		
 	}

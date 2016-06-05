@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import logica.Color;
 
 public class OpcionesUnJugador extends Pane{
 	
@@ -21,6 +22,9 @@ public class OpcionesUnJugador extends Pane{
 	Button iniciarJuego;
 	RadioButton blanca,negra;
 
+	private Color color;
+	private boolean hayTiempo;
+	
 	public OpcionesUnJugador(){
 		
 		super();
@@ -70,9 +74,21 @@ public class OpcionesUnJugador extends Pane{
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		
-		Scene escena = new Scene(new PantallaJuego());
-		escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		
-		iniciarJuego.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena));
+		
+		iniciarJuego.setOnAction(e -> {
+			
+			if(blanca.isSelected()){
+				color=Color.BLANCO;
+			}else{
+				color=Color.NEGRO;
+			}
+			
+			hayTiempo = tiempo.isSelected();
+			
+			Scene escena = new Scene(new PantallaJuego(1,color,hayTiempo));
+			escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
+			((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena);
+		});
 	}
 }
