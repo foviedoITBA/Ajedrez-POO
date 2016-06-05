@@ -15,6 +15,11 @@
 	-fx-font-size:15pt;
 	-fx-text-fill:#3c2c20;
 	-fx-font-family: Walkway Rounded;
+	
+	-fx-background-color:Transparent;
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
 }
 
 .button{
@@ -23,11 +28,21 @@
 	-fx-font-family: Walkway Rounded;
 	
 	-fx-background-color:Transparent;
-	-fx-background-image: url('plainRoundedButton.png');
     -fx-background-size:contain;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
     
+    -fx-padding:3em;
+    
+}
+.roundedButton{
+	-fx-background-image: url('plainRoundedButton.png');
+}
+.squareButton{
+	-fx-background-image: url('plainSquareButton.png');
+}
+.curvedButton{
+	-fx-background-image: url('plainCurvedButton.png');
 }
 
 #labelChess{
@@ -39,7 +54,7 @@
 }
 
 #tablero{
-	-fx-background-image: url('tablero.png');
+	-fx-background-image: url('tablero.jpg');
     -fx-background-size:contain;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;

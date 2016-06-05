@@ -3,16 +3,23 @@ package interfaz;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OpcionesUnJugador extends Pane{
+	
+	Label titulo,tiempoLabel,blancaLabel,negraLabel;
+	CheckBox tiempo;
+	Button iniciarJuego;
+	RadioButton blanca,negra;
 
 	public OpcionesUnJugador(){
 		
@@ -20,17 +27,20 @@ public class OpcionesUnJugador extends Pane{
 		
 		this.setPrefSize(700, 800);
 		
-		Label titulo = new MyLabel("",100,50,500,100);
+		titulo = new MyLabel("",100,50,500,100);
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");
 
-		Label color = new MyLabel("Elija un color ",290,170,200,50);
+		blanca = new MyRadioButton(280,223,100,50);
+		blanca.setSelected(true);
+		blancaLabel = new MyLabel("Blancas",160,210,170,60);
+		blancaLabel.setPadding(new Insets(25,25,25,35));
+		blancaLabel.getStyleClass().add("curvedButton");
 
-		RadioButton blanca = new MyRadioButton(250,239,100,50);
-			blanca.setSelected(true);
-		Label blancaLabel = new MyLabel("Blancas",160,240,100,50);
-
-		RadioButton negra = new MyRadioButton(520,239,100,50);
+		negra = new MyRadioButton(485,223,100,50);
+		negraLabel = new MyLabel("Negras",370,210,170,60);
+		negraLabel.setPadding(new Insets(25,25,25,35));
+		negraLabel.getStyleClass().add("curvedButton");
 		
 		negra.setOnAction(new EventHandler<ActionEvent>(){
 			public void handle(ActionEvent event){
@@ -45,17 +55,18 @@ public class OpcionesUnJugador extends Pane{
 				blanca.setSelected(true);
 			}
 		});
-
-		Label negraLabel = new MyLabel("Negras",440,240,100,50);
 		
 
-		Label tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,340,260,50);
+		tiempoLabel = new MyLabel("Juego con limite de tiempo",180,340,340,60);
+		tiempoLabel.setPadding(new Insets(25));
+		tiempoLabel.getStyleClass().add("squareButton");
 		
-		RadioButton tiempo = new MyRadioButton(460,339,30,50);
+		tiempo = new MyCheckBox(470,353,100,50);
 
-		Button iniciarJuego = new MyButton(" Jugar ",225,420,250,60);
+		iniciarJuego = new MyButton(" Jugar ",225,490,250,60);
+		iniciarJuego.getStyleClass().add("roundedButton");
 
-		this.getChildren().addAll(titulo,color,blancaLabel,blanca,negraLabel,negra,tiempo,tiempoLabel,iniciarJuego);
+		this.getChildren().addAll(titulo,blancaLabel,blanca,negraLabel,negra,tiempoLabel,tiempo,iniciarJuego);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		

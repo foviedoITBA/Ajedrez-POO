@@ -1,19 +1,20 @@
 package interfaz;
 
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class OpcionesDosJugadores extends Pane{
 	Label titulo;
 	Label tiempoLabel;
-	RadioButton tiempo;
+	CheckBox tiempo;
 	Button iniciarJuego;
 	
 	
@@ -28,11 +29,14 @@ public class OpcionesDosJugadores extends Pane{
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");
 		
-		tiempoLabel = new MyLabel("Jugar con limite de tiempo",200,200,300,50);
+		tiempoLabel = new MyLabel("Juego con limite de tiempo",180,200,340,60);
+		tiempoLabel.setPadding(new Insets(25));
+		tiempoLabel.getStyleClass().add("squareButton");
 		
-		tiempo = new MyRadioButton(460,199,100,50);
+		tiempo = new MyCheckBox(470,213,100,50);
 
-		iniciarJuego = new MyButton(" Jugar ",225,270,250,60);
+		iniciarJuego = new MyButton(" Jugar ",225,300,250,60);
+		iniciarJuego.getStyleClass().add("roundedButton");
 
 		this.getChildren().addAll(titulo,tiempoLabel,tiempo,iniciarJuego);
 		

@@ -1,7 +1,8 @@
 Cosas que faltan:
 
 Enroque, peón al paso, coronación
-Verificar jaque mate y ahogado
+Verificar jaque mate y ahogado - Hecho?
 Poder guardar y cargar el juego
 Inteligencia artificial (jugar aperturas y pensar)
 Interfaz
+Excepciones

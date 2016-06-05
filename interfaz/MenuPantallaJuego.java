@@ -21,12 +21,14 @@ public class MenuPantallaJuego extends Group{
 		titulo.setId("labelChess");
 		
 		Button buttonGuardarPartida = new MyButton("Guardar",30,700,200,50);
+		buttonGuardarPartida.getStyleClass().add("roundedButton");
 	
 		Button buttonDeshacer = new MyButton("Deshacer",250,700,200,50);
-		
+		buttonDeshacer.getStyleClass().add("roundedButton");
 		
 		Button buttonMenuPrincipal = new MyButton("Menu Principal",470,700,200,50);
 		buttonMenuPrincipal.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio())));
+		buttonMenuPrincipal.getStyleClass().add("roundedButton");
 		
 		TableroPantallaJuego tablero = new TableroPantallaJuego();
 	
