@@ -4,9 +4,9 @@ public class PosicionAjedrez {
 	private byte fila;
 	private char columna;
 	
-	public PosicionAjedrez(byte fila, char columna) throws Exception{
+	public PosicionAjedrez(byte fila, char columna) throws RuntimeException{
 		if(!esValido(fila,columna)){
-			throw new Exception();
+			throw new RuntimeException();
 		}
 		this.columna = columna;
 		this.fila = fila;

@@ -36,15 +36,15 @@ public class Juego {
 		return elTablero.hayAlgo(posicion);
 	}
 	
-	public PiezaColor queHay(PosicionAjedrez posicion) throws Exception {
+	public PiezaColor queHay(PosicionAjedrez posicion) throws RuntimeException {
 		return elTablero.queHay(posicion);
 	}
 	
-	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws Exception {
+	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws RuntimeException {
 		return elTablero.damePosicionesPosibles(posicion);
 	}
 	
-	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws Exception {
+	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws RuntimeException {
 		if (jaqueMate || ahogado)
 			return null;
 		if (!hayAlgo(posInicial))

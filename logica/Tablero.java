@@ -22,11 +22,11 @@ public class Tablero {
 		return !losCasilleros[posTablero.getX()][posTablero.getY()].isEmpty();
 	}
 	
-	public PiezaColor queHay(PosicionAjedrez posAjedrez) throws Exception {
+	public PiezaColor queHay(PosicionAjedrez posAjedrez) throws RuntimeException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
 		if (laPieza == null){
-			throw new Exception();
+			throw new RuntimeException();
 		}
 		NombrePieza elNombre = laPieza.dameNombre();
 		Color elColor = laPieza.dameColor();
@@ -34,11 +34,11 @@ public class Tablero {
 		
 	}
 
-	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws Exception {
+	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws RuntimeException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
 		if (laPieza == null)
-			throw new Exception();
+			throw new RuntimeException();
 		Set<PosicionTablero> lasPosicionesTablero = posicionesPosibles(posTablero);
 		Set<PosicionAjedrez> lasPosicionesAjedrez = new HashSet<>();
 		for (PosicionTablero unaPosTablero: lasPosicionesTablero)
@@ -195,12 +195,12 @@ public class Tablero {
 	}
 
 	/* Devuelve todos las posiciones posibles de la pieza en pos considerando que no debe quedar el rey en jaque */
-	private Set<PosicionTablero> posicionesPosibles(PosicionTablero pos) throws Exception {
+	private Set<PosicionTablero> posicionesPosibles(PosicionTablero pos) throws RuntimeException {
 		// Obtengo todos los lugares a los que podría potencialmente ir la pieza
 		Casillero casilleroFuente = losCasilleros[pos.getX()][pos.getY()];		
 		Pieza piezaMoviendo = casilleroFuente.getPieza();
 		if (piezaMoviendo == null)
-			throw new Exception();
+			throw new RuntimeException();
 		Set<PosicionTablero> posicionesPosibles = analizoMovimientos(pos, false);
 		// Ahora hay que ver cuáles de esas jugadas dejan al rey en jaque y sacarlas de posicionesPosibles
 		// Para eso primero busco la posición del rey del jugador que tiene el turno
@@ -253,12 +253,12 @@ public class Tablero {
 	}
 
 	/* Devuelve todos los movimientos posibles de la pieza en pos sin considerar que el rey pueda quedar en jaque */
-	private Set<PosicionTablero> analizoMovimientos(PosicionTablero pos, boolean soloComiendo) throws Exception {
+	private Set<PosicionTablero> analizoMovimientos(PosicionTablero pos, boolean soloComiendo) throws RuntimeException {
 
 		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
 		Pieza piezaMoviendo = casillero.getPieza();
 		if (piezaMoviendo == null)
-			throw new Exception();
+			throw new RuntimeException();
 		Set<PosicionTablero> movPosibles = new HashSet<>();
 		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 
