@@ -15,7 +15,7 @@ public class MenuPantallaJuego extends Group{
 	Juego elJuego;
 	public MenuPantallaJuego(Juego elJuego){
 		
-		super();
+//		super();
 		this.elJuego=elJuego;
 		
 		Label titulo = new MyLabel("",100,20,500,100);

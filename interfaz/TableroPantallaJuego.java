@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import logica.Color;
 import logica.Juego;
+import logica.Jugada;
 import logica.PiezaColor;
 import logica.PosicionAjedrez;
 
@@ -27,6 +28,7 @@ public class TableroPantallaJuego extends Pane {
 	PosicionAjedrez seleccionado;
 	Set<PosicionAjedrez> movimientosPosibles;
 	Juego elJuego;
+	PiezaImagen imagenes;
 	
 	public TableroPantallaJuego(Juego elJuego){
 		super();
@@ -35,6 +37,8 @@ public class TableroPantallaJuego extends Pane {
 		this.setTranslateY(DEFSAJE_Y);
 		
 		this.elJuego=elJuego;
+		seleccionado=null;
+		imagenes=new PiezaImagen();
 		inicializarTablero();
 		inicializarPiezas();
 		this.setOnMouseClicked(e-> posicionTablero(e.getSceneX(),e.getSceneY()));
@@ -43,18 +47,20 @@ public class TableroPantallaJuego extends Pane {
 		
 	}
 	
-	public void  dibujarImagen(Image img, int fila, int col){
+	private void  dibujarImagen(Image img, int fila, int col){
 		tablero[col][fila].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
 	}
 	
-	public void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
-		int fila=9-pos.dameFila();
-		int col=pos.dameColumna()-'a'+1;
-		System.out.println("Click en FilaAjedrez: "+fila+ "ColumnaTablero: "+col);
-		dibujarImagen(new Image("/assets/peonBlanco.png"),fila,col);
+	private void  dibujarImagen(Image img,PosicionTablero pos){
+		dibujarImagen(img,pos.getFila(),pos.getColumna());
 	}
 	
-	public void borrarImagen(int fila, int col){
+	private void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
+		//System.out.println("Click en FilaAjedrez: "+fila+ "ColumnaTablero: "+col);
+		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));//dibuja solo peones blancos
+	}
+	
+	private void borrarImagen(int fila, int col){
 		this.getChildren().remove(tablero[col][fila]);
 		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
 		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
@@ -63,46 +69,74 @@ public class TableroPantallaJuego extends Pane {
 		this.getChildren().add(tablero[col][fila]);
 		
 	}
+	
+	private void borrarImagen(PosicionTablero pos){
+		borrarImagen(pos.getFila(),pos.getColumna());
+	}
 
-	public void borrarPieza(PosicionAjedrez pos){
-		int fila=9-pos.dameFila();
-		int col=pos.dameColumna()-'a'+1;
-		borrarImagen(fila, col);
+	private void borrarPieza(PosicionAjedrez pos){
+		borrarImagen(transformar(pos));
 	}
 	
-	public void posicionTablero(double x, double y){
+	private void posicionTablero(double x, double y){
+		System.out.println("");
+		System.out.println("");
 		System.out.println("x:"+x+" y: "+y);
-		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO)+1;
-		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO)+1;
+		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO);
+		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
 		
-		byte filAjedrez=(byte)(9-fila);
-		char colAjedrez=(char) ('a'+columna-1);
+		//byte filAjedrez=(byte)(9-fila);
+		//char colAjedrez=(char) ('a'+columna-1);
 		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);
-		System.out.println("Click en FilaAjedrez: "+filAjedrez+ "ColumnaAjedrez: "+colAjedrez);
-		clickTablero(new PosicionAjedrez(filAjedrez,colAjedrez));
+		//System.out.println("Click en FilaAjedrez: "+filAjedrez+ "ColumnaAjedrez: "+colAjedrez);
+		clickTablero(transformar(fila, columna));
 		
 		
 	}
 	
-	public void clickTablero(PosicionAjedrez clickeado){
+	private PosicionAjedrez transformar(int fila, int columna){
+		byte laFila = (byte) (8 - fila);
+		char laColumna = (char) (columna + 'a');
+		return new PosicionAjedrez(laFila, laColumna);
+	}
+	
+	private PosicionTablero transformar(PosicionAjedrez posAjedrez) {//anoto FUERTE que hay que cmabiar esto
+		byte fila = posAjedrez.dameFila();
+		char columna = posAjedrez.dameColumna();
+		int laFila = 8 - fila;
+		int laColumna = columna - 'a';
+		return new PosicionTablero(laFila, laColumna);
+	}
+	
+	private void clickTablero(PosicionAjedrez clickeado){
+		System.out.println("Entre a click");
 		turno=elJuego.dameTurno();
+		System.out.println("turno de:"+turno);
 		if(seleccionado == null) {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno) {
 				return;
 			}
 			seleccionado=clickeado;
+			System.out.println("se selecciono un casillero "+seleccionado);
 			movimientosPosibles=elJuego.dameMovimientos(seleccionado);
+			System.out.println(movimientosPosibles);
 			//pintar casilleros
 		}else{
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
+				System.out.println("entre al segundo if");
 				if(movimientosPosibles.contains(clickeado)){
-					elJuego.mover(seleccionado, clickeado);
-					dibujarPieza(elJuego.queHay(seleccionado),clickeado);
-					borrarPieza(seleccionado);
+					System.out.println("entre al segundo if");
+					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
+					borrarPieza(clickeado);
+					dibujarPieza(laJugada.damePiezaColorMovida(),clickeado);
+					borrarPieza(laJugada.damePosicionOrigen());
+
+					
 					seleccionado=null;
+					System.out.println("Se movio una pieza");
 				}
-			}
-			else{
+			}else{
+				System.out.println("entre a este else");
 				seleccionado=clickeado;
 				movimientosPosibles=elJuego.dameMovimientos(seleccionado);
 				//pintar casilleros
@@ -110,37 +144,16 @@ public class TableroPantallaJuego extends Pane {
 		}
 	}
 	
-	private void inicializarPiezas(){
-		for(int i=0; i<8 ;i++){ 
-			dibujarImagen(new Image("/assets/peonNegro.png"),1,i);
-			dibujarImagen(new Image("/assets/peonBlanco.png"),6,i);
+	
+	private void inicializarPiezas(){//poner variabler static
+		for(byte i=1;i<=8;i++){
+			for(char j='a';j<='h';j++){
+				PosicionAjedrez pos= new PosicionAjedrez(i, j);
+				if(elJuego.hayAlgo(pos)){
+					dibujarPieza(elJuego.queHay(pos),pos);
+				}
+			}
 		}
-			
-		dibujarImagen(new Image("/assets/torreNegro.png"),0,0);
-		dibujarImagen(new Image("/assets/torreNegro.png"),0,7);
-		
-		dibujarImagen(new Image("/assets/torreBlanco.png"),7,0);
-		dibujarImagen(new Image("/assets/torreBlanco.png"),7,7);
-		
-		dibujarImagen(new Image("/assets/caballoBlanco.png"),7,1);
-		dibujarImagen(new Image("/assets/caballoBlanco.png"),7,6);
-		
-		dibujarImagen(new Image("/assets/caballoNegro.png"),0,1);
-		dibujarImagen(new Image("/assets/caballoNegro.png"),0,6);
-		
-		dibujarImagen(new Image("/assets/alfilNegro.png"),0,2);
-		dibujarImagen(new Image("/assets/alfilNegro.png"),0,5);
-		
-		dibujarImagen(new Image("/assets/alfilBlanco.png"),7,2);
-		dibujarImagen(new Image("/assets/alfilBlanco.png"),7,5);
-		
-		dibujarImagen(new Image("/assets/reyBlanco.png"),7,4);
-		dibujarImagen(new Image("/assets/damaBlanco.png"),7,3);
-		
-		dibujarImagen(new Image("/assets/reyNegro.png"),0,4);
-		dibujarImagen(new Image("/assets/damaNegro.png"),0,3);
-		
-		
 	}
 
 	private void inicializarTablero(){

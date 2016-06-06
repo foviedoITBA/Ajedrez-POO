@@ -27,8 +27,6 @@ public class OpcionesUnJugador extends Pane{
 	
 	public OpcionesUnJugador(){
 		
-		super();
-		
 		this.setPrefSize(700, 800);
 		
 		titulo = new MyLabel("",100,50,500,100);

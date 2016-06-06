@@ -12,12 +12,12 @@ public class Jugada {
 		this.laPiezaComida = laPiezaComida;
 	}
 	
-	public NombrePieza dameNobrePiezaMovida() {
-		return laPiezaMovida.dameNombre();
+	public PiezaColor damePiezaColorMovida() {
+		return new PiezaColor(laPiezaMovida.dameNombre(),laPiezaMovida.dameColor());
 	}
 
-	public NombrePieza dameNombrePiezaComida() {
-		return laPiezaComida.dameNombre();
+	public PiezaColor damePiezaColorComida() {
+		return new PiezaColor(laPiezaComida.dameNombre(),laPiezaComida.dameColor());
 	}
 
 	public PosicionAjedrez damePosicionOrigen() {
