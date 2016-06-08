@@ -18,8 +18,6 @@ public abstract class Pieza {
 	public Color dameColor() {
 		return elColor;
 	}
-
-	public abstract NombrePieza dameNombre();
 	
 	public void ponerSeMovio() {
 		cantMov++;
@@ -33,6 +31,7 @@ public abstract class Pieza {
 		cantMov--;
 	}
 
+	public abstract NombrePieza dameNombre();
 	public abstract List<Movimiento> dameMovimientos();
 	
 }

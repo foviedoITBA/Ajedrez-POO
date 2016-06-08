@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
+import excepcion.CasilleroVacioException;
+
 public class Tablero {
 
 	private final static int SIZE_TABLERO=8;
@@ -22,27 +24,28 @@ public class Tablero {
 		return !losCasilleros[posTablero.getX()][posTablero.getY()].isEmpty();
 	}
 	
-	public PiezaColor queHay(PosicionAjedrez posAjedrez) throws RuntimeException {
+	public PiezaColor queHay(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
 		if (laPieza == null){
-			throw new RuntimeException();
+			throw new CasilleroVacioException();
 		}
 		NombrePieza elNombre = laPieza.dameNombre();
 		Color elColor = laPieza.dameColor();
 		return new PiezaColor(elNombre, elColor);
-		
 	}
 
-	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws RuntimeException {
+	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
-		if (laPieza == null)
-			throw new RuntimeException();
+		if (laPieza == null){
+			throw new CasilleroVacioException();
+		}
 		Set<PosicionTablero> lasPosicionesTablero = posicionesPosibles(posTablero);
 		Set<PosicionAjedrez> lasPosicionesAjedrez = new HashSet<>();
-		for (PosicionTablero unaPosTablero: lasPosicionesTablero)
+		for (PosicionTablero unaPosTablero: lasPosicionesTablero){
 			lasPosicionesAjedrez.add(transformarPosicion(unaPosTablero));
+		}
 		return lasPosicionesAjedrez;
 	}
 
@@ -50,15 +53,14 @@ public class Tablero {
 		PosicionTablero posOrigenT = transformarPosicion(posOrigen);
 		PosicionTablero posDestinoT = transformarPosicion(posDestino);
 		Pieza piezaMoviendo = losCasilleros[posOrigenT.getX()][posOrigenT.getY()].getPieza();
-		if (piezaMoviendo == null)
+		if (piezaMoviendo == null){
 			return false;
-		Set<PosicionTablero> posicionesPosibles = null;
-		try { // Ya sé que no va a tirar excepción porque me acabo de fijar que posOrigen no sea null
-			posicionesPosibles = posicionesPosibles(posOrigenT);
 		}
-		catch(Exception e){}
-		if (posicionesPosibles.contains(posDestinoT))
+		Set<PosicionTablero> posicionesPosibles = null;
+		posicionesPosibles = posicionesPosibles(posOrigenT);
+		if (posicionesPosibles.contains(posDestinoT)){
 			return true;
+		}
 		return false;
 	}
 	
@@ -100,18 +102,17 @@ public class Tablero {
 		// Me fijo si hay alguna pieza del adversario que se la pueda comer
 		boolean estaEnJaque = false;
 		Color ganador = null;
-		if (perdedor == Color.BLANCO)
+		if (perdedor == Color.BLANCO){
 			ganador = Color.NEGRO;
-		else
+		}else{
 			ganador = Color.BLANCO;
+		}
 		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !estaEnJaque; j++) {
 				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == ganador) {
-					try {
-						if (analizoMovimientos(new PosicionTablero(i,j), true).contains(posRey))
-							estaEnJaque = true;
+					if (analizoMovimientos(new PosicionTablero(i,j), true).contains(posRey)){
+						estaEnJaque = true;
 					}
-					catch(Exception e){}
 				}
 			}
 		}
@@ -127,11 +128,9 @@ public class Tablero {
 		for (int i = 0; i < SIZE_TABLERO && !hayJugadas; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !hayJugadas; j++) {
 				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == perdedor) {
-					try {	
-						if (!posicionesPosibles(new PosicionTablero(i,j)).isEmpty())
-							hayJugadas = true;
+					if (!posicionesPosibles(new PosicionTablero(i,j)).isEmpty()){
+						hayJugadas = true;
 					}
-					catch (Exception e){}
 				}
 			}
 		}
@@ -152,12 +151,7 @@ public class Tablero {
 		int columna = posTablero.getY();
 		byte laFila = (byte) (8 - fila);
 		char laColumna = (char) (columna + 'a');
-		PosicionAjedrez posAjedrez = null;
-		try { // Seguro que posTablero está bien construida, si no, habría lanzado una excepción
-			posAjedrez = new PosicionAjedrez(laFila, laColumna);
-		}
-		catch(Exception e){}
-		return posAjedrez;
+		return new PosicionAjedrez(laFila, laColumna);
 	}
 	
 	private void initTablero() { //coloco el tablero con las piezas en la posicion inicial
@@ -195,12 +189,12 @@ public class Tablero {
 	}
 
 	/* Devuelve todos las posiciones posibles de la pieza en pos considerando que no debe quedar el rey en jaque */
-	private Set<PosicionTablero> posicionesPosibles(PosicionTablero pos) throws RuntimeException {
+	private Set<PosicionTablero> posicionesPosibles(PosicionTablero pos) throws CasilleroVacioException {
 		// Obtengo todos los lugares a los que podría potencialmente ir la pieza
 		Casillero casilleroFuente = losCasilleros[pos.getX()][pos.getY()];		
 		Pieza piezaMoviendo = casilleroFuente.getPieza();
 		if (piezaMoviendo == null)
-			throw new RuntimeException();
+			throw new CasilleroVacioException();
 		Set<PosicionTablero> posicionesPosibles = analizoMovimientos(pos, false);
 		// Ahora hay que ver cuáles de esas jugadas dejan al rey en jaque y sacarlas de posicionesPosibles
 		// Para eso primero busco la posición del rey del jugador que tiene el turno
@@ -253,12 +247,12 @@ public class Tablero {
 	}
 
 	/* Devuelve todos los movimientos posibles de la pieza en pos sin considerar que el rey pueda quedar en jaque */
-	private Set<PosicionTablero> analizoMovimientos(PosicionTablero pos, boolean soloComiendo) throws RuntimeException {
+	private Set<PosicionTablero> analizoMovimientos(PosicionTablero pos, boolean soloComiendo) throws CasilleroVacioException {
 
 		Casillero casillero=losCasilleros[pos.getX()][pos.getY()];
 		Pieza piezaMoviendo = casillero.getPieza();
 		if (piezaMoviendo == null)
-			throw new RuntimeException();
+			throw new CasilleroVacioException();
 		Set<PosicionTablero> movPosibles = new HashSet<>();
 		List<Movimiento> movPieza = casillero.getPieza().dameMovimientos(); 
 

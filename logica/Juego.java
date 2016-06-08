@@ -1,6 +1,9 @@
 package logica;
 
 import java.util.Stack;
+
+import excepcion.CasilleroVacioException;
+
 import java.util.Set;
 
 public class Juego {
@@ -36,48 +39,57 @@ public class Juego {
 		return elTablero.hayAlgo(posicion);
 	}
 	
-	public PiezaColor queHay(PosicionAjedrez posicion) throws RuntimeException {
+	public PiezaColor queHay(PosicionAjedrez posicion) throws CasilleroVacioException {
 		return elTablero.queHay(posicion);
 	}
 	
-	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws RuntimeException {
+	public Set<PosicionAjedrez> dameMovimientos(PosicionAjedrez posicion) throws CasilleroVacioException {
 		return elTablero.damePosicionesPosibles(posicion);
 	}
 	
-	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws RuntimeException {
-		if (jaqueMate || ahogado)
+	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws CasilleroVacioException {
+		if (jaqueMate || ahogado){
 			return null;
-		if (!hayAlgo(posInicial))
+		}
+		if (!hayAlgo(posInicial)){
 			return null;
-		if (queHay(posInicial).dameColor() != jugadorTurno.dameColor())
+		}
+		if (queHay(posInicial).dameColor() != jugadorTurno.dameColor()){
 			return null;
+		}
 		if(elTablero.esMovimientoPosible(posInicial,posFinal)){
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
 			registro.push(laJugada);
 			cambiarTurno();
 			jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
-			if (!jaqueMate)
+			if (!jaqueMate){
 				ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
+			}
+			
 			/**TEST**/
 			elTablero.imprimirTablero();
 			
 			return laJugada;
-		} else
+		} else{
 			return null;
+		}
 	}
 		
 	public Color dameTurno() {
 		return jugadorTurno.dameColor();
 	}
 	
-	// Revierte la última jugada hecha, sacándola de la pila del registro y mandándosela al tablero para que la deshaga 
+	// Revierte la última jugada hecha, sacándola de la pila del registro y
+	//	mandándosela al tablero para que la deshaga 
 	public void revertir() {
-		if (registro.isEmpty())
+		if (registro.isEmpty()){
 			return;
+		}
 		elTablero.revertir(registro.pop());
 		cambiarTurno();
 		jaqueMate = false;
 		ahogado = false;
+		
 		/**TEST**/
 		elTablero.imprimirTablero();
 	}
@@ -91,12 +103,11 @@ public class Juego {
 	}
 
 	private void cambiarTurno() {
-		if (jugadorTurno.equals(jugadorBlanco))
+		if (jugadorTurno.equals(jugadorBlanco)){
 			jugadorTurno = jugadorNegro;
-		else
+		}else{
 			jugadorTurno = jugadorBlanco;
+		}
 	}
-
-
-	/* Otros métodos y miembros que hagan falta */
+	
 }

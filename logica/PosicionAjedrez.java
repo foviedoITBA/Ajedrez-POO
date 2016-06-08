@@ -1,12 +1,14 @@
 package logica;
 
+import excepcion.PosAjedrezInvalidaException;
+
 public class PosicionAjedrez {
 	private byte fila;
 	private char columna;
 	
-	public PosicionAjedrez(byte fila, char columna) throws RuntimeException{
+	public PosicionAjedrez(byte fila, char columna) throws PosAjedrezInvalidaException {
 		if(!esValido(fila,columna)){
-			throw new RuntimeException();
+			throw new PosAjedrezInvalidaException();
 		}
 		this.columna = columna;
 		this.fila = fila;
@@ -23,9 +25,11 @@ public class PosicionAjedrez {
 	public byte dameFila(){
 		return fila;
 	}
+	
 	public char dameColumna(){
 		return columna;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,6 +55,8 @@ public class PosicionAjedrez {
 		return true;
 	}
 
+	
+	/** PARA TESTING **/
 	public String toString(){
 		return "fila: "+fila+" columna:"+columna;
 	}

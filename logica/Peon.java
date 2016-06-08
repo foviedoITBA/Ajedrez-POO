@@ -7,7 +7,7 @@ public class Peon extends Pieza {
 
 	/* Los movimientos de los peones no son miembros de clase
 	 * porque el peón se mueve distinto según si ya se movió o no
-	 * y según el color, eontonces es una característica de cada peón.
+	 * y según el color, entonces es una característica de cada peón.
 	 */
 	private List<Movimiento> movimientos;
 	private Movimiento adelante;
@@ -40,8 +40,8 @@ public class Peon extends Pieza {
 	public NombrePieza dameNombre() {
 		return NombrePieza.PEON;
 	}
+	
 	@Override
-	@Deprecated
 	public List<Movimiento> dameMovimientos() {
 		return movimientos;
 	}
