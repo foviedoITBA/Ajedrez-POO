@@ -102,10 +102,21 @@ public class Juego {
 		return ahogado;
 	}
 
+	public boolean huboUnaJugada() {
+		return !registro.isEmpty();
+	}
+
+	public Jugada dameUltimaJugada() {
+		if (registro.isEmpty())
+			throw new EmptyRegisterException();
+		else
+			return registro.peek();
+	}
+
 	private void cambiarTurno() {
 		if (jugadorTurno.equals(jugadorBlanco)){
 			jugadorTurno = jugadorNegro;
-		}else{
+		} else {
 			jugadorTurno = jugadorBlanco;
 		}
 	}

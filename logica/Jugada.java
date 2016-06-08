@@ -5,7 +5,7 @@ public class Jugada {
 	private PosicionAjedrez posOrigen, posDestino;
 	private Pieza laPiezaMovida, laPiezaComida;
 	
-	public Jugada(PosicionAjedrez posOrigen, PosicionAjedrez posDestino, Pieza laPiezaMovida, Pieza laPiezaComida) {
+	Jugada(PosicionAjedrez posOrigen, PosicionAjedrez posDestino, Pieza laPiezaMovida, Pieza laPiezaComida) {
 		this.posOrigen = posOrigen;
 		this.posDestino = posDestino;
 		this.laPiezaMovida = laPiezaMovida;

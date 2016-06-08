@@ -1,0 +1,60 @@
+<?xml version = "1.0"?>
+
+<Jugadas>
+	<e4 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true">
+		<e5 filaOrigen="7" columnaOrigen="e" filaDestino="5" columnaDestino="e" hacer="true"> <!-- Open Game -->
+			<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true">
+				<Cc6 filaOrigen="8" columnaOrigen="b" filaDestino="6" columnaDestino="c" hacer="true">
+					<Ac4 filaOrigen="1" columnaOrigen="f" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Italian game -->
+
+					</Ac4>
+					<Ab5 filaOrigen="1" columnaOrigen="f" filaDestino="5" columnaDestino="b" hacer="true"> <!-- Ruy Lopez -->
+
+					</Ab5>
+				</Cc6>
+				<Cf6 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- Petrov's defense -->
+					<Cc3 filaOrigen="1" columnaOrigen="b" filaDestino="3" columnaDestino="c" hacer="true">
+
+					</Cc3>
+					<Ac4 filaOrigen="1" columnaOrigen="f" filaDestino="4" columnaDestino="c" hacer="true">
+
+					</Ac4>
+					<Cxe5 filaOrigen="3" columnaOrigen="f" filaDestino="5" columnaDestino="e" hacer="true">
+						<d6 filaOrigen="7" columnaOrigen="d" filaDestino="6" columnaDestino="d" hacer="true">
+						</d6>
+						<Cxe4 filaOrigen="6" columnaOrigen="f" filaDestino="4" columnaDestino="e" hacer="false"> 
+							<Qe2 filaOrigen="1" columnaOrigen="d" filaDestino="2" columnaDestino="e" hacer="true">
+							</Qe2>
+						</Cxe4>
+					</Cxe5>
+				</Cf6>
+			</Cf3>
+			<f4 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- King's Gambit -->
+				<exf4 filaOrigen="5" columnaOrigen="e" filaDestino="4" columnaDestino="f" hacer="true"> <!-- Accepted Line -->
+				
+				</exf4>
+				<Ac5 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- Declined Line -->
+					
+				</Ac5>
+			</f4>
+		</e5>
+		<e6 filaOrigen="7" columnaOrigen="e" filaDestino="6" columnaDestino="e" hacer="true"> <!-- French Defense -->
+			<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
+				<d5 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true">
+					<e5 filaOrigen="4" columnaOrigen="e" filaDestino="5" columnaDestino="e" hacer="true">
+					</e5>
+				</d5>
+			</d4>
+		</e6>
+		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="5" columnaDestino="d" hacer="true"> <!-- Scandinavian Defense -->
+		</d5>
+		<c5 filaOrigen="7" columnaOrigen="c" filaDestino="5" columnaDestino="c" hacer="true"> <!-- Sicilian Defense -->
+		</c5>
+	</e4>
+	<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
+		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="7" columnaDestino="d" hacer="true"> <!-- Closed Game -->
+			<c4 filaOrigen="2" columnaOrigen="c" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Queen's Gambit -->
+			</c4>
+		<d5>
+	</d4>
+</Jugadas>
