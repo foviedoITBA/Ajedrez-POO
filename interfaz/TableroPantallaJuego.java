@@ -144,7 +144,6 @@ public class TableroPantallaJuego extends Pane {
 		}
 	}
 	
-	
 	private void inicializarPiezas(){//poner variabler static
 		for(byte i=1;i<=8;i++){
 			for(char j='a';j<='h';j++){
