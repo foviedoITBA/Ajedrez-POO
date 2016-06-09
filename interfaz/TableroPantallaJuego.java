@@ -40,11 +40,16 @@ public class TableroPantallaJuego extends Pane {
 		seleccionado=null;
 		imagenes=new PiezaImagen();
 		inicializarTablero();
-		inicializarPiezas();
+		imprimirTablero();
 		this.setOnMouseClicked(e-> posicionTablero(e.getSceneX(),e.getSceneY()));
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		this.setId("tablero");
 		
+	}
+	
+	public void deshacerJugada(){
+		elJuego.revertir();
+		imprimirTablero();
 	}
 	
 	private void  dibujarImagen(Image img, int fila, int col){
@@ -80,15 +85,10 @@ public class TableroPantallaJuego extends Pane {
 	
 	private void posicionTablero(double x, double y){
 		System.out.println("");
-		System.out.println("");
 		System.out.println("x:"+x+" y: "+y);
 		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO);
 		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
-		
-		//byte filAjedrez=(byte)(9-fila);
-		//char colAjedrez=(char) ('a'+columna-1);
 		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);
-		//System.out.println("Click en FilaAjedrez: "+filAjedrez+ "ColumnaAjedrez: "+colAjedrez);
 		clickTablero(transformar(fila, columna));
 		
 		
@@ -109,7 +109,6 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void clickTablero(PosicionAjedrez clickeado){
-		System.out.println("Entre a click");
 		turno=elJuego.dameTurno();
 		System.out.println("turno de:"+turno);
 		if(seleccionado == null) {
@@ -117,26 +116,22 @@ public class TableroPantallaJuego extends Pane {
 				return;
 			}
 			seleccionado=clickeado;
-			System.out.println("se selecciono un casillero "+seleccionado);
+			System.out.println("se selecciono un casillero "+seleccionado);//TESTTTT
 			movimientosPosibles=elJuego.dameMovimientos(seleccionado);
-			System.out.println(movimientosPosibles);
+			System.out.println(movimientosPosibles);//borrarrrrrr
 			//pintar casilleros
 		}else{
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
-				System.out.println("entre al segundo if");
 				if(movimientosPosibles.contains(clickeado)){
-					System.out.println("entre al segundo if");
 					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
-					borrarPieza(clickeado);
-					dibujarPieza(laJugada.damePiezaColorMovida(),clickeado);
-					borrarPieza(laJugada.damePosicionOrigen());
-
-					
+					imprimirTablero();
 					seleccionado=null;
-					System.out.println("Se movio una pieza");
+					if(elJuego.hayJaqueMate()){
+						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
+					}
+					System.out.println("Se movio una pieza");///////borrrar
 				}
 			}else{
-				System.out.println("entre a este else");
 				seleccionado=clickeado;
 				movimientosPosibles=elJuego.dameMovimientos(seleccionado);
 				//pintar casilleros
@@ -144,10 +139,11 @@ public class TableroPantallaJuego extends Pane {
 		}
 	}
 	
-	private void inicializarPiezas(){//poner variabler static
+	private void imprimirTablero(){//poner variabler static
 		for(byte i=1;i<=8;i++){
 			for(char j='a';j<='h';j++){
 				PosicionAjedrez pos= new PosicionAjedrez(i, j);
+				borrarPieza(pos);
 				if(elJuego.hayAlgo(pos)){
 					dibujarPieza(elJuego.queHay(pos),pos);
 				}

@@ -37,6 +37,13 @@ public class Peon extends Pieza {
 	}
 	
 	@Override
+	public void sacarSeMovio() {
+		super.sacarSeMovio();
+		movimientos.remove(adelante);
+		movimientos.add( new Movimiento(avance, 0, false, true, false, 2));
+	}
+	
+	@Override
 	public NombrePieza dameNombre() {
 		return NombrePieza.PEON;
 	}
