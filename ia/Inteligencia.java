@@ -31,10 +31,13 @@ public class Inteligencia {
 	private Element root, selector;
 	private Random randomGenerator;
 	private boolean pensando;
-	
+	private int jugadasHechas;
+	private int jugadasHechasSinPensar;
+
 	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
+		this.elJuego = elJuego;
 		Color elColor = queColorEs;
-		jugadasXML = "Jugadas.xml";
+		jugadasXML = "ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		
@@ -50,6 +53,8 @@ public class Inteligencia {
 		selector = root;
 		randomGenerator = new Random();
 		pensando = false;
+		jugadasHechas = 0;
+		jugadasHechasSinPensar = 0;
 	}
 
 	public void juega() {
@@ -62,31 +67,53 @@ public class Inteligencia {
 	private void juegaSinPensar() {
 		// Al entrar en el método, selector refiere a la última jugada (Element) hecha por la IA
 		Jugada ultimaJugada;
-		List<Element> respuestas;
+		List<Element> respuestas = null;
 		if (!elJuego.huboUnaJugada()) {
 			respuestas = selector.getChildren();
 			selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
+			jugadasHechas++;
+			jugadasHechasSinPensar++;
 			hacerJugada(selector);
 			return;
 		}
-		ultimaJugada = elJuego.dameUltimaJugada();
+		while(elJuego.cuantasJugadasVan() < jugadasHechas + 1) {
+			selector = selector.getParentElement();
+			jugadasHechas--;
+			jugadasHechasSinPensar--;
+		}
 		respuestas = selector.getChildren();
+		ultimaJugada = elJuego.dameUltimaJugada();
 		Element laDelOtro = buscarJugada(respuestas, ultimaJugada);
 		if (laDelOtro == null || laDelOtro.getChildren().isEmpty()) { // Si la jugada del otro no está en el árbol o no hay respuesta para esa jugada
-			/* Pasar a modo pensar */
-			selector = null;
-			root = null;
-			jugadasDocument = null;
-			jdomBuilder = null;
-			pensando = true;
-			// Lo demás...
+			pasarAPensar();
+			juegaPensando();
 		}
 		else { // Si hay alguna respuesta en el árbol de jugadas, elige una al azar
-			respuestas = selector.getChildren();
-			selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
-			hacerJugada(selector);
+			respuestas = laDelOtro.getChildren();
+			ListIterator<Element> iterador = respuestas.listIterator();
+			while(iterador.hasNext()) {
+				if (iterador.next().getAttributeValue("hacer").equals("false"))
+					iterador.remove();
+			}
+			if (respuestas.isEmpty()) { // Si todas las respuestas son malas jugadas
+				pasarAPensar();
+				juegaPensando();
+			}
+			else {
+				selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
+				jugadasHechas += 2;
+				jugadasHechasSinPensar += 2;
+				hacerJugada(selector);
+			}
 		}
 
+	}
+
+	private void pasarAPensar() {
+		root = null;
+		jugadasDocument = null;
+		jdomBuilder = null;
+		pensando = true;
 	}
 
 	private void juegaPensando() {

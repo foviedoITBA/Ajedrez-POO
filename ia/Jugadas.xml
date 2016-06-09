@@ -55,6 +55,6 @@
 		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="7" columnaDestino="d" hacer="true"> <!-- Closed Game -->
 			<c4 filaOrigen="2" columnaOrigen="c" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Queen's Gambit -->
 			</c4>
-		<d5>
+		</d5>
 	</d4>
 </Jugadas>

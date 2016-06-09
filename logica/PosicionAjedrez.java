@@ -58,6 +58,6 @@ public class PosicionAjedrez {
 	
 	/** PARA TESTING **/
 	public String toString(){
-		return "fila: "+fila+" columna:"+columna;
+		return "fila: "+fila+" columna: "+columna;
 	}
 }

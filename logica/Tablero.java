@@ -95,6 +95,11 @@ public class Tablero {
 		return (!elReyEstaEnJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
+	public boolean hayJaque(Color jaqueado) {
+		return false;
+
+	}
+
 	private boolean elReyEstaEnJaque(Color perdedor) {
 		
 		PosicionTablero posRey = buscoAlRey(perdedor);

@@ -1,6 +1,6 @@
 package logica;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 import excepcion.CasilleroVacioException;
 
@@ -13,7 +13,7 @@ public class Juego {
 	private Jugador jugadorBlanco,jugadorNegro;
 	private Jugador jugadorTurno;
 
-	private  Stack<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
+	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
 	private boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
 	private boolean ahogado;	// Una variable que registra si hubo ahogado o no
@@ -22,7 +22,7 @@ public class Juego {
 
 	public Juego() {
 		elTablero = new Tablero();
-		registro = new Stack<Jugada>();
+		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
 		jugadorBlanco=new Jugador(Color.BLANCO);
@@ -70,7 +70,7 @@ public class Juego {
 			elTablero.imprimirTablero();
 			
 			return laJugada;
-		} else{
+		} else {
 			return null;
 		}
 	}
@@ -93,7 +93,7 @@ public class Juego {
 		/**TEST**/
 		elTablero.imprimirTablero();
 	}
-	
+
 	public boolean hayJaqueMate() {
 		return jaqueMate;
 	}
@@ -111,6 +111,14 @@ public class Juego {
 			throw new EmptyRegisterException();
 		else
 			return registro.peek();
+	}
+
+	public int cuantasJugadasVan() {
+		return registro.size();
+	}
+
+	public boolean hayJaque() {
+		return elTablero.hayJaque(jugadorTurno.dameColor());
 	}
 
 	private void cambiarTurno() {
