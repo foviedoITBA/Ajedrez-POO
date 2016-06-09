@@ -9,6 +9,9 @@ import logica.NombrePieza;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.Iterator;
+import java.util.ArrayList;
   
 import org.jdom2.Content;
 import org.jdom2.Document;
@@ -36,7 +39,7 @@ public class Inteligencia {
 
 	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
-		Color elColor = queColorEs;
+		elColor = queColorEs;
 		jugadasXML = "ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
@@ -69,14 +72,15 @@ public class Inteligencia {
 		Jugada ultimaJugada;
 		List<Element> respuestas = null;
 		if (!elJuego.huboUnaJugada()) {
+			selector = root;
 			respuestas = selector.getChildren();
 			selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
-			jugadasHechas++;
-			jugadasHechasSinPensar++;
+			jugadasHechas = 1;
+			jugadasHechasSinPensar = 1;
 			hacerJugada(selector);
 			return;
 		}
-		while(elJuego.cuantasJugadasVan() < jugadasHechas + 1) {
+		while(elJuego.cuantasJugadasVan() < jugadasHechas + 1) { // Si se revirtió el juego, tiene que volver por el árbol
 			selector = selector.getParentElement();
 			jugadasHechas--;
 			jugadasHechasSinPensar--;
@@ -116,8 +120,29 @@ public class Inteligencia {
 		pensando = true;
 	}
 
+	@Deprecated
 	private void juegaPensando() {
-
+		List<PosicionAjedrez> posicionesDondeTengoPiezasQueSePuedenMover = new ArrayList<>();
+		for (byte fila = 1; fila < 8; fila++) {
+			for (char columna = 'a'; columna <= 'h'; columna++) {
+				PosicionAjedrez laPosicion = new PosicionAjedrez(fila, columna);
+				if (!elJuego.hayAlgo(laPosicion))
+					continue;
+				if (elJuego.queHay(laPosicion).dameColor() != this.elColor)
+					continue;
+				Set<PosicionAjedrez> losDestinos = elJuego.dameMovimientos(laPosicion);
+				if (!losDestinos.isEmpty())
+					posicionesDondeTengoPiezasQueSePuedenMover.add(laPosicion);
+			}
+		}
+		PosicionAjedrez posOrigen = posicionesDondeTengoPiezasQueSePuedenMover.get(randomGenerator.nextInt(posicionesDondeTengoPiezasQueSePuedenMover.size()));
+		int numeroAlAzar = randomGenerator.nextInt(elJuego.dameMovimientos(posOrigen).size());
+		Iterator<PosicionAjedrez> iterador = elJuego.dameMovimientos(posOrigen).iterator();
+		while(numeroAlAzar >= 1) {
+			iterador.next();
+			numeroAlAzar--;
+		}
+		elJuego.mover(posOrigen, iterador.next());
 	}
 
 	private Element buscarJugada(List<Element> jugadas, Jugada laJugada) {

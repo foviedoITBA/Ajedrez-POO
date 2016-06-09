@@ -52,8 +52,40 @@
 		</c5>
 	</e4>
 	<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
-		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="7" columnaDestino="d" hacer="true"> <!-- Closed Game -->
+		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="5" columnaDestino="d" hacer="true"> <!-- Closed Game -->
 			<c4 filaOrigen="2" columnaOrigen="c" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Queen's Gambit -->
+				<dxc4 filaOrigen="5" columnaOrigen="d" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Accepted Line -->
+					<e3 filaOrigen="2" columnaOrigen="e" filaDestino="3" columnaDestino="e" hacer="true">
+						<e5 filaOrigen="2" columnaOrigen="e" filaDestino="3" columnaDestino="e" hacer="true">
+						</e5>
+						<b5 filaOrigen="2" columnaOrigen="e" filaDestino="3" columnaDestino="e" hacer="false">
+							<a4 filaOrigen="2" columnaOrigen="a" filaDestino="4" columnaDestino="a" hacer="true">
+								<c6 filaOrigen="7" columnaOrigen="c" filaDestino="6" columnaDestino="c" hacer="false">
+									<axb5 filaOrigen="4" columnaOrigen="a" filaDestino="5" columnaDestino="b" hacer="true">
+										<cxb5 filaOrigen="6" columnaOrigen="c" filaDestino="5" columnaDestino="b" hacer="false">
+											<Df3 filaOrigen="2" columnaOrigen="e" filaDestino="3" columnaDestino="e" hacer="true">
+											</Df3>
+										</cxb5>
+									</axb5>
+								</c6>
+								<bxa4 filaOrigen="5" columnaOrigen="b" filaDestino="4" columnaDestino="a" hacer="true">
+								</bxa4>
+							</a4>
+						</b5>
+					</e3>
+					<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true">
+						<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+							<e3 filaOrigen="2" columnaOrigen="e" filaDestino="3" columnaDestino="e" hacer="true">
+							</e3>
+						</Cf6>
+					</Cf3>
+				</dxc4>
+				<e6 filaOrigen="7" columnaOrigen="e" filaDestino="6" columnaDestino="e" hacer="true"> <!-- Declined Line -->
+					<Cc3 filaOrigen="1" columnaOrigen="b" filaDestino="3" columnaDestino="c" hacer="true">
+						<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+						</Cf6>
+					</Cc3>
+				</e6> 
 			</c4>
 		</d5>
 	</d4>

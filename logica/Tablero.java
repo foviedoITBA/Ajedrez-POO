@@ -18,7 +18,6 @@ public class Tablero {
 		initTablero();
 	}
 
-
 	public boolean hayAlgo(PosicionAjedrez posAjedrez) {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		return !losCasilleros[posTablero.getX()][posTablero.getY()].isEmpty();
@@ -35,6 +34,7 @@ public class Tablero {
 		return new PiezaColor(elNombre, elColor);
 	}
 
+	// Devuelve las posiciones a las que puede ir la pieza en posAjedrez
 	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
@@ -95,6 +95,7 @@ public class Tablero {
 		return (!elReyEstaEnJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
+	@Deprecated
 	public boolean hayJaque(Color jaqueado) {
 		return false;
 
@@ -313,10 +314,22 @@ public class Tablero {
 				if(losCasilleros[i][j].isEmpty()){
 					System.out.print("0\t");
 				}else{
+					if (losCasilleros[i][j].getPieza() instanceof Torre)
+						System.out.print("T");
+					else if (losCasilleros[i][j].getPieza() instanceof Caballo)
+						System.out.print("C");
+					else if (losCasilleros[i][j].getPieza() instanceof Alfil)
+						System.out.print("A");
+					else if (losCasilleros[i][j].getPieza() instanceof Dama)
+						System.out.print("D");
+					else if (losCasilleros[i][j].getPieza() instanceof Rey)
+						System.out.print("R");
+					else
+						System.out.print("P");
 					if(losCasilleros[i][j].getPieza().dameColor().equals(Color.BLANCO)){
-						System.out.print("1(B)\t");
+						System.out.print("(B)\t");
 					}else{
-						System.out.print("1(N)\t");
+						System.out.print("(N)\t");
 					}
 				}
 
