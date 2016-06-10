@@ -18,7 +18,7 @@ public class Juego {
 	private boolean jaqueMate;	// Una variable que registra si hubo jaque mate o no
 	private boolean ahogado;	// Una variable que registra si hubo ahogado o no
 	
-
+	private boolean hayCoronacionPendiente;
 
 	public Juego() {
 		elTablero = new Tablero();
@@ -28,7 +28,7 @@ public class Juego {
 		jugadorBlanco=new Jugador(Color.BLANCO);
 		jugadorNegro=new Jugador(Color.NEGRO);
 		jugadorTurno = jugadorBlanco;
-
+		hayCoronacionPendiente = false;
 		/**TEST**/
 		elTablero.imprimirTablero();
 	}
@@ -48,6 +48,8 @@ public class Juego {
 	}
 	
 	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws CasilleroVacioException {
+		if (hayCoronacionPendiente)
+			throw new RuntimeException();
 		if (jaqueMate || ahogado){
 			return null;
 		}
@@ -59,11 +61,14 @@ public class Juego {
 		}
 		if(elTablero.esMovimientoPosible(posInicial,posFinal)){
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
+			hayCoronacionPendiente = elTablero.hayAlgoParaCoronar(jugadorTurno.dameColor());
 			registro.push(laJugada);
-			cambiarTurno();
-			jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
-			if (!jaqueMate){
-				ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
+			if (!hayCoronacionPendiente) {
+				cambiarTurno();
+				jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
+				if (!jaqueMate) {
+					ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
+				}
 			}
 			
 			/**TEST**/
@@ -119,6 +124,19 @@ public class Juego {
 
 	public boolean hayJaque() {
 		return elTablero.hayJaque(jugadorTurno.dameColor());
+	}
+
+	public boolean hayAlgoParaCoronar() {
+		return hayCoronacionPendiente;
+	}
+
+	public void coronar(NombrePieza laPieza) {
+		elTablero.coronar(laPieza, jugadorTurno.dameColor());
+		cambiarTurno();
+		jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
+		if (!jaqueMate) {
+			ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
+		}
 	}
 
 	private void cambiarTurno() {

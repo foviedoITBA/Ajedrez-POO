@@ -32,5 +32,9 @@ public class Alfil extends Pieza {
 	public NombrePieza dameNombre() {
 		return NombrePieza.ALFIL;
 	}
-	
+
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return false;
+	}
 }

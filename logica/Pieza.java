@@ -31,6 +31,7 @@ public abstract class Pieza {
 		cantMov--;
 	}
 
+	public abstract boolean puedoCoronar(int fila);
 	public abstract NombrePieza dameNombre();
 	public abstract List<Movimiento> dameMovimientos();
 	

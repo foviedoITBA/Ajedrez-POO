@@ -112,6 +112,50 @@ public class Tablero {
 		return estaEnJaque;
 	}
 
+	public boolean hayAlgoParaCoronar(Color coronador) {
+		boolean hayAlgo = false;
+		for (int i = 0; i < SIZE_TABLERO && !hayAlgo; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !hayAlgo; j++) {
+				if (losCasilleros[i][j].isEmpty())
+					continue;
+				hayAlgo = losCasilleros[i][j].getPieza().puedoCoronar(8 - i);
+			}
+		}
+		return hayAlgo;
+	}
+
+	public void coronar(NombrePieza laPieza, Color elColor) {
+		boolean encontrado = false;
+		for (int i = 0; i < SIZE_TABLERO && !encontrado; i++) {
+			for (int j = 0; i < SIZE_TABLERO && !encontrado; j++) {
+				if (losCasilleros[i][j].getPieza().puedoCoronar(8 - i)) {
+					Pieza nuevaPieza = null;
+					switch(laPieza)
+					{
+						case TORRE:
+							nuevaPieza = new Torre(elColor);
+							break;
+						case CABALLO:
+							nuevaPieza = new Caballo(elColor);
+							break;
+						case ALFIL:
+							nuevaPieza = new Alfil(elColor);
+							break;
+						case DAMA:
+							nuevaPieza = new Dama(elColor);
+							break;
+						default:
+							throw new RuntimeException();
+					}
+					losCasilleros[i][j].addPieza(nuevaPieza);
+					encontrado = true;
+				}
+			}
+		}
+		if (!encontrado)
+			throw new RuntimeException();
+	}
+
 	private boolean elReyEstaEnJaque(Color perdedor) {
 		
 		PosicionTablero posRey = buscoAlRey(perdedor);

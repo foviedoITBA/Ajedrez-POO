@@ -41,4 +41,9 @@ public class Rey extends Pieza {
 	public NombrePieza dameNombre() {
 		return NombrePieza.REY;
 	}
+
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return false;
+	}
 }

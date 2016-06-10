@@ -55,4 +55,8 @@ public class Peon extends Pieza {
 		return movimientos;
 	}
 
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return ((dameColor() == Color.BLANCO && fila == 8) || (dameColor() == Color.NEGRO && fila == 1));
+	}
 }

@@ -40,4 +40,9 @@ public class Dama extends Pieza {
 	public NombrePieza dameNombre() {
 		return NombrePieza.DAMA;
 	}
+
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return false;
+	}
 }

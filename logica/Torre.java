@@ -33,5 +33,9 @@ public class Torre extends Pieza{
 	public NombrePieza dameNombre() {
 		return NombrePieza.TORRE;
 	}
-	
+
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return false;
+	}	
 }

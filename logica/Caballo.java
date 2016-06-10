@@ -40,4 +40,9 @@ public class Caballo extends Pieza{
 	public NombrePieza dameNombre() {
 		return NombrePieza.CABALLO;
 	}
+
+	@Override
+	public boolean puedoCoronar(int fila) {
+		return false;
+	}
 }
