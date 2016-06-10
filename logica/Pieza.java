@@ -24,7 +24,7 @@ public abstract class Pieza {
 	}
 	
 	public boolean dameSeMovio() {
-		return cantMov == 0;
+		return cantMov != 0;
 	}
 
 	public void sacarSeMovio() {

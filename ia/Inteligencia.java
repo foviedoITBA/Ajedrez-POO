@@ -158,7 +158,7 @@ public class Inteligencia {
 			if (elElemento.getAttributeValue("filaOrigen").equals(filaOrigen) && elElemento.getAttributeValue("columnaOrigen").equals(columnaOrigen) && elElemento.getAttributeValue("filaDestino").equals(filaDestino) && elElemento.getAttributeValue("columnaDestino").equals(columnaDestino))
 				encontrado = true;
 		}
-		return elElemento;
+		return (encontrado ? elElemento : null);
 	}
 
 	private void hacerJugada(Element e) {

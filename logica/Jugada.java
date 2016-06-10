@@ -35,4 +35,8 @@ public class Jugada {
 	Pieza damePiezaComida() {
 		return laPiezaComida;
 	}
+
+	public String toString() {
+		return "DE " + posOrigen.toString() + " A " + posDestino.toString();
+	}
 }
