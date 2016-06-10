@@ -40,7 +40,7 @@ public class Inteligencia {
 	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
-		jugadasXML = "src/ia/Jugadas.xml";
+		jugadasXML = "ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		

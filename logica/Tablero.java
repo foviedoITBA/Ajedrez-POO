@@ -97,8 +97,19 @@ public class Tablero {
 
 	@Deprecated
 	public boolean hayJaque(Color jaqueado) {
-		return false;
-
+		PosicionTablero posRey = buscoAlRey(jaqueado);
+		boolean estaEnJaque = false;
+		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
+			for (int j = 0; j < SIZE_TABLERO && !estaEnJaque; j++) {
+				PosicionAjedrez laPosicion = transformarPosicion(new PosicionTablero(i, j));
+				if (hayAlgo(laPosicion) && queHay(laPosicion).dameColor() != jaqueado) {
+					if (analizoMovimientos(transformarPosicion(laPosicion), true).contains(posRey)) {
+						estaEnJaque = true;
+					}
+				}
+			}
+		}
+		return estaEnJaque;
 	}
 
 	private boolean elReyEstaEnJaque(Color perdedor) {

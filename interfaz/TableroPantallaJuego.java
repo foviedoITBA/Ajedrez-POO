@@ -136,9 +136,11 @@ public class TableroPantallaJuego extends Pane {
 					if(elJuego.hayJaqueMate()){
 						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
 					}
+					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 					System.out.println("Se movio una pieza");///////borrrar
 					ia.juega();
 					imprimirTablero();
+					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 				}
 			}else{
 				seleccionado=clickeado;
