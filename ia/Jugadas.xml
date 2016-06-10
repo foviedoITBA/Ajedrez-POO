@@ -12,7 +12,7 @@
 
 					</Ab5>
 				</Cc6>
-				<Cf6 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- Petrov's defense -->
+				<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true"> <!-- Petrov's defense -->
 					<Cc3 filaOrigen="1" columnaOrigen="b" filaDestino="3" columnaDestino="c" hacer="true">
 
 					</Cc3>
@@ -40,7 +40,7 @@
 		</e5>
 		<e6 filaOrigen="7" columnaOrigen="e" filaDestino="6" columnaDestino="e" hacer="true"> <!-- French Defense -->
 			<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
-				<d5 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true">
+				<d5 filaOrigen="7" columnaOrigen="d" filaDestino="5" columnaDestino="d" hacer="true">
 					<e5 filaOrigen="4" columnaOrigen="e" filaDestino="5" columnaDestino="e" hacer="true">
 					</e5>
 				</d5>

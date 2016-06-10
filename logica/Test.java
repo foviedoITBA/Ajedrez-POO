@@ -11,7 +11,7 @@ public class Test {
 		Juego juego = new Juego();
 		Inteligencia ia1 = new Inteligencia(juego, Color.BLANCO);
 		Inteligencia ia2 = new Inteligencia(juego, Color.NEGRO);
-		while(!juego.hayJaqueMate() && jugadas < 10) {
+		while(!juego.hayJaqueMate()) {
 			ia1.juega();
 			ia2.juega();
 			jugadas++;

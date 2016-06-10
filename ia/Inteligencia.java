@@ -40,7 +40,7 @@ public class Inteligencia {
 	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
-		jugadasXML = "ia/Jugadas.xml";
+		jugadasXML = "src/ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		
@@ -123,7 +123,7 @@ public class Inteligencia {
 	@Deprecated
 	private void juegaPensando() {
 		List<PosicionAjedrez> posicionesDondeTengoPiezasQueSePuedenMover = new ArrayList<>();
-		for (byte fila = 1; fila < 8; fila++) {
+		for (byte fila = 1; fila <= 8; fila++) {
 			for (char columna = 'a'; columna <= 'h'; columna++) {
 				PosicionAjedrez laPosicion = new PosicionAjedrez(fila, columna);
 				if (!elJuego.hayAlgo(laPosicion))

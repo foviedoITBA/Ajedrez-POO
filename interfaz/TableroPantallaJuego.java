@@ -1,6 +1,8 @@
 package interfaz;
 
+import ia.Inteligencia;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import javafx.scene.canvas.Canvas;
@@ -29,6 +31,9 @@ public class TableroPantallaJuego extends Pane {
 	Set<PosicionAjedrez> movimientosPosibles;
 	Juego elJuego;
 	PiezaImagen imagenes;
+	ArrayList<Jugada> jugadas;
+	
+	Inteligencia ia;
 	
 	public TableroPantallaJuego(Juego elJuego){
 		super();
@@ -39,11 +44,14 @@ public class TableroPantallaJuego extends Pane {
 		this.elJuego=elJuego;
 		seleccionado=null;
 		imagenes=new PiezaImagen();
+		jugadas=new ArrayList<Jugada>();
 		inicializarTablero();
 		imprimirTablero();
 		this.setOnMouseClicked(e-> posicionTablero(e.getSceneX(),e.getSceneY()));
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		this.setId("tablero");
+		
+		ia = new Inteligencia(elJuego,Color.NEGRO);
 		
 	}
 	
@@ -90,8 +98,6 @@ public class TableroPantallaJuego extends Pane {
 		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
 		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);
 		clickTablero(transformar(fila, columna));
-		
-		
 	}
 	
 	private PosicionAjedrez transformar(int fila, int columna){
@@ -124,12 +130,15 @@ public class TableroPantallaJuego extends Pane {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
 				if(movimientosPosibles.contains(clickeado)){
 					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
+					jugadas.add(laJugada);
 					imprimirTablero();
 					seleccionado=null;
 					if(elJuego.hayJaqueMate()){
 						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
 					}
 					System.out.println("Se movio una pieza");///////borrrar
+					ia.juega();
+					imprimirTablero();
 				}
 			}else{
 				seleccionado=clickeado;
