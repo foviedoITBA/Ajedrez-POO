@@ -89,14 +89,13 @@ public class Tablero {
 	}
 	
 	public boolean hayJaqueMate(Color perdedor) {
-		return (elReyEstaEnJaque(perdedor) && !hayMovimientosPosibles(perdedor));
+		return (hayJaque(perdedor) && !hayMovimientosPosibles(perdedor));
 	}
 
 	public boolean hayAhogado(Color ahogado) {
-		return (!elReyEstaEnJaque(ahogado) && !hayMovimientosPosibles(ahogado));
+		return (!hayJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
-	@Deprecated
 	public boolean hayJaque(Color jaqueado) {
 		PosicionTablero posRey = buscoAlRey(jaqueado);
 		boolean estaEnJaque = false;
@@ -157,7 +156,7 @@ public class Tablero {
 			throw new CoronacionInvalidaException();
 	}
 
-	private boolean elReyEstaEnJaque(Color perdedor) {
+	/*private boolean elReyEstaEnJaque(Color perdedor) {
 		
 		PosicionTablero posRey = buscoAlRey(perdedor);
 
@@ -181,7 +180,7 @@ public class Tablero {
 
 		return estaEnJaque;
 
-	}
+	}*/
 
 	private boolean hayMovimientosPosibles(Color perdedor) {
 		

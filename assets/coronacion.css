@@ -1,0 +1,48 @@
+.root{
+	-fx-background-color:#D3D3D3;
+	-fx-background-image: url('bg.jpg');
+    -fx-background-size:cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+#labelChess{
+	
+	-fx-background-image: url('coronar.png');
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+.button{
+	-fx-background-color:Transparent;
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;    
+    
+}
+
+.button.torreBlanca{
+	-fx-background-image: url('torreBlancaCoronacion.png');
+}
+.button.alfilBlanca{
+	-fx-background-image: url('alfilBlancoCoronacion.png');
+}
+.button.caballoBlanca{
+	-fx-background-image: url('caballoBlancoCoronacion.png');
+}
+.button.damaBlanca{
+	-fx-background-image: url('damaBlancaCoronacion.png');
+}
+.button.torreNegro{
+	-fx-background-image: url('torreNegroCoronacion.png');
+}
+.button.alfilNegro{
+	-fx-background-image: url('alfilNegroCoronacion.png');
+}
+.button.caballoNegro{
+	-fx-background-image: url('caballoNegroCoronacion.png');
+}
+.button.damaNegro{
+	-fx-background-image: url('damaNegroCoronacion.png');
+}

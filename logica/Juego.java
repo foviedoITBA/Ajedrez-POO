@@ -135,6 +135,7 @@ public class Juego {
 	public void coronar(NombrePieza laPieza) {
 		elTablero.coronar(laPieza, jugadorTurno.dameColor());
 		cambiarTurno();
+		hayCoronacionPendiente=false;
 		jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
 		if (!jaqueMate) {
 			ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());

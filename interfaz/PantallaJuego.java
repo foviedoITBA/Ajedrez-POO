@@ -17,7 +17,7 @@ public class PantallaJuego extends Pane{
 		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();
 		inicializarMenu();
-		tablero= new TableroPantallaJuego(elJuego);
+		tablero= new TableroPantallaJuego(elJuego,color);
 		this.getChildren().addAll(tablero);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
