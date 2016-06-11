@@ -30,36 +30,33 @@ public class EstadoDeJuego extends Pane {
 	
 	public void actualizarEstado(){
 		
-		System.out.println("aca");
 		if(juego.dameTurno() == Color.BLANCO){
-			System.out.println("aca2");
 			this.getChildren().removeAll(img);
 			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().addAll(img);
 		}else{
-			System.out.println("aca3");
 			this.getChildren().removeAll(img);
 			img = new MyCanvas(new Image("/assets/juegaNegras.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().addAll(img);
 		}
 		if(juego.hayAlgoParaCoronar()){
 			this.getChildren().remove(img);
-			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+			img = new MyCanvas(new Image("/assets/coronacion.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().add(img);
 		}
 		if(juego.hayJaque()){
 			this.getChildren().remove(img);
-			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+			img = new MyCanvas(new Image("/assets/jaque.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().add(img);
 		}
 		if(juego.hayAhogado()){
 			this.getChildren().remove(img);
-			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+			img = new MyCanvas(new Image("/assets/ahogado.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().add(img);
 		}
 		if(juego.hayJaqueMate()){
 			this.getChildren().remove(img);
-			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+			img = new MyCanvas(new Image("/assets/jaqueMate.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().add(img);
 		}
 	}

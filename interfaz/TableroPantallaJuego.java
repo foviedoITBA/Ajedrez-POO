@@ -144,7 +144,6 @@ public class TableroPantallaJuego extends Pane {
 					tabla.agregarJugada(laJugada);
 					imprimirTablero();
 					seleccionado=null;
-					estadoDeJuego.actualizarEstado();
 					if(elJuego.hayJaqueMate()){
 						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
 					}
@@ -182,6 +181,7 @@ public class TableroPantallaJuego extends Pane {
 				}
 			}
 		}
+		estadoDeJuego.actualizarEstado();
 	}
 
 	private void inicializarTablero(){
