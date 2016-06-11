@@ -12,13 +12,16 @@ import logica.Juego;
 
 public class PantallaJuego extends Pane{
 	TableroPantallaJuego tablero;
+	TablaJugadas tablaJugadas;
 	public PantallaJuego(int cantJugadores, Color color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();
 		inicializarMenu();
-		tablero= new TableroPantallaJuego(elJuego);
-		this.getChildren().addAll(tablero);
+		tablaJugadas=new TablaJugadas();
+		tablero= new TableroPantallaJuego(elJuego,tablaJugadas);
+		
+		this.getChildren().addAll(tablero,tablaJugadas);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 	}

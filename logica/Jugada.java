@@ -19,6 +19,13 @@ public class Jugada {
 	public PiezaColor damePiezaColorComida() {
 		return new PiezaColor(laPiezaComida.dameNombre(),laPiezaComida.dameColor());
 	}
+	
+	public boolean hayPiezaComida(){
+		if(laPiezaComida== null){
+			return false;
+		}
+			return true;
+	}
 
 	public PosicionAjedrez damePosicionOrigen() {
 		return posOrigen;

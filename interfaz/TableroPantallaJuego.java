@@ -2,7 +2,6 @@ package interfaz;
 
 import ia.Inteligencia;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import javafx.scene.canvas.Canvas;
@@ -32,10 +31,10 @@ public class TableroPantallaJuego extends Pane {
 	private Set<PosicionAjedrez> movimientosPosibles;
 	private Juego elJuego;
 	private PiezaImagen imagenes;
-	private ArrayList<Jugada> jugadas;
 	private Inteligencia ia;
+	private TablaJugadas tabla;
 	
-	public TableroPantallaJuego(Juego elJuego){
+	public TableroPantallaJuego(Juego elJuego, TablaJugadas tabla){
 		super();
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
@@ -45,7 +44,7 @@ public class TableroPantallaJuego extends Pane {
 		this.elJuego=elJuego;
 		seleccionado=null;
 		imagenes=new PiezaImagen();
-		jugadas=new ArrayList<Jugada>();
+		this.tabla=tabla;
 		inicializarTablero();
 		imprimirTablero();
 		this.setOnMouseClicked(e-> posicionTablero(e.getSceneX(),e.getSceneY()));
@@ -70,8 +69,7 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
-		//System.out.println("Click en FilaAjedrez: "+fila+ "ColumnaTablero: "+col);
-		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));//dibuja solo peones blancos
+		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));
 	}
 	
 	private void borrarImagen(int fila, int col){
@@ -131,7 +129,7 @@ public class TableroPantallaJuego extends Pane {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
 				if(movimientosPosibles.contains(clickeado)){
 					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
-					jugadas.add(laJugada);
+					tabla.agregarJugada(laJugada);
 					imprimirTablero();
 					seleccionado=null;
 					if(elJuego.hayJaqueMate()){
@@ -140,6 +138,7 @@ public class TableroPantallaJuego extends Pane {
 					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 					System.out.println("Se movio una pieza");///////borrrar
 					ia.juega();
+					tabla.agregarJugada(elJuego.dameUltimaJugada());
 					imprimirTablero();
 					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 				}
