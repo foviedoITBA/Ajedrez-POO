@@ -47,7 +47,7 @@ public class TableroPantallaJuego extends Pane {
 		seleccionado=null;
 		imagenes=new PiezaImagen();
 		this.tabla=tabla;
-		inicializarTablero();
+		//inicializarTablero();
 		imprimirTablero();
 		
 		
@@ -176,7 +176,8 @@ public class TableroPantallaJuego extends Pane {
 			}
 		}
 	}
-
+	
+	@Deprecated
 	private void inicializarTablero(){
 		for(int i=0; i<8;i++){//hay que usar un enum o algo que diga ancho ya alto del tablero en vez de 8
 			for(int j=0; j<8;j++){

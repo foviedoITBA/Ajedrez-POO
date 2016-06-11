@@ -36,6 +36,9 @@ public class TablaJugadas extends Pane{
 		imprimirJugadas();
 	}
 	
+	public void removerJugada(Jugada jugada){
+		jugadas.remove(jugadas.size()-1);
+	}
 	
 	public void imprimirJugadas(){
 		for (int i=0; i<jugadas.size(); i++){
