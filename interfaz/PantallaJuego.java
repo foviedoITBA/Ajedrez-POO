@@ -19,7 +19,7 @@ public class PantallaJuego extends Pane{
 		Juego elJuego=new Juego();
 		inicializarMenu();
 		tablaJugadas=new TablaJugadas();
-		tablero= new TableroPantallaJuego(elJuego,tablaJugadas);
+		tablero= new TableroPantallaJuego(elJuego,tablaJugadas,color);
 		
 		this.getChildren().addAll(tablero,tablaJugadas);
 		

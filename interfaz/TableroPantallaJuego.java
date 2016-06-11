@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import logica.Color;
 import logica.Juego;
 import logica.Jugada;
+import logica.NombrePieza;
 import logica.PiezaColor;
 import logica.PosicionAjedrez;
 
@@ -26,7 +27,7 @@ public class TableroPantallaJuego extends Pane {
 	
 	
 	private Canvas[][] tablero;
-	private Color turno;
+	private Color turno,miColor;
 	private PosicionAjedrez seleccionado;
 	private Set<PosicionAjedrez> movimientosPosibles;
 	private Juego elJuego;
@@ -34,7 +35,7 @@ public class TableroPantallaJuego extends Pane {
 	private Inteligencia ia;
 	private TablaJugadas tabla;
 	
-	public TableroPantallaJuego(Juego elJuego, TablaJugadas tabla){
+	public TableroPantallaJuego(Juego elJuego, TablaJugadas tabla,Color color){
 		super();
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
@@ -42,16 +43,26 @@ public class TableroPantallaJuego extends Pane {
 		
 		tablero= new Canvas[8][8];
 		this.elJuego=elJuego;
+		miColor = color;
 		seleccionado=null;
 		imagenes=new PiezaImagen();
 		this.tabla=tabla;
 		inicializarTablero();
 		imprimirTablero();
-		this.setOnMouseClicked(e-> posicionTablero(e.getSceneX(),e.getSceneY()));
+		
+		
+		this.setOnMouseClicked(e-> {
+			turno = elJuego.dameTurno();
+//			if(turno == miColor){//verifico que sea mi turno
+				posicionTablero(e.getSceneX(),e.getSceneY());
+//			}
+			
+		});
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		this.setId("tablero");
 		
-		ia = new Inteligencia(elJuego,Color.NEGRO);
+		/*if()//inicializo la ia con el otro color
+		ia = new Inteligencia(elJuego,Color.NEGRO);*/
 		
 	}
 	
@@ -114,7 +125,6 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void clickTablero(PosicionAjedrez clickeado){
-		turno=elJuego.dameTurno();
 		System.out.println("turno de:"+turno);
 		if(seleccionado == null) {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno) {
@@ -137,10 +147,15 @@ public class TableroPantallaJuego extends Pane {
 					}
 					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 					System.out.println("Se movio una pieza");///////borrrar
-					ia.juega();
-					tabla.agregarJugada(elJuego.dameUltimaJugada());
-					imprimirTablero();
-					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+//					ia.juega();
+//					tabla.agregarJugada(elJuego.dameUltimaJugada());
+//					imprimirTablero();
+//					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+					if(elJuego.hayAlgoParaCoronar()){
+						NombrePieza pieza = CoronacionPiezas.display(turno);
+						elJuego.coronar(pieza);
+						imprimirTablero();
+					}
 				}
 			}else{
 				seleccionado=clickeado;

@@ -10,10 +10,11 @@ Tests
 
 
 
-testear coronacion del peon
 hacer la coronacion en la interfaz
 agregar turno en la interfaz
 agregar pane para mostrar las jugadas en la interfaz (bg y impresion del texto)
 investigar como jugar por tiempo
 retrasar la jugada de la ia
 hacer constructores de juego para cada caso
+
+icono app

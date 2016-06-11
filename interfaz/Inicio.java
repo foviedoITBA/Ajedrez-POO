@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import logica.Color;
+
 public class Inicio extends Pane {
 	public Inicio(){
 		super();
@@ -37,5 +39,6 @@ public class Inicio extends Pane {
 		
 		this.getChildren().addAll(titulo,buttonUnJugador,buttonDosJugadores,buttonCargarPartida,buttonSalir);
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
+		
 	}
 }
