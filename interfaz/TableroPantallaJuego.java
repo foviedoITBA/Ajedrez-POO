@@ -34,8 +34,9 @@ public class TableroPantallaJuego extends Pane {
 	private PiezaImagen imagenes;
 	private Inteligencia ia;
 	private TablaJugadas tabla;
+	private EstadoDeJuego estadoDeJuego;
 	
-	public TableroPantallaJuego(Juego elJuego, TablaJugadas tabla,Color color){
+	public TableroPantallaJuego(Juego elJuego, EstadoDeJuego estadoDeJuego, TablaJugadas tabla,Color color){
 		super();
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
@@ -47,6 +48,7 @@ public class TableroPantallaJuego extends Pane {
 		seleccionado=null;
 		imagenes=new PiezaImagen();
 		this.tabla=tabla;
+		this.estadoDeJuego = estadoDeJuego;
 		//inicializarTablero();
 		imprimirTablero();
 		
@@ -151,8 +153,12 @@ public class TableroPantallaJuego extends Pane {
 //					tabla.agregarJugada(elJuego.dameUltimaJugada());
 //					imprimirTablero();
 //					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+					
 					if(elJuego.hayAlgoParaCoronar()){
-						NombrePieza pieza = CoronacionPiezas.display(turno);
+						NombrePieza pieza = null;
+						do{
+							pieza = CoronacionPiezas.display(turno);
+						}while(pieza==null);
 						elJuego.coronar(pieza);
 						imprimirTablero();
 					}
@@ -175,6 +181,7 @@ public class TableroPantallaJuego extends Pane {
 				}
 			}
 		}
+		estadoDeJuego.actualizarEstado();
 	}
 	
 	@Deprecated

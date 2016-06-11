@@ -13,15 +13,17 @@ import logica.Juego;
 public class PantallaJuego extends Pane{
 	TableroPantallaJuego tablero;
 	TablaJugadas tablaJugadas;
+	EstadoDeJuego estadoDeJuego;
 	public PantallaJuego(int cantJugadores, Color color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();
 		inicializarMenu();
+		estadoDeJuego = new EstadoDeJuego(elJuego);
 		tablaJugadas=new TablaJugadas();
-		tablero= new TableroPantallaJuego(elJuego,tablaJugadas,color);
+		tablero= new TableroPantallaJuego(elJuego,estadoDeJuego,tablaJugadas,color);
 		
-		this.getChildren().addAll(tablero,tablaJugadas);
+		this.getChildren().addAll(tablero,estadoDeJuego,tablaJugadas);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 	}
