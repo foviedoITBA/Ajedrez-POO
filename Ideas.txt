@@ -1,7 +1,19 @@
 Cosas que faltan:
 
 Enroque, peón al paso, coronación
-Verificar jaque mate y ahogado - Hecho?
 Poder guardar y cargar el juego
 Inteligencia artificial (jugar aperturas y pensar)
 Interfaz
+Jugar por tiempo
+Setear que jugador empieza la partida
+Tests
+
+
+
+testear coronacion del peon
+hacer la coronacion en la interfaz
+agregar turno en la interfaz
+agregar pane para mostrar las jugadas en la interfaz (bg y impresion del texto)
+investigar como jugar por tiempo
+retrasar la jugada de la ia
+hacer constructores de juego para cada caso

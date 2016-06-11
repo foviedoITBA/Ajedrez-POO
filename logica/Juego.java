@@ -3,6 +3,8 @@ package logica;
 import java.util.ArrayDeque;
 
 import excepcion.CasilleroVacioException;
+import excepcion.CoronacionPendienteException;
+import excepcion.EmptyRegisterException;
 
 import java.util.Set;
 
@@ -49,7 +51,7 @@ public class Juego {
 	
 	public Jugada mover(PosicionAjedrez posInicial, PosicionAjedrez posFinal) throws CasilleroVacioException {
 		if (hayCoronacionPendiente)
-			throw new RuntimeException();
+			throw new CoronacionPendienteException();
 		if (jaqueMate || ahogado){
 			return null;
 		}

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import excepcion.CasilleroVacioException;
+import excepcion.CoronacionInvalidaException;
 
 public class Tablero {
 
@@ -116,9 +117,9 @@ public class Tablero {
 		boolean hayAlgo = false;
 		for (int i = 0; i < SIZE_TABLERO && !hayAlgo; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !hayAlgo; j++) {
-				if (losCasilleros[i][j].isEmpty())
-					continue;
-				hayAlgo = losCasilleros[i][j].getPieza().puedoCoronar(8 - i);
+				if (!losCasilleros[i][j].isEmpty()){
+					hayAlgo = losCasilleros[i][j].getPieza().puedoCoronar(8 - i);
+				}
 			}
 		}
 		return hayAlgo;
@@ -145,7 +146,7 @@ public class Tablero {
 							nuevaPieza = new Dama(elColor);
 							break;
 						default:
-							throw new RuntimeException();
+							throw new CoronacionInvalidaException();
 					}
 					losCasilleros[i][j].addPieza(nuevaPieza);
 					encontrado = true;
@@ -153,7 +154,7 @@ public class Tablero {
 			}
 		}
 		if (!encontrado)
-			throw new RuntimeException();
+			throw new CoronacionInvalidaException();
 	}
 
 	private boolean elReyEstaEnJaque(Color perdedor) {

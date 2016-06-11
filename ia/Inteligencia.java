@@ -20,6 +20,8 @@ import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.util.IteratorIterable;
 
+import excepcion.ImposibleCargarJugadasException;
+
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
@@ -40,7 +42,7 @@ public class Inteligencia {
 	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
-		jugadasXML = "ia/Jugadas.xml";
+		jugadasXML = "src/ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		
