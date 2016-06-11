@@ -14,7 +14,7 @@ public class PantallaJuego extends Pane{
 	TableroPantallaJuego tablero;
 	public PantallaJuego(int cantJugadores, Color color, boolean hayTiempo){
 		super();
-		this.setPrefSize(700, 800);
+		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();
 		inicializarMenu();
 		tablero= new TableroPantallaJuego(elJuego);
@@ -24,7 +24,7 @@ public class PantallaJuego extends Pane{
 	}
 	
 	private void inicializarMenu(){
-		Label titulo = new MyLabel("",100,20,500,100);
+		Label titulo = new MyLabel("",200,20,500,100);
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");
 		

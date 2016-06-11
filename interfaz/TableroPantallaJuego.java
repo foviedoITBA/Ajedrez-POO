@@ -24,16 +24,16 @@ public class TableroPantallaJuego extends Pane {
 	
 	private static double DEFSAJE_X=100;
 	private static double DEFSAJE_Y=150;
-	private Canvas[][] tablero= new Canvas[8][8];
 	
-	Color turno;
-	PosicionAjedrez seleccionado;
-	Set<PosicionAjedrez> movimientosPosibles;
-	Juego elJuego;
-	PiezaImagen imagenes;
-	ArrayList<Jugada> jugadas;
 	
-	Inteligencia ia;
+	private Canvas[][] tablero;
+	private Color turno;
+	private PosicionAjedrez seleccionado;
+	private Set<PosicionAjedrez> movimientosPosibles;
+	private Juego elJuego;
+	private PiezaImagen imagenes;
+	private ArrayList<Jugada> jugadas;
+	private Inteligencia ia;
 	
 	public TableroPantallaJuego(Juego elJuego){
 		super();
@@ -41,6 +41,7 @@ public class TableroPantallaJuego extends Pane {
 		this.setTranslateX(DEFSAJE_X);
 		this.setTranslateY(DEFSAJE_Y);
 		
+		tablero= new Canvas[8][8];
 		this.elJuego=elJuego;
 		seleccionado=null;
 		imagenes=new PiezaImagen();
