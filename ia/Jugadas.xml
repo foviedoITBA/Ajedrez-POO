@@ -6,7 +6,34 @@
 			<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true">
 				<Cc6 filaOrigen="8" columnaOrigen="b" filaDestino="6" columnaDestino="c" hacer="true">
 					<Ac4 filaOrigen="1" columnaOrigen="f" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Italian game -->
-
+						<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true"> <!-- Two Knights Defense -->
+							<Cg5 filaOrigen="3" columnaOrigen="f" filaDestino="5" columnaDestino="g" hacer="true">
+								<d5 filaOrigen="7" columnaOrigen="d" filaDestino="5" columnaDestino="d" hacer="true">
+									<exd5 filaOrigen="4" columnaOrigen="e" filaDestino="5" columnaDestino="d" hacer="true">
+										<Ca5 filaOrigen="6" columnaOrigen="c" filaDestino="5" columnaDestino="a" hacer="true">
+										</Ca5>
+										<Cxd5 filaOrigen="6" columnaOrigen="f" filaDestino="5" columnaDestino="d" hacer="false">
+											<Cxf7 filaOrigen="5" columnaOrigen="g" filaDestino="7" columnaDestino="f" hacer="true"> <!-- Fried Liver Attack -->
+												<Rxf7 filaOrigen="8" columnaOrigen="e" filaDestino="7" columnaDestino="f" hacer="true">
+													<Df3 filaOrigen="1" columnaOrigen="d" filaDestino="3" columnaDestino="f" hacer="true">
+														<Re6 filaOrigen="7" columnaOrigen="f" filaDestino="6" columnaDestino="e" hacer="true">
+														</Re6>
+														<Re8 filaOrigen="7" columnaOrigen="f" filaDestino="8" columnaDestino="e" hacer="true">
+														</Re8>
+														<Rg8 filaOrigen="7" columnaOrigen="f" filaDestino="8" columnaDestino="g" hacer="false">
+															<Axd5 filaOrigen="4" columnaOrigen="c" filaDestino="5" columnaDestino="d" hacer="true">
+															</Axd5>
+														</Rg8>
+													</Df3>
+												</Rxf7>
+											</Cxf7>
+										</Cxd5>
+									</exd5>
+								</d5>
+							</Cg5>
+						</Cf6>
+						<Ac5 filaOrigen="8" columnaOrigen="f" filaDestino="5" columnaDestino="c" hacer="true"> <!-- Giuoco Piano -->
+						</Ac5>
 					</Ac4>
 					<Ab5 filaOrigen="1" columnaOrigen="f" filaDestino="5" columnaDestino="b" hacer="true"> <!-- Ruy Lopez -->
 
@@ -31,10 +58,22 @@
 			</Cf3>
 			<f4 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- King's Gambit -->
 				<exf4 filaOrigen="5" columnaOrigen="e" filaDestino="4" columnaDestino="f" hacer="true"> <!-- Accepted Line -->
-				
+					<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true"> <!-- King Knight's Gambit -->
+					</Cf3>
 				</exf4>
 				<Ac5 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- Declined Line -->
-					
+					<fxe5 filaOrigen="4" columnaOrigen="f" filaDestino="5" columnaDestino="e" hacer="false">
+						<Dh4 filaOrigen="8" columnaOrigen="d" filaDestino="4" columnaDestino="h" hacer="true">
+							<g3 filaOrigen="2" columnaOrigen="g" filaDestino="3" columnaDestino="g" hacer="false">
+								<Dxe4 filaOrigen="4" columnaOrigen="h" filaDestino="4" columnaDestino="e" hacer="true">
+								</Dxe4>
+							</g3>
+							<Re2 filaOrigen="1" columnaOrigen="e" filaDestino="2" columnaDestino="e" hacer="true">
+								<Dxe4 filaOrigen="4" columnaOrigen="h" filaDestino="4" columnaDestino="e" hacer="true">
+								</Dxe4>
+							</Re2>
+						</Dh4>
+					</fxe5>
 				</Ac5>
 			</f4>
 		</e5>
@@ -49,6 +88,26 @@
 		<d5 filaOrigen="7" columnaOrigen="d" filaDestino="5" columnaDestino="d" hacer="true"> <!-- Scandinavian Defense -->
 		</d5>
 		<c5 filaOrigen="7" columnaOrigen="c" filaDestino="5" columnaDestino="c" hacer="true"> <!-- Sicilian Defense -->
+			<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true">
+				<d6 filaOrigen="7" columnaOrigen="d" filaDestino="6" columnaDestino="d" hacer="true">
+					<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
+						<cxd4 filaOrigen="5" columnaOrigen="c" filaDestino="4" columnaDestino="d" hacer="true">
+							<Cxd4 filaOrigen="3" columnaOrigen="f" filaDestino="4" columnaDestino="d" hacer="true">
+								<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+									<Cc3 filaOrigen="1" columnaOrigen="b" filaDestino="3" columnaDestino="c" hacer="true">
+										<Cc6 filaOrigen="8" columnaOrigen="b" filaDestino="6" columnaDestino="c" hacer="true"> <!-- Classical Variation -->
+										</Cc6>
+										<g6 filaOrigen="7" columnaOrigen="g" filaDestino="6" columnaDestino="g" hacer="true"> <!-- Dragon Variation -->
+										</g6>
+										<a6 filaOrigen="7" columnaOrigen="a" filaDestino="6" columnaDestino="a" hacer="true"> <!-- Najdorf Variation -->
+										</a6>
+									</Cc3>
+								</Cf6>
+							</Cxd4>
+						</cxd4>
+					</d4>
+				</d6>
+			</Cf3>
 		</c5>
 	</e4>
 	<d4 filaOrigen="2" columnaOrigen="d" filaDestino="4" columnaDestino="d" hacer="true">
