@@ -183,17 +183,4 @@ public class TableroPantallaJuego extends Pane {
 		}
 		estadoDeJuego.actualizarEstado();
 	}
-	
-	@Deprecated
-	private void inicializarTablero(){
-		for(int i=0; i<8;i++){//hay que usar un enum o algo que diga ancho ya alto del tablero en vez de 8
-			for(int j=0; j<8;j++){
-				tablero[i][j]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
-				tablero[i][j].setTranslateX(CASILLERO_ANCHO*i);
-				tablero[i][j].setTranslateY(CASILLERO_ALTO*j);
-
-				this.getChildren().add(tablero[i][j]);
-			}
-		}
-	}
 }

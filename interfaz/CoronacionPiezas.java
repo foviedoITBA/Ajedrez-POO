@@ -2,7 +2,6 @@ package interfaz;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -12,27 +11,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logica.Color;
 import logica.NombrePieza;
-import logica.PiezaColor;
 
 public class CoronacionPiezas extends Pane {
-
-//	private final static int SEPARACION_INICIAL_X = 0;
-//	private final static int SEPARACION_INICIAL_Y = 0;
-//	private final static int SIZE_IMAGEN = 60;
-	
-	
-//	private NombrePieza[] piezas;
-//	private Color color;
-//	private int piezaElegida;
-	
-//	public CoronacionPiezas(Color color){
-//		this.color = color;
-//		piezas = new NombrePieza[4];
-//		piezas[0] = NombrePieza.TORRE;
-//		piezas[1] = NombrePieza.ALFIL;
-//		piezas[2] = NombrePieza.CABALLO;
-//		piezas[3] = NombrePieza.DAMA;
-//	}
 	
 	private static NombrePieza seleccionada;
 	

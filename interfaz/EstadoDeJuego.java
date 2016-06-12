@@ -45,9 +45,15 @@ public class EstadoDeJuego extends Pane {
 			this.getChildren().add(img);
 		}
 		if(juego.hayJaque()){
-			this.getChildren().remove(img);
-			img = new MyCanvas(new Image("/assets/jaque.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
-			this.getChildren().add(img);
+			if(juego.dameTurno() == Color.BLANCO){
+				this.getChildren().remove(img);
+				img = new MyCanvas(new Image("/assets/jaqueBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+				this.getChildren().add(img);
+			}else{
+				this.getChildren().remove(img);
+				img = new MyCanvas(new Image("/assets/jaqueNegras.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
+				this.getChildren().add(img);
+			}
 		}
 		if(juego.hayAhogado()){
 			this.getChildren().remove(img);

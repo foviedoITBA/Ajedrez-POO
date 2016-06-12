@@ -12,8 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import logica.Color;
-
 public class Inicio extends Pane {
 	public Inicio(){
 		super();

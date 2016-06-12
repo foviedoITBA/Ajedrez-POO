@@ -59,3 +59,13 @@
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
+
+.tablaJugadas{
+	-fx-background-image: url('jugadasPane.png');
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+.tablaJugadas .label{
+	-fx-font-size: 10pt;
+}
