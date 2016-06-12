@@ -27,7 +27,7 @@ public class Caballo extends Pieza{
 		movimientos.add(dosArribaUnoIzquierda);
 	}
 
-	public Caballo(Color color){
+	public Caballo(ColorPieza color){
 		super(color);
 	}
 	

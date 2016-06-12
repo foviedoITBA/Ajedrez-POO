@@ -31,7 +31,7 @@ public class Tablero {
 			throw new CasilleroVacioException();
 		}
 		NombrePieza elNombre = laPieza.dameNombre();
-		Color elColor = laPieza.dameColor();
+		ColorPieza elColor = laPieza.dameColor();
 		return new PiezaColor(elNombre, elColor);
 	}
 
@@ -88,15 +88,15 @@ public class Tablero {
 		laJugada.damePiezaMovida().sacarSeMovio();
 	}
 	
-	public boolean hayJaqueMate(Color perdedor) {
+	public boolean hayJaqueMate(ColorPieza perdedor) {
 		return (hayJaque(perdedor) && !hayMovimientosPosibles(perdedor));
 	}
 
-	public boolean hayAhogado(Color ahogado) {
+	public boolean hayAhogado(ColorPieza ahogado) {
 		return (!hayJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
-	public boolean hayJaque(Color jaqueado) {
+	public boolean hayJaque(ColorPieza jaqueado) {
 		PosicionTablero posRey = buscoAlRey(jaqueado);
 		boolean estaEnJaque = false;
 		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
@@ -124,7 +124,7 @@ public class Tablero {
 		return hayAlgo;
 	}
 
-	public void coronar(NombrePieza laPieza, Color elColor) {
+	public void coronar(NombrePieza laPieza, ColorPieza elColor) {
 		boolean encontrado = false;
 		for (int i = 0; i < SIZE_TABLERO && !encontrado; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !encontrado; j++) {
@@ -182,7 +182,7 @@ public class Tablero {
 
 	}*/
 
-	private boolean hayMovimientosPosibles(Color perdedor) {
+	private boolean hayMovimientosPosibles(ColorPieza perdedor) {
 		
 		// Busco todas las piezas del jugador y me fijo si se pueden mover
 		boolean hayJugadas = false;
@@ -217,30 +217,30 @@ public class Tablero {
 	
 	private void initTablero() { //coloco el tablero con las piezas en la posicion inicial
 
-		losCasilleros[0][0]=new Casillero(new Torre(Color.NEGRO));
-		losCasilleros[0][1]=new Casillero(new Caballo(Color.NEGRO));
-		losCasilleros[0][2]=new Casillero(new Alfil(Color.NEGRO));
-		losCasilleros[0][3]=new Casillero(new Dama(Color.NEGRO));
-		losCasilleros[0][4]=new Casillero(new Rey(Color.NEGRO));
-		losCasilleros[0][5]=new Casillero(new Alfil(Color.NEGRO));
-		losCasilleros[0][6]=new Casillero(new Caballo(Color.NEGRO));
-		losCasilleros[0][7]=new Casillero(new Torre(Color.NEGRO));
+		losCasilleros[0][0]=new Casillero(new Torre(ColorPieza.NEGRO));
+		losCasilleros[0][1]=new Casillero(new Caballo(ColorPieza.NEGRO));
+		losCasilleros[0][2]=new Casillero(new Alfil(ColorPieza.NEGRO));
+		losCasilleros[0][3]=new Casillero(new Dama(ColorPieza.NEGRO));
+		losCasilleros[0][4]=new Casillero(new Rey(ColorPieza.NEGRO));
+		losCasilleros[0][5]=new Casillero(new Alfil(ColorPieza.NEGRO));
+		losCasilleros[0][6]=new Casillero(new Caballo(ColorPieza.NEGRO));
+		losCasilleros[0][7]=new Casillero(new Torre(ColorPieza.NEGRO));
 
-		losCasilleros[7][0]=new Casillero(new Torre(Color.BLANCO));
-		losCasilleros[7][1]=new Casillero(new Caballo(Color.BLANCO));
-		losCasilleros[7][2]=new Casillero(new Alfil(Color.BLANCO));
-		losCasilleros[7][3]=new Casillero(new Dama(Color.BLANCO));
-		losCasilleros[7][4]=new Casillero(new Rey(Color.BLANCO));
-		losCasilleros[7][5]=new Casillero(new Alfil(Color.BLANCO));
-		losCasilleros[7][6]=new Casillero(new Caballo(Color.BLANCO));
-		losCasilleros[7][7]=new Casillero(new Torre(Color.BLANCO));
+		losCasilleros[7][0]=new Casillero(new Torre(ColorPieza.BLANCO));
+		losCasilleros[7][1]=new Casillero(new Caballo(ColorPieza.BLANCO));
+		losCasilleros[7][2]=new Casillero(new Alfil(ColorPieza.BLANCO));
+		losCasilleros[7][3]=new Casillero(new Dama(ColorPieza.BLANCO));
+		losCasilleros[7][4]=new Casillero(new Rey(ColorPieza.BLANCO));
+		losCasilleros[7][5]=new Casillero(new Alfil(ColorPieza.BLANCO));
+		losCasilleros[7][6]=new Casillero(new Caballo(ColorPieza.BLANCO));
+		losCasilleros[7][7]=new Casillero(new Torre(ColorPieza.BLANCO));
 
 		for(int i=1;i<SIZE_TABLERO-1;i++){
 			for(int j=0;j<SIZE_TABLERO;j++){
 				if(i==1){
-					losCasilleros[i][j]=new Casillero(new Peon(Color.NEGRO));
+					losCasilleros[i][j]=new Casillero(new Peon(ColorPieza.NEGRO));
 				}else if(i==SIZE_TABLERO-2){
-					losCasilleros[i][j]=new Casillero(new Peon(Color.BLANCO));
+					losCasilleros[i][j]=new Casillero(new Peon(ColorPieza.BLANCO));
 				}else{
 					losCasilleros[i][j]=new Casillero();
 				}
@@ -346,7 +346,7 @@ public class Tablero {
 		return posX>=0 && posY>=0 && posX<SIZE_TABLERO && posY<SIZE_TABLERO;
 	}
 
-	private PosicionTablero buscoAlRey(Color colorDelRey) {
+	private PosicionTablero buscoAlRey(ColorPieza colorDelRey) {
 		PosicionTablero posRey = null;
 		boolean encontreAlRey = false;
 		for (int i = 0; i < SIZE_TABLERO && !encontreAlRey; i++) {
@@ -381,7 +381,7 @@ public class Tablero {
 						System.out.print("R");
 					else
 						System.out.print("P");
-					if(losCasilleros[i][j].getPieza().dameColor().equals(Color.BLANCO)){
+					if(losCasilleros[i][j].getPieza().dameColor().equals(ColorPieza.BLANCO)){
 						System.out.print("(B)\t");
 					}else{
 						System.out.print("(N)\t");

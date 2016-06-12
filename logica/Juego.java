@@ -27,8 +27,8 @@ public class Juego {
 		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
-		jugadorBlanco=new Jugador(Color.BLANCO);
-		jugadorNegro=new Jugador(Color.NEGRO);
+		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
+		jugadorNegro=new Jugador(ColorPieza.NEGRO);
 		jugadorTurno = jugadorBlanco;
 		hayCoronacionPendiente = false;
 		/**TEST**/
@@ -82,7 +82,7 @@ public class Juego {
 		}
 	}
 		
-	public Color dameTurno() {
+	public ColorPieza dameTurno() {
 		return jugadorTurno.dameColor();
 	}
 	

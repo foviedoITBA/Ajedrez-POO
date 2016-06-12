@@ -2,13 +2,13 @@ package logica;
 
 public class Jugador {
 
-	private Color color;
+	private ColorPieza color;
 	
-	public Jugador(Color color){
+	public Jugador(ColorPieza color){
 		this.color=color;
 	}
 	
-	public Color dameColor() {
+	public ColorPieza dameColor() {
 		return color;
 	}
 

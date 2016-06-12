@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import logica.Color;
+import logica.ColorPieza;
 
 public class OpcionesUnJugador extends Pane{
 	
@@ -22,7 +22,7 @@ public class OpcionesUnJugador extends Pane{
 	Button iniciarJuego;
 	RadioButton blanca,negra;
 
-	private Color color;
+	private ColorPieza color;
 	private boolean hayTiempo;
 	
 	public OpcionesUnJugador(){
@@ -77,9 +77,9 @@ public class OpcionesUnJugador extends Pane{
 		iniciarJuego.setOnAction(e -> {
 			
 			if(blanca.isSelected()){
-				color=Color.BLANCO;
+				color=ColorPieza.BLANCO;
 			}else{
-				color=Color.NEGRO;
+				color=ColorPieza.NEGRO;
 			}
 			
 			hayTiempo = tiempo.isSelected();

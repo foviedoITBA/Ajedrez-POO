@@ -27,7 +27,7 @@ public class Dama extends Pieza {
 		movimientos.add(derecha);
 	}
 
-	public Dama(Color color){
+	public Dama(ColorPieza color){
 		super(color);
 	}
 	

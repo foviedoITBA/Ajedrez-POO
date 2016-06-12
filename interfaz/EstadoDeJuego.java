@@ -3,7 +3,7 @@ package interfaz;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import logica.Color;
+import logica.ColorPieza;
 import logica.Juego;
 
 public class EstadoDeJuego extends Pane {
@@ -30,7 +30,7 @@ public class EstadoDeJuego extends Pane {
 	
 	public void actualizarEstado(){
 		
-		if(juego.dameTurno() == Color.BLANCO){
+		if(juego.dameTurno() == ColorPieza.BLANCO){
 			this.getChildren().removeAll(img);
 			img = new MyCanvas(new Image("/assets/juegaBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 			this.getChildren().addAll(img);
@@ -45,7 +45,7 @@ public class EstadoDeJuego extends Pane {
 			this.getChildren().add(img);
 		}
 		if(juego.hayJaque()){
-			if(juego.dameTurno() == Color.BLANCO){
+			if(juego.dameTurno() == ColorPieza.BLANCO){
 				this.getChildren().remove(img);
 				img = new MyCanvas(new Image("/assets/jaqueBlancas.png"),0,0,IMAGEN_ANCHO,IMAGEN_ALTO);
 				this.getChildren().add(img);

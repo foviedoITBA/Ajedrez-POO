@@ -4,18 +4,18 @@ import java.util.List;
 
 public abstract class Pieza {
 		
-	private Color elColor;
+	private ColorPieza elColor;
 	private int cantMov;
 	/* Para poder enrocar, hace falta que no se hayan movido ni el rey ni la torre que enroca.
 	 * Para que el peón pueda avanzar dos casilleros, es necesario que no se haya movido.
 	 */
 
-	public Pieza(Color unColor) {
+	public Pieza(ColorPieza unColor) {
 		elColor = unColor;
 		cantMov = 0;
 	}
 	
-	public Color dameColor() {
+	public ColorPieza dameColor() {
 		return elColor;
 	}
 	

@@ -1,7 +1,7 @@
 package ia;
 
 import logica.Juego;
-import logica.Color;
+import logica.ColorPieza;
 import logica.Jugada;
 import logica.PosicionAjedrez;
 import logica.PiezaColor;
@@ -29,7 +29,7 @@ import java.util.Random;
 public class Inteligencia {
 
 	private Juego elJuego;
-	private Color elColor;
+	private ColorPieza elColor;
 	private String jugadasXML;
 	private SAXBuilder jdomBuilder;
 	private Document jugadasDocument;
@@ -39,7 +39,7 @@ public class Inteligencia {
 	private int jugadasHechas;
 	private int jugadasHechasSinPensar;
 
-	public Inteligencia(Juego elJuego, Color queColorEs) throws ImposibleCargarJugadasException {
+	public Inteligencia(Juego elJuego, ColorPieza queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
 		jugadasXML = "src/ia/Jugadas.xml";

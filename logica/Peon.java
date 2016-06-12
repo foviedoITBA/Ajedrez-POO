@@ -13,10 +13,10 @@ public class Peon extends Pieza {
 	private Movimiento adelante;
 	private int avance; // Cabia según si es blanco o negro
 	
-	public Peon(Color color) {
+	public Peon(ColorPieza color) {
 		super(color);
 		movimientos = new ArrayList<>(4);
-		if(color == Color.BLANCO ) {
+		if(color == ColorPieza.BLANCO ) {
 			avance = -1;
 		} else {//si es negro
 			avance = 1;
@@ -57,6 +57,6 @@ public class Peon extends Pieza {
 
 	@Override
 	public boolean puedoCoronar(int fila) {
-		return ((dameColor() == Color.BLANCO && fila == 8) || (dameColor() == Color.NEGRO && fila == 1));
+		return ((dameColor() == ColorPieza.BLANCO && fila == 8) || (dameColor() == ColorPieza.NEGRO && fila == 1));
 	}
 }

@@ -19,7 +19,7 @@ public class Alfil extends Pieza {
 		movimientos.add(abajoIzquierda);
 	}
 		
-	public Alfil(Color color){
+	public Alfil(ColorPieza color){
 		super(color);
 	}
 

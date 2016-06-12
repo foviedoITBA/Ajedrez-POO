@@ -12,7 +12,7 @@ public class Test extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setScene(new Scene(new TablaJugadas()));
+		primaryStage.setScene(new Scene(new TableroPantallaJuego(null, null, null, null)));
 		primaryStage.setResizable(false);
 		primaryStage.show();
 		

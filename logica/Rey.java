@@ -28,7 +28,7 @@ public class Rey extends Pieza {
 		// Faltaría implementar la posibilidad de enroque
 	}
 	
-	public Rey(Color color){
+	public Rey(ColorPieza color){
 		super(color);
 	}
 	

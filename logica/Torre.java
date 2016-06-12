@@ -20,7 +20,7 @@ public class Torre extends Pieza{
 		// Faltaría implementar la posibilidad de enroque
 	}
 
-	public Torre(Color color){
+	public Torre(ColorPieza color){
 		super(color);
 	}
 

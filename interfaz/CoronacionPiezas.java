@@ -9,14 +9,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import logica.Color;
+import logica.ColorPieza;
 import logica.NombrePieza;
 
 public class CoronacionPiezas extends Pane {
 	
 	private static NombrePieza seleccionada;
 	
-	public static NombrePieza display(Color color){
+	public static NombrePieza display(ColorPieza color){
 		
 		Stage stage= new Stage();
 		
@@ -29,7 +29,7 @@ public class CoronacionPiezas extends Pane {
 		Button caballo = new MyButton("",0,0,90,90);
 		Button dama = new MyButton("",0,0,90,90);
 		
-		if(color == Color.BLANCO){
+		if(color == ColorPieza.BLANCO){
 			torre.getStyleClass().add("torreBlanca");
 			alfil.getStyleClass().add("alfilBlanca");
 			caballo.getStyleClass().add("caballoBlanca");

@@ -2,9 +2,9 @@ package logica;
 
 public class PiezaColor {
 	private NombrePieza elNombre;
-	private Color elColor;
+	private ColorPieza elColor;
 	
-	public PiezaColor(NombrePieza nombre, Color color){
+	public PiezaColor(NombrePieza nombre, ColorPieza color){
 		elNombre = nombre;
 		elColor = color;
 	}
@@ -13,7 +13,7 @@ public class PiezaColor {
 		return elNombre;
 	}
 	
-	public Color dameColor(){
+	public ColorPieza dameColor(){
 		return elColor;
 	}
 

@@ -7,14 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import logica.Color;
+import logica.ColorPieza;
 import logica.Juego;
 
 public class PantallaJuego extends Pane{
 	TableroPantallaJuego tablero;
 	TablaJugadas tablaJugadas;
 	EstadoDeJuego estadoDeJuego;
-	public PantallaJuego(int cantJugadores, Color color, boolean hayTiempo){
+	public PantallaJuego(int cantJugadores, ColorPieza color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();

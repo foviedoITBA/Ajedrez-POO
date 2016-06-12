@@ -5,9 +5,11 @@ import ia.Inteligencia;
 import java.util.Set;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import logica.Color;
+import javafx.scene.paint.Color;
+import logica.ColorPieza;
 import logica.Juego;
 import logica.Jugada;
 import logica.NombrePieza;
@@ -27,7 +29,7 @@ public class TableroPantallaJuego extends Pane {
 	
 	
 	private Canvas[][] tablero;
-	private Color turno,miColor;
+	private ColorPieza turno,miColor;
 	private PosicionAjedrez seleccionado;
 	private Set<PosicionAjedrez> movimientosPosibles;
 	private Juego elJuego;
@@ -36,7 +38,7 @@ public class TableroPantallaJuego extends Pane {
 	private TablaJugadas tabla;
 	private EstadoDeJuego estadoDeJuego;
 	
-	public TableroPantallaJuego(Juego elJuego, EstadoDeJuego estadoDeJuego, TablaJugadas tabla,Color color){
+	public TableroPantallaJuego(Juego elJuego, EstadoDeJuego estadoDeJuego, TablaJugadas tabla,ColorPieza color){
 		super();
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
@@ -89,12 +91,6 @@ public class TableroPantallaJuego extends Pane {
 		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
 		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
 		tablero[col][fila].setTranslateY(CASILLERO_ALTO*fila);
-		//tablero[col][fila].getStyleClass().add("marked");
-//		tablero[col][fila].setStyle("-fx-effect: innershadow(gaussian, #039ed3, 10, 1.0, 0, 0);");
-//		tablero[col][fila].fillRect(0,0,100,20);
-//		tablero[col][fila].setFill(Color.RED);
-//		tablero[col][fila].fillRect(1,1,98,18);
-//		tablero[col][fila].setStyle("-fx-border-width: 3px;-fx-border-style: solid;");
 
 		this.getChildren().add(tablero[col][fila]);
 		
@@ -141,7 +137,7 @@ public class TableroPantallaJuego extends Pane {
 			System.out.println("se selecciono un casillero "+seleccionado);//TESTTTT
 			movimientosPosibles=elJuego.dameMovimientos(seleccionado);
 			System.out.println(movimientosPosibles);//borrarrrrrr
-			//pintar casilleros
+			pintarCasilleros(movimientosPosibles);//pintar casilleros
 		}else{
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
 				if(movimientosPosibles.contains(clickeado)){
@@ -171,6 +167,8 @@ public class TableroPantallaJuego extends Pane {
 			}else{
 				seleccionado=clickeado;
 				movimientosPosibles=elJuego.dameMovimientos(seleccionado);
+				imprimirTablero();
+				pintarCasilleros(movimientosPosibles);
 				//pintar casilleros
 			}
 		}
@@ -187,5 +185,19 @@ public class TableroPantallaJuego extends Pane {
 			}
 		}
 		estadoDeJuego.actualizarEstado();
+	}
+	
+	private void pintarCasilleros(Set<PosicionAjedrez> movimientosPosibles){
+		for(PosicionAjedrez pos: movimientosPosibles){
+			pintarCasilleros(transformar(pos));
+		}
+	}
+	
+	private void pintarCasilleros(PosicionTablero pos){
+		GraphicsContext gc;
+		gc=tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
+		 gc.setStroke(Color.BLACK);
+		 gc.setLineWidth(8);
+		 gc.strokeRect(0,0,CASILLERO_ANCHO,CASILLERO_ALTO);
 	}
 }

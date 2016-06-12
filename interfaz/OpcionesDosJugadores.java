@@ -10,7 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import logica.Color;
+import logica.ColorPieza;
 
 public class OpcionesDosJugadores extends Pane{
 	Label titulo;
@@ -47,7 +47,7 @@ public class OpcionesDosJugadores extends Pane{
 			
 			hayTiempo = tiempo.isSelected();
 			
-			Scene escena = new Scene(new PantallaJuego(2,Color.BLANCO,hayTiempo));
+			Scene escena = new Scene(new PantallaJuego(2,ColorPieza.BLANCO,hayTiempo));
 			escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 			((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(escena);
 		});

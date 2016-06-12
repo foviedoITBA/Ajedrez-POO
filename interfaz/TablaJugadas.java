@@ -63,9 +63,9 @@ public class TablaJugadas extends Pane{
 				comidas[i]= new MyCanvas(imagenes.dameImagen(jugada.damePiezaColorComida()),100+desfasajeX,30*desfasajeY + 5,18,18);
 				this.getChildren().add(comidas[i]);
 			}
-			number[i]=new MyLabel((cantJugadas-(i))+".",10+desfasajeX,30*desfasajeY + 5,20,20);
+			//number[i]=new MyLabel((cantJugadas-i)+".",10+desfasajeX,30*desfasajeY + 5,20,20);
 			label[i]=new MyLabel(jugada.damePosicionOrigen()+" - "+jugada.damePosicionDestino(),50+desfasajeX,30*desfasajeY + 5,80,20);
-			this.getChildren().addAll(number[i],label[i],canvas[i]);
+			this.getChildren().addAll(/*number[i],*/label[i],canvas[i]);
 		}
 	}
 }

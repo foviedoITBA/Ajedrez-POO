@@ -1,5 +1,5 @@
 package logica;
 
-public enum Color {
+public enum ColorPieza {
 	BLANCO, NEGRO;
 }
