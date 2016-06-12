@@ -112,7 +112,7 @@ public class Tablero {
 		return estaEnJaque;
 	}
 
-	public boolean hayAlgoParaCoronar(Color coronador) {
+	public boolean hayAlgoParaCoronar() {
 		boolean hayAlgo = false;
 		for (int i = 0; i < SIZE_TABLERO && !hayAlgo; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !hayAlgo; j++) {
@@ -127,8 +127,8 @@ public class Tablero {
 	public void coronar(NombrePieza laPieza, Color elColor) {
 		boolean encontrado = false;
 		for (int i = 0; i < SIZE_TABLERO && !encontrado; i++) {
-			for (int j = 0; i < SIZE_TABLERO && !encontrado; j++) {
-				if (losCasilleros[i][j].getPieza().puedoCoronar(8 - i)) {
+			for (int j = 0; j < SIZE_TABLERO && !encontrado; j++) {
+				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().puedoCoronar(8 - i)) {
 					Pieza nuevaPieza = null;
 					switch(laPieza)
 					{

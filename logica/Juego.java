@@ -63,7 +63,7 @@ public class Juego {
 		}
 		if(elTablero.esMovimientoPosible(posInicial,posFinal)){
 			Jugada laJugada = elTablero.moverPieza(posInicial, posFinal);
-			hayCoronacionPendiente = elTablero.hayAlgoParaCoronar(jugadorTurno.dameColor());
+			hayCoronacionPendiente = elTablero.hayAlgoParaCoronar();
 			registro.push(laJugada);
 			if (!hayCoronacionPendiente) {
 				cambiarTurno();
