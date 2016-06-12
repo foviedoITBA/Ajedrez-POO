@@ -49,7 +49,6 @@ public class TableroPantallaJuego extends Pane {
 		imagenes=new PiezaImagen();
 		this.tabla=tabla;
 		this.estadoDeJuego = estadoDeJuego;
-		//inicializarTablero();
 		imprimirTablero();
 		
 		
@@ -90,6 +89,12 @@ public class TableroPantallaJuego extends Pane {
 		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
 		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
 		tablero[col][fila].setTranslateY(CASILLERO_ALTO*fila);
+		//tablero[col][fila].getStyleClass().add("marked");
+//		tablero[col][fila].setStyle("-fx-effect: innershadow(gaussian, #039ed3, 10, 1.0, 0, 0);");
+//		tablero[col][fila].fillRect(0,0,100,20);
+//		tablero[col][fila].setFill(Color.RED);
+//		tablero[col][fila].fillRect(1,1,98,18);
+//		tablero[col][fila].setStyle("-fx-border-width: 3px;-fx-border-style: solid;");
 
 		this.getChildren().add(tablero[col][fila]);
 		

@@ -54,10 +54,14 @@
 }
 
 #tablero{
-	-fx-background-image: url('tablero.jpg');
+	/*-fx-background-image: url('tablero.jpg');*/
     -fx-background-size:contain;
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
+}
+.marked{
+	/*-fx-border-width: 3px;*/
+	
 }
 
 .tablaJugadas{

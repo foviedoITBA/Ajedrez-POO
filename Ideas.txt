@@ -9,6 +9,4 @@ Setear que jugador empieza la partida
 Tests
 
 
-investigar como jugar por tiempo
-retrasar la jugada de la ia
 hacer constructores de juego para cada caso
