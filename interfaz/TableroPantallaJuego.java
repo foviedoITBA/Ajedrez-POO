@@ -73,19 +73,20 @@ public class TableroPantallaJuego extends Pane {
 		elJuego.revertir();
 		imprimirTablero();
 	}
-	
+	@Deprecated
 	private void  dibujarImagen(Image img, int fila, int col){
 		tablero[col][fila].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
 	}
 	
 	private void  dibujarImagen(Image img,PosicionTablero pos){
-		dibujarImagen(img,pos.getFila(),pos.getColumna());
+		tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);
 	}
 	
 	private void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
 		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));
 	}
 	
+	@Deprecated
 	private void borrarImagen(int fila, int col){
 		this.getChildren().remove(tablero[col][fila]);
 		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
@@ -97,7 +98,15 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void borrarImagen(PosicionTablero pos){
-		borrarImagen(pos.getFila(),pos.getColumna());
+		int fila= pos.getFila();
+		int col= pos.getColumna();
+		
+		this.getChildren().remove(tablero[col][fila]);
+		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
+		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
+		tablero[col][fila].setTranslateY(CASILLERO_ALTO*fila);
+
+		this.getChildren().add(tablero[col][fila]);
 	}
 
 	private void borrarPieza(PosicionAjedrez pos){
@@ -105,11 +114,11 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void posicionTablero(double x, double y){
-		System.out.println("");
-		System.out.println("x:"+x+" y: "+y);
+		System.out.println("");//TEST bborrarrr
+		System.out.println("x:"+x+" y: "+y);//Test borrarrr
 		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO);
 		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
-		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);
+		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);//Test borrarrr
 		clickTablero(transformar(fila, columna));
 	}
 	
@@ -196,8 +205,8 @@ public class TableroPantallaJuego extends Pane {
 	private void pintarCasilleros(PosicionTablero pos){
 		GraphicsContext gc;
 		gc=tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
-		 gc.setStroke(Color.BLACK);
-		 gc.setLineWidth(8);
-		 gc.strokeRect(0,0,CASILLERO_ANCHO,CASILLERO_ALTO);
+		gc.setStroke(Color.BLACK);
+		gc.setLineWidth(8);
+		gc.strokeRect(0,0,CASILLERO_ANCHO,CASILLERO_ALTO);
 	}
 }
