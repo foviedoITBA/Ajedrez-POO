@@ -1,14 +1,11 @@
 package logica;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rey extends Pieza {
 
-	private static List<Movimiento> movimientos;
-
-	static {
-		movimientos = new ArrayList<>(8);
+	public Rey(ColorPieza color){
+		super(color);
+		nombre = NombrePieza.REY;
 		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, 1);
 		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, 1);
 		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, 1);
@@ -28,20 +25,6 @@ public class Rey extends Pieza {
 		// Faltaría implementar la posibilidad de enroque
 	}
 	
-	public Rey(ColorPieza color){
-		super(color);
-	}
-	
-	@Override
-	public List<Movimiento> dameMovimientos() {
-		return movimientos;
-	}
-	
-	@Override
-	public NombrePieza dameNombre() {
-		return NombrePieza.REY;
-	}
-
 	@Override
 	public boolean puedoCoronar(int fila) {
 		return false;
