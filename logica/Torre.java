@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Torre extends Pieza{
-
-	public Torre(ColorPieza color){
-		super(color);
-		nombre = NombrePieza.TORRE;
+	
+	private static List<Movimiento> movimientos;
+	
+	static {
+		movimientos = new ArrayList<>(4);
 		Movimiento arriba = new Movimiento(0, 1, true, true, false, -1);
 		Movimiento abajo = new Movimiento(0, -1, true, true, false, -1);
 		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, -1);
@@ -16,7 +19,21 @@ public class Torre extends Pieza{
 		movimientos.add(derecha);
 		// Faltaría implementar la posibilidad de enroque
 	}
+
+	public Torre(ColorPieza color){
+		super(color);
+	}
+
+	@Override
+	public List<Movimiento> dameMovimientos() {
+		return movimientos;
+	}
 	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.TORRE;
+	}
+
 	@Override
 	public boolean puedoCoronar(int fila) {
 		return false;

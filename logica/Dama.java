@@ -1,11 +1,14 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class Dama extends Pieza {	
+public class Dama extends Pieza {
+
+	private static List<Movimiento> movimientos;
 	
-	public Dama(ColorPieza color){
-		super(color);
-		nombre = NombrePieza.DAMA;
+	static {
+		movimientos = new ArrayList<>(8);
 		Movimiento arribaDerecha = new Movimiento(1, 1, true, true, false, -1);
 		Movimiento abajoDerecha = new Movimiento(1, -1, true, true, false, -1);
 		Movimiento arribaIzquierda = new Movimiento(-1, 1, true, true, false, -1);
@@ -23,7 +26,20 @@ public class Dama extends Pieza {
 		movimientos.add(izquierda);
 		movimientos.add(derecha);
 	}
+
+	public Dama(ColorPieza color){
+		super(color);
+	}
 	
+	@Override
+	public List<Movimiento> dameMovimientos() {
+		return movimientos;
+	}
+	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.DAMA;
+	}
 
 	@Override
 	public boolean puedoCoronar(int fila) {
