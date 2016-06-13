@@ -15,7 +15,7 @@ public class Peon extends Pieza {
 	
 	public Peon(ColorPieza color) {
 		super(color);
-		movimientos = new ArrayList<>(4);
+		movimientos = new ArrayList<>();
 		if(color == ColorPieza.BLANCO ) {
 			avance = -1;
 		} else {//si es negro

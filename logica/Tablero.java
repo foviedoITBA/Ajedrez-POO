@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import excepcion.CasilleroVacioException;
 import excepcion.CoronacionInvalidaException;
-import excepcion.EnroqueInvalidoException;
+//import excepcion.EnroqueInvalidoException;
 
 public class Tablero {
 
@@ -181,15 +181,15 @@ public class Tablero {
 		return true;
 	}
 
-	@Deprecated
-	public void enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
-		throw new EnroqueInvalidoException();
-	}
+//	@Deprecated
+//	public void enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
+//		throw new EnroqueInvalidoException();
+//	}
 
-	@Deprecated
-	public void enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
-		throw new EnroqueInvalidoException();
-	}
+//	@Deprecated
+//	public void enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
+//		throw new EnroqueInvalidoException();
+//	}
 
 	/*private boolean elReyEstaEnJaque(Color perdedor) {
 		

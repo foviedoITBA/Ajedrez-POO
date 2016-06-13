@@ -8,7 +8,7 @@ public class Torre extends Pieza{
 	private static List<Movimiento> movimientos;
 	
 	static {
-		movimientos = new ArrayList<>(4);
+		movimientos = new ArrayList<>();
 		Movimiento arriba = new Movimiento(0, 1, true, true, false, -1);
 		Movimiento abajo = new Movimiento(0, -1, true, true, false, -1);
 		Movimiento izquierda = new Movimiento(-1, 0, true, true, false, -1);

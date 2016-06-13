@@ -10,3 +10,6 @@ Tests
 
 
 hacer constructores de juego para cada caso
+
+notas de tests
+la clase pieza en el contador de movimientos puede ser negativo??

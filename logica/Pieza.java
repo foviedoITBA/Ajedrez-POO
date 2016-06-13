@@ -28,7 +28,8 @@ public abstract class Pieza {
 	}
 
 	public void sacarSeMovio() {
-		cantMov--;
+		if(cantMov > 0)
+			cantMov--;
 	}
 
 	public abstract boolean puedoCoronar(int fila);
