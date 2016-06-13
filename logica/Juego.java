@@ -7,6 +7,7 @@ import excepcion.CoronacionPendienteException;
 import excepcion.CoronacionInvalidaException;
 import excepcion.JugadaInvalidaException;
 import excepcion.EmptyRegisterException;
+import excepcion.EnroqueInvalidoException;
 
 import java.util.Set;
 
@@ -202,6 +203,22 @@ public class Juego {
 		if (!jaqueMate) {
 			ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
 		}
+	}
+
+	public boolean sePuedeEnrocarCorto() {
+		return elTablero.puedeEnrocarCorto(jugadorTurno.dameColor());
+	}
+
+	public boolean sePuedeEnrocarLargo() {
+		return elTablero.puedeEnrocarLargo(jugadorTurno.dameColor());
+	}
+
+	public void enrocarCorto() throws EnroqueInvalidoException {
+		elTablero.enrocarCorto(jugadorTurno.dameColor());
+	}
+
+	public void enrocarLargo() throws EnroqueInvalidoException {
+		elTablero.enrocarLargo(jugadorTurno.dameColor());
 	}
 
 	private void cambiarTurno() {

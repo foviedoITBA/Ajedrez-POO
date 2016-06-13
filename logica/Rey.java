@@ -46,4 +46,9 @@ public class Rey extends Pieza {
 	public boolean puedoCoronar(int fila) {
 		return false;
 	}
+
+	@Override
+	public boolean puedoEnrocar() {
+		return !dameSeMovio();
+	}
 }

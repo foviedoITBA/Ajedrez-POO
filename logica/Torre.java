@@ -37,5 +37,10 @@ public class Torre extends Pieza{
 	@Override
 	public boolean puedoCoronar(int fila) {
 		return false;
-	}	
+	}
+
+	@Override
+	public boolean puedoEnrocar() {
+		return !dameSeMovio();
+	}
 }

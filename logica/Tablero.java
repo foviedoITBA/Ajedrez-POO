@@ -7,6 +7,7 @@ import java.util.Stack;
 
 import excepcion.CasilleroVacioException;
 import excepcion.CoronacionInvalidaException;
+import excepcion.EnroqueInvalidoException;
 
 public class Tablero {
 
@@ -154,6 +155,40 @@ public class Tablero {
 		}
 		if (!encontrado)
 			throw new CoronacionInvalidaException();
+	}
+
+	public boolean puedeEnrocarCorto(ColorPieza elColor) {
+		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
+		int colTorre = 7;
+		PosicionTablero posDelRey = buscoAlRey(elColor);
+		if (!losCasilleros[posDelRey.getX()][posDelRey.getY()].getPieza().puedoEnrocar())
+			return false;
+		if (losCasilleros[fila][colTorre].isEmpty() || !losCasilleros[fila][colTorre].getPieza().puedoEnrocar())
+			return false;
+		// Flata el resto
+		return true;
+	}
+
+	public boolean puedeEnrocarLargo(ColorPieza elColor) {
+		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
+		int colTorre = 0;
+		PosicionTablero posDelRey = buscoAlRey(elColor);
+		if (!losCasilleros[posDelRey.getX()][posDelRey.getY()].getPieza().puedoEnrocar())
+			return false;
+		if (losCasilleros[fila][colTorre].isEmpty() || !losCasilleros[fila][colTorre].getPieza().puedoEnrocar())
+			return false;		
+		// Falta el resto
+		return true;
+	}
+
+	@Deprecated
+	public void enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
+		throw new EnroqueInvalidoException();
+	}
+
+	@Deprecated
+	public void enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
+		throw new EnroqueInvalidoException();
 	}
 
 	/*private boolean elReyEstaEnJaque(Color perdedor) {

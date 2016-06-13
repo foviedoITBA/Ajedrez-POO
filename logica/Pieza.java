@@ -32,6 +32,7 @@ public abstract class Pieza {
 	}
 
 	public abstract boolean puedoCoronar(int fila);
+	public abstract boolean puedoEnrocar();
 	public abstract NombrePieza dameNombre();
 	public abstract List<Movimiento> dameMovimientos();
 	

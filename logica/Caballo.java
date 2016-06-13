@@ -45,4 +45,9 @@ public class Caballo extends Pieza{
 	public boolean puedoCoronar(int fila) {
 		return false;
 	}
+
+	@Override
+	public boolean puedoEnrocar() {
+		return false;
+	}
 }

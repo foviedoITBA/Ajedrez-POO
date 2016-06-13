@@ -59,4 +59,9 @@ public class Peon extends Pieza {
 	public boolean puedoCoronar(int fila) {
 		return ((dameColor() == ColorPieza.BLANCO && fila == 8) || (dameColor() == ColorPieza.NEGRO && fila == 1));
 	}
+
+	@Override
+	public boolean puedoEnrocar() {
+		return false;
+	}
 }
