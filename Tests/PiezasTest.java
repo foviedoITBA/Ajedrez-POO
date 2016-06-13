@@ -53,6 +53,19 @@ public class PiezasTest {
 	}
 	
 	@Test
+	public void testCaballo(){
+		Pieza caballo = new Caballo(ColorPieza.NEGRO);
+		caballo.ponerSeMovio();
+		caballo.ponerSeMovio();
+		for(Movimiento mov: caballo.dameMovimientos()){
+			assertEquals(mov.cantidadDeVeces(),1);
+			assertEquals(mov.esComiendo(),true);
+			assertEquals(mov.esSaltando(),true);
+		}
+		
+	}
+	
+	@Test
 	public void testAfil() throws CloneNotSupportedException{
 		Pieza pieza = new Alfil(ColorPieza.BLANCO);
 		assertEquals(pieza.dameNombre(),NombrePieza.ALFIL);
