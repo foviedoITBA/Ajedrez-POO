@@ -26,6 +26,10 @@ public class Torre extends Pieza{
 
 	@Override
 	public List<Movimiento> dameMovimientos() {
+		List<Movimiento> movimientosCopia = new ArrayList<>();
+		for (Movimiento unMovimiento: movimientos) {
+			movimientosCopia.add(new Movimiento(unMovimiento));
+		}
 		return movimientos;
 	}
 	

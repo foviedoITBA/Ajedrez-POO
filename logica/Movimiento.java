@@ -22,6 +22,15 @@ public class Movimiento {
 		this.saltando = saltando;
 		this.cantidad = cantidad;
 	}
+
+	public Movimiento(Movimiento otroMovimiento) {
+		this.movX = otroMovimiento.movX;
+		this.movY = otroMovimiento.movY;
+		this.comiendo = otroMovimiento.comiendo;
+		this.sinComer = otroMovimiento.sinComer;
+		this.saltando = otroMovimiento.saltando;
+		this.cantidad = otroMovimiento.cantidad;
+	}
 	
 	public int dameMovX(){
 		return movX;
