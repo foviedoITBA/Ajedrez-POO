@@ -1,5 +1,7 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class Peon extends Pieza {
 
@@ -7,12 +9,13 @@ public class Peon extends Pieza {
 	 * porque el peón se mueve distinto según si ya se movió o no
 	 * y según el color, entonces es una característica de cada peón.
 	 */
+	private List<Movimiento> movimientos;
 	private Movimiento adelante;
 	private int avance; // Cabia según si es blanco o negro
 	
 	public Peon(ColorPieza color) {
 		super(color);
-		nombre = NombrePieza.PEON;
+		movimientos = new ArrayList<>(4);
 		if(color == ColorPieza.BLANCO ) {
 			avance = -1;
 		} else {//si es negro
@@ -30,8 +33,7 @@ public class Peon extends Pieza {
 	public void ponerSeMovio() {
 		super.ponerSeMovio();
 		movimientos.remove(adelante);
-		adelante = new Movimiento(avance, 0, false, true, false, 1);
-		movimientos.add(adelante);
+		movimientos.add( new Movimiento(avance, 0, false, true, false, 1));
 	}
 	
 	@Override
@@ -39,9 +41,18 @@ public class Peon extends Pieza {
 		super.sacarSeMovio();
 		if (!dameSeMovio()) {
 			movimientos.remove(adelante);
-			adelante = new Movimiento(avance, 0, false, true, false, 2);
-			movimientos.add(adelante);
+			movimientos.add( new Movimiento(avance, 0, false, true, false, 2));
 		}
+	}
+	
+	@Override
+	public NombrePieza dameNombre() {
+		return NombrePieza.PEON;
+	}
+	
+	@Override
+	public List<Movimiento> dameMovimientos() {
+		return movimientos;
 	}
 
 	@Override

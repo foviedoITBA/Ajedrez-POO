@@ -1,6 +1,6 @@
 package logica;
 
-public class Movimiento implements Cloneable{
+public class Movimiento {
 
 	private int movX, movY;
 	/* comiendo: indica si se puede mover capturando en esa dirección
@@ -59,10 +59,6 @@ public class Movimiento implements Cloneable{
 		if (this.movX == ((Movimiento)otroObjeto).movX && this.movY == ((Movimiento)otroObjeto).movY && this.comiendo == ((Movimiento)otroObjeto).comiendo && this.sinComer == ((Movimiento)otroObjeto).sinComer && this.saltando == ((Movimiento)otroObjeto).saltando && this.cantidad == ((Movimiento)otroObjeto).cantidad)
 			return true;
 		return false;
-	}
-	
-	public Object clone() throws CloneNotSupportedException{
-		return super.clone();
 	}
 
 }
