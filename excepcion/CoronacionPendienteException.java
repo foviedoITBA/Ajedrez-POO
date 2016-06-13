@@ -1,6 +1,6 @@
 package excepcion;
 
-public class CoronacionPendienteException extends RuntimeException {
+public class CoronacionPendienteException extends CoronacionException {
 	public CoronacionPendienteException(){
 		super();
 	}
