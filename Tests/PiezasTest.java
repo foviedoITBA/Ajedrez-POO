@@ -92,6 +92,8 @@ public class PiezasTest {
 		Pieza rey = new Rey(ColorPieza.BLANCO);
 		assertEquals(rey.dameNombre(),NombrePieza.REY);
 		assertEquals(rey.dameMovimientos().size(),8);
+		assertEquals(rey.puedoEnrocar(),true);
+		rey.ponerSeMovio();
 		assertEquals(rey.puedoEnrocar(),false);
 		assertEquals(rey.puedoCoronar(0),false);
 		rey.dameMovimientos().clear();

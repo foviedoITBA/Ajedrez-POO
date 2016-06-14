@@ -11,11 +11,11 @@ public class Peon extends Pieza {
 	 */
 	private List<Movimiento> movimientos;
 	private Movimiento adelante;
-	private int avance; // Cabia según si es blanco o negro
+	private int avance; // Cambia según si es blanco o negro
 	
 	public Peon(ColorPieza color) {
 		super(color);
-		movimientos = new ArrayList<>(4);
+		movimientos = new ArrayList<>(3);
 		if(color == ColorPieza.BLANCO ) {
 			avance = -1;
 		} else {//si es negro
@@ -33,7 +33,8 @@ public class Peon extends Pieza {
 	public void ponerSeMovio() {
 		super.ponerSeMovio();
 		movimientos.remove(adelante);
-		movimientos.add( new Movimiento(avance, 0, false, true, false, 1));
+		adelante = new Movimiento(avance, 0, false, true, false, 1);
+		movimientos.add( adelante);
 	}
 	
 	@Override
@@ -41,7 +42,8 @@ public class Peon extends Pieza {
 		super.sacarSeMovio();
 		if (!dameSeMovio()) {
 			movimientos.remove(adelante);
-			movimientos.add( new Movimiento(avance, 0, false, true, false, 2));
+			adelante =  new Movimiento(avance, 0, false, true, false, 2);
+			movimientos.add(adelante);
 		}
 	}
 	
@@ -56,7 +58,7 @@ public class Peon extends Pieza {
 		for (Movimiento unMovimiento: this.movimientos) {
 			movimientosCopia.add(new Movimiento(unMovimiento));
 		}
-		return movimientos;
+		return movimientosCopia;
 	}
 
 	@Override

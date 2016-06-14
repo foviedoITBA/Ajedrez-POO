@@ -16,18 +16,33 @@ import logica.*;
 public class SerializarTest {
 
 	@Test
-	public void testJugadorWrite() throws FileNotFoundException, IOException {
-		ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("juego.txt",true));
-		oos.writeObject(new Jugador(ColorPieza.BLANCO));
-		oos.close();
+	public void testJugadorWrite(){
+		FileOutputStream file = null;
+		ObjectOutputStream oos = null;
+		try{
+			file = new FileOutputStream("juego.txt",false);
+			oos = new ObjectOutputStream(file);
+			oos.writeObject(new Jugador(ColorPieza.BLANCO));
+			oos.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 	}
-	
+
 	@Test
 	public void testJugadorRead() throws FileNotFoundException, IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("juego.txt"));
-		
-		Jugador jugador = (Jugador) ois.readObject();
-		ois.close();
+		Jugador jugador = null;
+		FileInputStream file = null;
+		ObjectInputStream ois = null;
+		try{
+			file = new FileInputStream("juego.txt");
+			ois = new ObjectInputStream(file);
+			jugador = (Jugador) ois.readObject();
+			ois.close();
+			file.close();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		assertEquals(jugador.dameColor(),ColorPieza.BLANCO);
 	}
 }

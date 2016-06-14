@@ -38,7 +38,7 @@ public class Rey extends Pieza {
 		for (Movimiento unMovimiento: movimientos) {
 			movimientosCopia.add(new Movimiento(unMovimiento));
 		}
-		return movimientos;
+		return movimientosCopia;
 	}
 	
 	@Override

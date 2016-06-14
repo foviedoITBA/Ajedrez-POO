@@ -17,7 +17,6 @@ public class Torre extends Pieza{
 		movimientos.add(abajo);
 		movimientos.add(izquierda);
 		movimientos.add(derecha);
-		// Faltaría implementar la posibilidad de enroque
 	}
 
 	public Torre(ColorPieza color){
@@ -30,7 +29,7 @@ public class Torre extends Pieza{
 		for (Movimiento unMovimiento: movimientos) {
 			movimientosCopia.add(new Movimiento(unMovimiento));
 		}
-		return movimientos;
+		return movimientosCopia;
 	}
 	
 	@Override
