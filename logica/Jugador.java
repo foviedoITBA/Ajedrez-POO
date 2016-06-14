@@ -1,6 +1,8 @@
 package logica;
 
-public class Jugador {
+import java.io.Serializable;
+
+public class Jugador implements Serializable{
 
 	private ColorPieza color;
 	

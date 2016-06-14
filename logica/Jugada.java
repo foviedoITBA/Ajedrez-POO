@@ -1,6 +1,8 @@
 package logica;
 
-public class Jugada {
+import java.io.Serializable;
+
+public class Jugada implements Serializable{
 	
 	private PosicionAjedrez posOrigen, posDestino;
 	private Pieza laPiezaMovida, laPiezaComida;

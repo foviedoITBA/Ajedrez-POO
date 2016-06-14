@@ -21,7 +21,7 @@ public class PiezasTest {
 		pieza.sacarSeMovio();
 		assertEquals(pieza.dameSeMovio(),false);
 	}
-	//PEON,TORRE,CABALLO,ALFIL,DAMA,REY;
+	
 	@Test
 	public void testPeon() throws CloneNotSupportedException{
 		Pieza peon = new Peon(ColorPieza.BLANCO);
@@ -76,5 +76,26 @@ public class PiezasTest {
 		assertEquals(pieza.dameMovimientos().size(),4);
 	}
 
-
+	@Test
+	public void testDama() throws CloneNotSupportedException{
+		Pieza dama = new Dama(ColorPieza.BLANCO);
+		assertEquals(dama.dameNombre(),NombrePieza.DAMA);
+		assertEquals(dama.dameMovimientos().size(),8);
+		assertEquals(dama.puedoEnrocar(),false);
+		assertEquals(dama.puedoCoronar(0),false);
+		dama.dameMovimientos().clear();
+		assertEquals(dama.dameMovimientos().size(),8);
+	}
+	
+	@Test
+	public void testRey() throws CloneNotSupportedException{
+		Pieza rey = new Rey(ColorPieza.BLANCO);
+		assertEquals(rey.dameNombre(),NombrePieza.REY);
+		assertEquals(rey.dameMovimientos().size(),8);
+		assertEquals(rey.puedoEnrocar(),false);
+		assertEquals(rey.puedoCoronar(0),false);
+		rey.dameMovimientos().clear();
+		assertEquals(rey.dameMovimientos().size(),8);
+	}
+	
 }
