@@ -7,7 +7,7 @@ import excepcion.CoronacionPendienteException;
 import excepcion.CoronacionInvalidaException;
 import excepcion.JugadaInvalidaException;
 import excepcion.EmptyRegisterException;
-//import excepcion.EnroqueInvalidoException;
+import excepcion.EnroqueInvalidoException;
 
 import java.util.Set;
 
@@ -127,7 +127,7 @@ public class Juego {
 	*/
 	public void revertir() {
 		if (registro.isEmpty()){
-			return;
+			throw new EmptyRegisterException();
 		}
 		elTablero.revertir(registro.pop());
 		cambiarTurno();
@@ -205,21 +205,54 @@ public class Juego {
 		}
 	}
 
+	/** Informa si el jugador que tiene el turno puede enrocar corto
+	@return true si se puede enrocar corto
+	*/
 	public boolean sePuedeEnrocarCorto() {
 		return elTablero.puedeEnrocarCorto(jugadorTurno.dameColor());
 	}
 
+	/** Informa si el jugador que tiene el turno puede enrocar largo
+	@return true si se puede enrocar largo
+	*/
 	public boolean sePuedeEnrocarLargo() {
 		return elTablero.puedeEnrocarLargo(jugadorTurno.dameColor());
 	}
 
-//	public void enrocarCorto() throws EnroqueInvalidoException {
-//		elTablero.enrocarCorto(jugadorTurno.dameColor());
-//	}
+	/** El jugador que tiene el turno enroca corto
+	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
+	*/
+	public void enrocarCorto() throws CoronacionPendienteException, EnroqueInvalidoException {
+		enrocar(false);
+	}
 
-//	public void enrocarLargo() throws EnroqueInvalidoException {
-//		elTablero.enrocarLargo(jugadorTurno.dameColor());
-//	}
+	/** El jugador que tiene el turno enroca largo
+	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws EnroqueInvalidoException Se lanza si no es posible enrocar largo; se debe censar previamente para prevenirlo
+	*/
+	public void enrocarLargo() throws CoronacionPendienteException, EnroqueInvalidoException {
+		enrocar(true);		
+	}
+
+	private void enrocar(boolean esLargo) throws CoronacionPendienteException, JugadaInvalidaException, EnroqueInvalidoException {
+		if (hayCoronacionPendiente)
+			throw new CoronacionPendienteException();
+		if (jaqueMate || ahogado){
+			throw new JugadaInvalidaException();
+		}
+		Jugada elEnroque = null;
+		if (!esLargo)
+			elEnroque = elTablero.enrocarCorto(jugadorTurno.dameColor());
+		else
+			elEnroque = elTablero.enrocarLargo(jugadorTurno.dameColor());
+		registro.push(elEnroque);
+		cambiarTurno();
+		jaqueMate = elTablero.hayJaqueMate(jugadorTurno.dameColor());
+		if (!jaqueMate) {
+			ahogado = elTablero.hayAhogado(jugadorTurno.dameColor());
+		}
+	}
 
 	private void cambiarTurno() {
 		if (jugadorTurno.equals(jugadorBlanco)){
@@ -229,4 +262,9 @@ public class Juego {
 		}
 	}
 	
+
+	/***********************************************SÓLO PARA TEST*****************************************/
+	public void imprimirTablero() {
+		elTablero.imprimirTablero();
+	}
 }

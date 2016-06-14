@@ -1,6 +1,6 @@
 package excepcion;
 
-public class EnroqueInvalidoException extends RuntimeException {
+public class EnroqueInvalidoException extends JugadaInvalidaException {
 	public EnroqueInvalidoException() {
 		super();
 	}

@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import excepcion.CasilleroVacioException;
 import excepcion.CoronacionInvalidaException;
-//import excepcion.EnroqueInvalidoException;
+import excepcion.EnroqueInvalidoException;
 
 public class Tablero {
 
@@ -87,6 +87,15 @@ public class Tablero {
 		casOrigen.addPieza(laJugada.damePiezaMovida());
 		casDestino.addPieza(laJugada.damePiezaComida());
 		laJugada.damePiezaMovida().sacarSeMovio();
+		if (laJugada.damePiezaMovidaExtra() != null) {
+			PosicionTablero posOrigenExtraT = transformarPosicion(laJugada.damePosicionOrigenExtra());
+			PosicionTablero posDestinoExtraT = transformarPosicion(laJugada.damePosicionDestinoExtra());
+			Casillero casOrigenExtra = losCasilleros[posOrigenExtraT.getX()][posOrigenExtraT.getY()];
+			Casillero casDestinoExtra = losCasilleros[posDestinoExtraT.getX()][posDestinoExtraT.getY()];
+			casOrigenExtra.addPieza(laJugada.damePiezaMovidaExtra());
+			laJugada.damePiezaMovidaExtra().sacarSeMovio();
+			casDestinoExtra.removePieza();
+		}
 	}
 	
 	public boolean hayJaqueMate(ColorPieza perdedor) {
@@ -160,36 +169,108 @@ public class Tablero {
 	public boolean puedeEnrocarCorto(ColorPieza elColor) {
 		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
 		int colTorre = 7;
-		PosicionTablero posDelRey = buscoAlRey(elColor);
-		if (!losCasilleros[posDelRey.getX()][posDelRey.getY()].getPieza().puedoEnrocar())
-			return false;
+		PosicionTablero posRey = buscoAlRey(elColor);
+		Rey elRey = (Rey) losCasilleros[posRey.getX()][posRey.getY()].getPieza();
+		PosicionTablero posIntermedia = new PosicionTablero(posRey.getX(), posRey.getY()+1);
+		PosicionTablero posFinal = new PosicionTablero(posRey.getX(), posRey.getY() + 2);
+		if (!elRey.puedoEnrocar())
+			return false;	// Si el rey dice que no puede enrocar, no se puede enrocar
 		if (losCasilleros[fila][colTorre].isEmpty() || !losCasilleros[fila][colTorre].getPieza().puedoEnrocar())
-			return false;
-		// Flata el resto
-		return true;
+			return false;	// Si la torre dice que no puede enrocar, no se puede enrocar
+		if (!losCasilleros[posIntermedia.getX()][posIntermedia.getY()].isEmpty() || !losCasilleros[posFinal.getX()][posFinal.getY()].isEmpty())
+			return false;	// Si las posiciones entre el rey y la torre están ocupadas, no se puede enrocar
+		if (hayJaque(elColor))
+			return false;	// El rey no puede enrocar para salir del jaque
+		losCasilleros[posIntermedia.getX()][posIntermedia.getY()].addPieza(elRey);
+		losCasilleros[posRey.getX()][posRey.getY()].removePieza();
+		if (hayJaque(elColor))
+		{
+			losCasilleros[posIntermedia.getX()][posIntermedia.getY()].removePieza();
+			losCasilleros[posRey.getX()][posRey.getY()].addPieza(elRey);
+			return false;	// El rey no puede pasar por jaque
+		}
+		losCasilleros[posIntermedia.getX()][posIntermedia.getY()].removePieza();
+		losCasilleros[posFinal.getX()][posFinal.getY()].addPieza(elRey);
+		if (hayJaque(elColor))
+		{
+			losCasilleros[posFinal.getX()][posFinal.getY()].removePieza();
+			losCasilleros[posRey.getX()][posRey.getY()].addPieza(elRey);
+			return false;	// El rey no puede quedar en jaque al enrocar
+		}
+		losCasilleros[posFinal.getX()][posFinal.getY()].removePieza();
+		losCasilleros[posRey.getX()][posRey.getY()].addPieza(elRey);
+		return true;		// Si todo se cumple, se puede enrocar
 	}
 
 	public boolean puedeEnrocarLargo(ColorPieza elColor) {
 		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
 		int colTorre = 0;
 		PosicionTablero posDelRey = buscoAlRey(elColor);
-		if (!losCasilleros[posDelRey.getX()][posDelRey.getY()].getPieza().puedoEnrocar())
-			return false;
+		Rey elRey = (Rey) losCasilleros[posDelRey.getX()][posDelRey.getY()].getPieza();
+		PosicionTablero posIntermediaRey = new PosicionTablero(posDelRey.getX(), posDelRey.getY()-1);
+		PosicionTablero posFinal = new PosicionTablero(posDelRey.getX(), posDelRey.getY() - 2);
+		PosicionTablero posIntermediaTorre = new PosicionTablero(fila, colTorre+1);
+		if (!elRey.puedoEnrocar())
+			return false;	// Si el rey dice que no puede enrocar, no se puede enrocar
 		if (losCasilleros[fila][colTorre].isEmpty() || !losCasilleros[fila][colTorre].getPieza().puedoEnrocar())
-			return false;		
-		// Falta el resto
-		return true;
+			return false;	// Si la torre dice que no puede enrocar, no se puede enrocar
+		if (!losCasilleros[posIntermediaRey.getX()][posIntermediaRey.getY()].isEmpty() || !losCasilleros[posFinal.getX()][posFinal.getY()].isEmpty() || !losCasilleros[posIntermediaTorre.getX()][posIntermediaTorre.getY()].isEmpty())
+			return false;	// Si las posiciones entre el rey y la torre están ocupadas, no se puede enrocar
+		if (hayJaque(elColor))
+			return false;	// El rey no puede enrocar para salir del jaque
+		losCasilleros[posIntermediaRey.getX()][posIntermediaRey.getY()].addPieza(elRey);
+		losCasilleros[posDelRey.getX()][posDelRey.getY()].removePieza();
+		if (hayJaque(elColor))
+		{
+			losCasilleros[posIntermediaRey.getX()][posIntermediaRey.getY()].removePieza();
+			losCasilleros[posDelRey.getX()][posDelRey.getY()].addPieza(elRey);
+			return false;	// El rey no puede pasar por jaque
+		}
+		losCasilleros[posIntermediaRey.getX()][posIntermediaRey.getY()].removePieza();
+		losCasilleros[posFinal.getX()][posFinal.getY()].addPieza(elRey);
+		if (hayJaque(elColor))
+		{
+			losCasilleros[posFinal.getX()][posFinal.getY()].removePieza();
+			losCasilleros[posDelRey.getX()][posDelRey.getY()].addPieza(elRey);
+			return false;	// El rey no puede quedar en jaque al enrocar
+		}
+		losCasilleros[posFinal.getX()][posFinal.getY()].removePieza();
+		losCasilleros[posDelRey.getX()][posDelRey.getY()].addPieza(elRey);
+		return true;	// Si todo se cumple, se puede enrocar
 	}
 
-//	@Deprecated
-//	public void enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
-//		throw new EnroqueInvalidoException();
-//	}
+	public Jugada enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
+		if (!puedeEnrocarCorto(elColor))
+			throw new EnroqueInvalidoException();
+		return enrocar(elColor, false);
+	}
 
-//	@Deprecated
-//	public void enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
-//		throw new EnroqueInvalidoException();
-//	}
+	public Jugada enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
+		if (!puedeEnrocarLargo(elColor))	
+			throw new EnroqueInvalidoException();
+		return enrocar(elColor, true);
+	}
+
+	private Jugada enrocar(ColorPieza elColor, boolean esLargo) {
+		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
+		int colOrigenRey = 4;
+		int colOrigenTorre = (esLargo ? 0 : 7);
+		int colDestinoRey = (esLargo ? 2 : 6);
+		int colDestinoTorre = (esLargo ? 3 : 5);
+		Rey elRey = (Rey) losCasilleros[fila][colOrigenRey].getPieza();
+		Torre laTorre = (Torre) losCasilleros[fila][colOrigenTorre].getPieza();
+		losCasilleros[fila][colOrigenRey].removePieza();
+		losCasilleros[fila][colOrigenTorre].removePieza();
+		losCasilleros[fila][colDestinoRey].addPieza(elRey);
+		losCasilleros[fila][colDestinoTorre].addPieza(laTorre);
+		elRey.ponerSeMovio();
+		laTorre.ponerSeMovio();
+		PosicionAjedrez posOrigenRey = transformarPosicion(new PosicionTablero(fila, colOrigenRey));
+		PosicionAjedrez posDestinoRey = transformarPosicion(new PosicionTablero(fila, colDestinoRey));
+		PosicionAjedrez posOrigenTorre = transformarPosicion(new PosicionTablero(fila, colOrigenTorre));
+		PosicionAjedrez posDestinoTorre = transformarPosicion(new PosicionTablero(fila, colDestinoTorre));
+		return new Jugada(posOrigenRey, posDestinoRey, elRey, null, posOrigenTorre, posDestinoTorre, laTorre);
+	}
 
 	/*private boolean elReyEstaEnJaque(Color perdedor) {
 		
