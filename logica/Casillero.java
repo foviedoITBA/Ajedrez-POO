@@ -12,11 +12,7 @@ public class Casillero {
 	}
 	
 	public boolean isEmpty(){
-		if (pieza==null){
-			return true;
-		}else{
-			return false;
-		}
+		return pieza == null;	
 	}
 	
 	public void addPieza(Pieza p){

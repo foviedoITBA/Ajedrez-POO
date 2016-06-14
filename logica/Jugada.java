@@ -10,13 +10,7 @@ public class Jugada implements Serializable{
 	private Pieza piezaExtra;
 
 	Jugada(PosicionAjedrez posOrigen, PosicionAjedrez posDestino, Pieza laPiezaMovida, Pieza laPiezaComida) {
-		this.posOrigen = posOrigen;
-		this.posDestino = posDestino;
-		this.laPiezaMovida = laPiezaMovida;
-		this.laPiezaComida = laPiezaComida;
-		this.posOrigenExtra = null;
-		this.posDestinoExtra = null;
-		this.piezaExtra = null;
+		this(posOrigen,posDestino,laPiezaMovida,laPiezaComida,null,null,null);
 	}
 
 	Jugada(PosicionAjedrez posOrigen, PosicionAjedrez posDestino, Pieza laPiezaMovida, Pieza laPiezaComida, PosicionAjedrez posOrigenExtra, PosicionAjedrez posDestinoExtra, Pieza piezaExtra) {
