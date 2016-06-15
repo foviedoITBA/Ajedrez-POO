@@ -1,6 +1,6 @@
 Cosas que faltan:
 
-Enroque, peón al paso
+Peón al paso
 Poder guardar y cargar el juego
 Inteligencia artificial (jugar aperturas y pensar)
 Interfaz

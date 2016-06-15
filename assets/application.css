@@ -73,3 +73,29 @@
 .tablaJugadas .label{
 	-fx-font-size: 10pt;
 }
+
+.paneEnroque .enroqueButton{
+	-fx-font-size:0.8em;
+	-fx-text-fill:#3c2c20;
+	-fx-font-family: Walkway Rounded;
+	
+	-fx-text-align: center;
+	
+    -fx-background-size:contain;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+    
+    -fx-padding:0em;
+    
+}
+.paneEnroque .enroqueButton.enroqueCortoButton{
+	-fx-background-image: url('enroqueCortoButton.png');
+	-fx-opacity: 0;
+}
+.paneEnroque .enroqueButton.enroqueLargoButton{
+	-fx-background-image: url('enroqueLargoButton.png');
+	-fx-opacity: 0;
+}
+.paneEnroque .enroqueButton.show{
+	-fx-opacity: 1;
+}

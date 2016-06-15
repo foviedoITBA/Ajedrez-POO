@@ -14,16 +14,18 @@ public class PantallaJuego extends Pane{
 	TableroPantallaJuego tablero;
 	TablaJugadas tablaJugadas;
 	EstadoDeJuego estadoDeJuego;
+	BotonEnroque botonEnroque;
 	public PantallaJuego(int cantJugadores, ColorPieza color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
 		Juego elJuego=new Juego();
 		inicializarMenu();
-		estadoDeJuego = new EstadoDeJuego(elJuego);
 		tablaJugadas=new TablaJugadas();
+		botonEnroque = new BotonEnroque(elJuego);
+		estadoDeJuego = new EstadoDeJuego(elJuego,botonEnroque);
 		tablero= new TableroPantallaJuego(elJuego,estadoDeJuego,tablaJugadas,color);
 		
-		this.getChildren().addAll(tablero,estadoDeJuego,tablaJugadas);
+		this.getChildren().addAll(tablero,estadoDeJuego,tablaJugadas,botonEnroque);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 	}
@@ -33,19 +35,17 @@ public class PantallaJuego extends Pane{
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");
 		
-		Button buttonGuardarPartida = new MyButton("Guardar",30,670,200,50);
+		Button buttonGuardarPartida = new MyButton("Guardar", 130,670,200,50);
 		buttonGuardarPartida.getStyleClass().add("roundedButton");
 		buttonGuardarPartida.setOnAction(e->{
 			GuardarPartida.display();
 		});
 		
-		
-		Button buttonDeshacer = new MyButton("Deshacer",250,670,200,50);
+		Button buttonDeshacer = new MyButton("Deshacer",360,670,200,50);
 		buttonDeshacer.setOnAction(e->tablero.deshacerJugada());
 		buttonDeshacer.getStyleClass().add("roundedButton");
 		
-		
-		Button buttonMenu = new MyButton("Menu",470,670,200,50);
+		Button buttonMenu = new MyButton("Menu",580,670,200,50);
 		buttonMenu.getStyleClass().add("roundedButton");
 		buttonMenu.setOnAction(e ->{
 			if(ConfirmacionSalir.display()){
