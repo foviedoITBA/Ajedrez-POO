@@ -15,11 +15,7 @@ public class PosicionAjedrez {
 	}
 	
 	private boolean esValido(byte fila, char columna){
-		if(fila < 1 || fila > 8 || columna < 'a' || columna > 'h'){
-			return false;
-		}else{
-			return true;
-		}
+		return (fila < 1 || fila > 8 || columna < 'a' || columna > 'h')?false:true;
 	}
 	
 	public byte dameFila(){

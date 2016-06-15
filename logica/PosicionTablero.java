@@ -1,5 +1,7 @@
 package logica;
 
+import excepcion.PosAjedrezInvalidaException;
+
 public class PosicionTablero {
 	
 	private int posX, posY;
