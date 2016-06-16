@@ -68,12 +68,12 @@
 					</Cxe5>
 				</Cf6>
 			</Cf3>
-			<f4 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- King's Gambit -->
+			<f4 filaOrigen="2" columnaOrigen="f" filaDestino="4" columnaDestino="f" hacer="true"> <!-- King's Gambit -->
 				<exf4 filaOrigen="5" columnaOrigen="e" filaDestino="4" columnaDestino="f" hacer="true"> <!-- Accepted Line -->
 					<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true"> <!-- King Knight's Gambit -->
 					</Cf3>
 				</exf4>
-				<Ac5 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true"> <!-- Declined Line -->
+				<Ac5 filaOrigen="8" columnaOrigen="f" filaDestino="5" columnaDestino="c" hacer="true"> <!-- Declined Line -->
 					<fxe5 filaOrigen="4" columnaOrigen="f" filaDestino="5" columnaDestino="e" hacer="false">
 						<Dh4 filaOrigen="8" columnaOrigen="d" filaDestino="4" columnaDestino="h" hacer="true">
 							<g3 filaOrigen="2" columnaOrigen="g" filaDestino="3" columnaDestino="g" hacer="false">

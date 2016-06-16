@@ -16,13 +16,7 @@ import logica.NombrePieza;
 import logica.PiezaColor;
 import logica.PosicionAjedrez;
 
-public class TableroPantallaJuego extends Pane {
-
-	private static double TABLERO_ANCHO=500;
-	private static double TABLERO_ALTO=500;
-
-	private static double CASILLERO_ALTO=62.5;
-	private static double CASILLERO_ANCHO=62.5;
+public class TableroPantallaJuego extends Pane implements Dimensiones {
 
 	private static double DEFSAJE_X=100;
 	private static double DEFSAJE_Y=150;
@@ -44,7 +38,7 @@ public class TableroPantallaJuego extends Pane {
 		this.setTranslateX(DEFSAJE_X);
 		this.setTranslateY(DEFSAJE_Y);
 
-		tablero= new Canvas[8][8];
+		tablero= new Canvas[TABLERO_COLUMNAS][TABLERO_FILAS];
 		this.elJuego=elJuego;
 		miColor = color;
 		seleccionado=null;
@@ -56,19 +50,19 @@ public class TableroPantallaJuego extends Pane {
 
 		this.setOnMouseClicked(e-> {
 			turno = elJuego.dameTurno();
-			//			if(turno == miColor){//verifico que sea mi turno
-			posicionTablero(e.getSceneX(),e.getSceneY());
-			//			}
+			if(turno == miColor){//verifico que sea mi turno
+				posicionTablero(e.getSceneX(),e.getSceneY());
+			}
 
 		});
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		this.setId("tablero");
 
-		/*if()//inicializo la ia con el otro color
-		ia = new Inteligencia(elJuego,Color.NEGRO);*/
+		//if()//inicializo la ia con el otro color
+		ia = new Inteligencia(elJuego,ColorPieza.NEGRO);
 
 	}
-	
+
 	/**
 	 *  Este metodo deshace la jugada 
 	 */
@@ -80,10 +74,6 @@ public class TableroPantallaJuego extends Pane {
 		}
 	}
 
-	@Deprecated
-	private void  dibujarImagen(Image img, int fila, int col){
-		tablero[col][fila].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
-	}
 
 	private void  dibujarImagen(Image img,PosicionTablero pos){
 		tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);
@@ -91,17 +81,6 @@ public class TableroPantallaJuego extends Pane {
 
 	private void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
 		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));
-	}
-
-	@Deprecated
-	private void borrarImagen(int fila, int col){
-		this.getChildren().remove(tablero[col][fila]);
-		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
-		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
-		tablero[col][fila].setTranslateY(CASILLERO_ALTO*fila);
-
-		this.getChildren().add(tablero[col][fila]);
-
 	}
 
 	private void borrarImagen(PosicionTablero pos){
@@ -121,12 +100,9 @@ public class TableroPantallaJuego extends Pane {
 	}
 
 	private void posicionTablero(double x, double y){
-		System.out.println("");//TEST bborrarrr
-		System.out.println("x:"+x+" y: "+y);//Test borrarrr
 		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO);
 		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
-		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);//Test borrarrr
-		clickTablero(transformar(fila, columna));
+		click(transformar(fila, columna));
 	}
 
 	private PosicionAjedrez transformar(int fila, int columna){
@@ -135,7 +111,7 @@ public class TableroPantallaJuego extends Pane {
 		return new PosicionAjedrez(laFila, laColumna);
 	}
 
-	private PosicionTablero transformar(PosicionAjedrez posAjedrez) {//anoto FUERTE que hay que cmabiar esto
+	private PosicionTablero transformar(PosicionAjedrez posAjedrez) {
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
 		int laFila = 8 - fila;
@@ -143,32 +119,30 @@ public class TableroPantallaJuego extends Pane {
 		return new PosicionTablero(laFila, laColumna);
 	}
 
-	private void clickTablero(PosicionAjedrez clickeado){
-		System.out.println("turno de:"+turno);
+	private void click(PosicionAjedrez clickeado){
 		if(seleccionado == null) {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno) {
 				return;
 			}
 			seleccionado=clickeado;
-			System.out.println("se selecciono un casillero "+seleccionado);//TESTTTT
 			movimientosPosibles=elJuego.dameMovimientos(seleccionado);
-			System.out.println(movimientosPosibles);//borrarrrrrr
-			pintarCasilleros(movimientosPosibles);//pintar casilleros
+			pintarCasilleros(movimientosPosibles);
 		}else{
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
 				if(movimientosPosibles.contains(clickeado)){
 					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
 					tabla.agregarJugada(laJugada);
+					System.out.println("antes de imprimir");
 					imprimirTablero();
+					System.out.println("despues de imprimir");
 					seleccionado=null;
 					if(elJuego.hayJaqueMate()){
 						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
 					}
-					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
-					System.out.println("Se movio una pieza");///////borrrar
-					//					ia.juega();
-					//					tabla.agregarJugada(elJuego.dameUltimaJugada());
-					//					imprimirTablero();
+
+					//System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+					//System.out.println("Se movio una pieza");///////borrrar
+					
 					//					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 
 					if(elJuego.hayAlgoParaCoronar()){
@@ -179,18 +153,20 @@ public class TableroPantallaJuego extends Pane {
 						elJuego.coronar(pieza);
 						imprimirTablero();
 					}
+					ia.juega();
+					tabla.agregarJugada(elJuego.dameUltimaJugada());
+					imprimirTablero();
 				}
 			}else{
 				seleccionado=clickeado;
 				movimientosPosibles=elJuego.dameMovimientos(seleccionado);
 				imprimirTablero();
 				pintarCasilleros(movimientosPosibles);
-				//pintar casilleros
 			}
 		}
 	}
 
-	public void imprimirTablero() {// poner variabler static
+	public void imprimirTablero() {
 		for (byte i = 1; i <= 8; i++) {
 			for (char j = 'a'; j <= 'h'; j++) {
 				PosicionAjedrez pos = new PosicionAjedrez(i, j);

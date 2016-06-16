@@ -20,7 +20,7 @@ public class PantallaJuego extends Pane{
 		super();
 		this.setPrefSize(900, 800);
 		
-		elJuego=new Juego(color,hayTiempo);
+		elJuego=new Juego(hayTiempo);
 		inicializarMenu();
 		relojBlancas = new Reloj(elJuego,ColorPieza.BLANCO);
 		relojNegras = new Reloj(elJuego,ColorPieza.NEGRO);
@@ -57,8 +57,9 @@ public class PantallaJuego extends Pane{
 			((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio()));
 			});
 			
-		Button enroqueLargo = new MyButton("ENROQUELARGO",680,520,70,70);
+		Button enroqueLargo = new MyButton("",680,520,70,70);
 			enroqueLargo.setOnAction(e->{
+				System.out.println(elJuego.sePuedeEnrocarLargo());
 				if(elJuego.sePuedeEnrocarLargo()){
 					elJuego.enrocarLargo();
 					tablero.imprimirTablero();
@@ -69,8 +70,9 @@ public class PantallaJuego extends Pane{
 			enroqueLargo.getStyleClass().add("enroqueLargoButton");
 			
 			
-		Button enroqueCorto = new MyButton("enroqueCORTO",770,520,70,70);
-		enroqueLargo.setOnAction(e->{
+		Button enroqueCorto = new MyButton("",770,520,70,70);
+		enroqueCorto.setOnAction(e->{
+			System.out.println(elJuego.sePuedeEnrocarCorto());
 			if(elJuego.sePuedeEnrocarCorto()){
 				elJuego.enrocarCorto();
 				tablero.imprimirTablero();

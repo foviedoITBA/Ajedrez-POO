@@ -1,8 +1,3 @@
-/*  @font-face {
-    font-family: Walkway-rounded;
-    src: url("Walkwayrounded.ttf");
-}
-*/
 .root{
 	-fx-background-color:#D3D3D3;
 	-fx-background-image: url('bg.jpg');
@@ -14,7 +9,6 @@
 .label{
 	-fx-font-size:15pt;
 	-fx-text-fill:#3c2c20;
-	-fx-font-family: Walkway Rounded;
 	
 	-fx-background-color:Transparent;
     -fx-background-size:contain;
@@ -25,7 +19,6 @@
 .button{
 	-fx-font-size:1.6em;
 	-fx-text-fill:#3c2c20;
-	-fx-font-family: Walkway Rounded;
 	
 	-fx-background-color:Transparent;
     -fx-background-size:contain;
@@ -59,10 +52,7 @@
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
-.marked{
-	/*-fx-border-width: 3px;*/
-	
-}
+
 
 .tablaJugadas{
 	-fx-background-image: url('jugadasPane.png');
@@ -74,10 +64,9 @@
 	-fx-font-size: 10pt;
 }
 
-.paneEnroque .enroqueButton{
+.enroqueButton{
 	-fx-font-size:0.8em;
 	-fx-text-fill:#3c2c20;
-	-fx-font-family: Walkway Rounded;
 	
 	-fx-text-align: center;
 	
@@ -87,15 +76,15 @@
     
     -fx-padding:0em;
     
+	-fx-opacity: 1;
+    
 }
-.paneEnroque .enroqueButton.enroqueCortoButton{
+.enroqueButton.enroqueCortoButton{
 	-fx-background-image: url('enroqueCortoButton.png');
-	-fx-opacity: 0.3;
 }
-.paneEnroque .enroqueButton.enroqueLargoButton{
+.enroqueButton.enroqueLargoButton{
 	-fx-background-image: url('enroqueLargoButton.png');
-	-fx-opacity: 0.3;
 }
-.paneEnroque .enroqueButton.show{
+.enroqueButton.show{
 	-fx-opacity: 1;
 }

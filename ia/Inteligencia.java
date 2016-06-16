@@ -64,14 +64,15 @@ public class Inteligencia {
 
 	public void juega() {
 		//freno la ejecucion entre 2 y 5 segundos para que la ia no juegue tan rapido
-		Random rand = new Random();
+		/*Random rand = new Random();
 		int time = (rand.nextInt(3) + 2 ) * 1000;
 		try {
 			Thread.sleep(time);
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
-		}
-		
+		}*/
+		if (elJuego.hayJaqueMate() || elJuego.hayAhogado())
+			return;
 		if (pensando == false)
 			juegaSinPensar();
 		else

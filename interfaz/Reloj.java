@@ -19,8 +19,8 @@ public class Reloj extends StackPane{
 	private static double PANE_ANCHO=100;
 	public static double PANE_ALTO=100;
 	
-	private static double DEFSAJE_X=100+500+20;
-	private static double DEFSAJE_Y=150+150+200;
+	private static double DEFSAJE_X=100+500+60;
+	private static double DEFSAJE_Y=100+100+400;
 
 	private Line minutos,segundos;
 	private Juego juego;

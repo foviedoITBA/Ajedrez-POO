@@ -2,7 +2,7 @@ package logica;
 
 import java.io.Serializable;
 
-public class Jugador implements Serializable{
+class Jugador implements Serializable{
 
 	private ColorPieza color;
 	private int tiempoAcumulado;

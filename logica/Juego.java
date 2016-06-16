@@ -35,22 +35,17 @@ public class Juego {
 	/** Instancia una nueva partida lista para ser jugada
 	*/
 	public Juego() {
-		this(ColorPieza.BLANCO,false);
+		this(false);
 	}
 	
-	public Juego(ColorPieza colorInicial, boolean hayTiempo){
+	public Juego(boolean hayTiempo){
 		elTablero = new Tablero();
 		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
 		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
 		jugadorNegro=new Jugador(ColorPieza.NEGRO);
-		
-		if(colorInicial == ColorPieza.BLANCO){
-			jugadorTurno = jugadorBlanco;
-		}else{
-			jugadorTurno = jugadorNegro;
-		}
+		jugadorTurno = jugadorBlanco;
 		
 		this.hayTiempo = hayTiempo;
 		jugadorTurno.iniciarTiempo();
