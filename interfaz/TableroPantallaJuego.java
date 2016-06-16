@@ -132,9 +132,7 @@ public class TableroPantallaJuego extends Pane implements Dimensiones {
 				if(movimientosPosibles.contains(clickeado)){
 					Jugada laJugada = elJuego.mover(seleccionado, clickeado);
 					tabla.agregarJugada(laJugada);
-					System.out.println("antes de imprimir");
 					imprimirTablero();
-					System.out.println("despues de imprimir");
 					seleccionado=null;
 					if(elJuego.hayJaqueMate()){
 						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
