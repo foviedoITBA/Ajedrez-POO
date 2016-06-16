@@ -17,17 +17,17 @@ import logica.PiezaColor;
 import logica.PosicionAjedrez;
 
 public class TableroPantallaJuego extends Pane {
-	
+
 	private static double TABLERO_ANCHO=500;
 	private static double TABLERO_ALTO=500;
-	
+
 	private static double CASILLERO_ALTO=62.5;
 	private static double CASILLERO_ANCHO=62.5;
-	
+
 	private static double DEFSAJE_X=100;
 	private static double DEFSAJE_Y=150;
-	
-	
+
+
 	private Canvas[][] tablero;
 	private ColorPieza turno,miColor;
 	private PosicionAjedrez seleccionado;
@@ -37,13 +37,13 @@ public class TableroPantallaJuego extends Pane {
 	private Inteligencia ia;
 	private TablaJugadas tabla;
 	private EstadoDeJuego estadoDeJuego;
-	
+
 	public TableroPantallaJuego(Juego elJuego, EstadoDeJuego estadoDeJuego, TablaJugadas tabla,ColorPieza color){
 		super();
 		this.setPrefSize(TABLERO_ANCHO, TABLERO_ALTO);
 		this.setTranslateX(DEFSAJE_X);
 		this.setTranslateY(DEFSAJE_Y);
-		
+
 		tablero= new Canvas[8][8];
 		this.elJuego=elJuego;
 		miColor = color;
@@ -52,40 +52,42 @@ public class TableroPantallaJuego extends Pane {
 		this.tabla=tabla;
 		this.estadoDeJuego = estadoDeJuego;
 		imprimirTablero();
-		
-		
+
+
 		this.setOnMouseClicked(e-> {
 			turno = elJuego.dameTurno();
-//			if(turno == miColor){//verifico que sea mi turno
-				posicionTablero(e.getSceneX(),e.getSceneY());
-//			}
-			
+			//			if(turno == miColor){//verifico que sea mi turno
+			posicionTablero(e.getSceneX(),e.getSceneY());
+			//			}
+
 		});
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		this.setId("tablero");
-		
+
 		/*if()//inicializo la ia con el otro color
 		ia = new Inteligencia(elJuego,Color.NEGRO);*/
-		
+
 	}
-	
+
 	public void deshacerJugada(){
-		elJuego.revertir();
-		imprimirTablero();
+		if(elJuego.huboUnaJugada()){
+			elJuego.revertir();
+			imprimirTablero();
+		}	
 	}
 	@Deprecated
 	private void  dibujarImagen(Image img, int fila, int col){
 		tablero[col][fila].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
 	}
-	
+
 	private void  dibujarImagen(Image img,PosicionTablero pos){
 		tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);
 	}
-	
+
 	private void dibujarPieza(PiezaColor pieza,PosicionAjedrez pos){
 		dibujarImagen(imagenes.dameImagen(pieza),transformar(pos));
 	}
-	
+
 	@Deprecated
 	private void borrarImagen(int fila, int col){
 		this.getChildren().remove(tablero[col][fila]);
@@ -94,13 +96,13 @@ public class TableroPantallaJuego extends Pane {
 		tablero[col][fila].setTranslateY(CASILLERO_ALTO*fila);
 
 		this.getChildren().add(tablero[col][fila]);
-		
+
 	}
-	
+
 	private void borrarImagen(PosicionTablero pos){
 		int fila= pos.getFila();
 		int col= pos.getColumna();
-		
+
 		this.getChildren().remove(tablero[col][fila]);
 		tablero[col][fila]=new Canvas(CASILLERO_ANCHO,CASILLERO_ALTO);
 		tablero[col][fila].setTranslateX(CASILLERO_ANCHO*col);
@@ -112,7 +114,7 @@ public class TableroPantallaJuego extends Pane {
 	private void borrarPieza(PosicionAjedrez pos){
 		borrarImagen(transformar(pos));
 	}
-	
+
 	private void posicionTablero(double x, double y){
 		System.out.println("");//TEST bborrarrr
 		System.out.println("x:"+x+" y: "+y);//Test borrarrr
@@ -121,13 +123,13 @@ public class TableroPantallaJuego extends Pane {
 		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);//Test borrarrr
 		clickTablero(transformar(fila, columna));
 	}
-	
+
 	private PosicionAjedrez transformar(int fila, int columna){
 		byte laFila = (byte) (8 - fila);
 		char laColumna = (char) (columna + 'a');
 		return new PosicionAjedrez(laFila, laColumna);
 	}
-	
+
 	private PosicionTablero transformar(PosicionAjedrez posAjedrez) {//anoto FUERTE que hay que cmabiar esto
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
@@ -135,7 +137,7 @@ public class TableroPantallaJuego extends Pane {
 		int laColumna = columna - 'a';
 		return new PosicionTablero(laFila, laColumna);
 	}
-	
+
 	private void clickTablero(PosicionAjedrez clickeado){
 		System.out.println("turno de:"+turno);
 		if(seleccionado == null) {
@@ -159,11 +161,11 @@ public class TableroPantallaJuego extends Pane {
 					}
 					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
 					System.out.println("Se movio una pieza");///////borrrar
-//					ia.juega();
-//					tabla.agregarJugada(elJuego.dameUltimaJugada());
-//					imprimirTablero();
-//					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
-					
+					//					ia.juega();
+					//					tabla.agregarJugada(elJuego.dameUltimaJugada());
+					//					imprimirTablero();
+					//					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+
 					if(elJuego.hayAlgoParaCoronar()){
 						NombrePieza pieza = null;
 						do{
@@ -182,7 +184,7 @@ public class TableroPantallaJuego extends Pane {
 			}
 		}
 	}
-	
+
 	private void imprimirTablero(){//poner variabler static
 		for(byte i=1;i<=8;i++){
 			for(char j='a';j<='h';j++){
@@ -195,17 +197,21 @@ public class TableroPantallaJuego extends Pane {
 		}
 		estadoDeJuego.actualizarEstado();
 	}
-	
+
 	private void pintarCasilleros(Set<PosicionAjedrez> movimientosPosibles){
 		for(PosicionAjedrez pos: movimientosPosibles){
 			pintarCasilleros(transformar(pos));
 		}
 	}
-	
+
 	private void pintarCasilleros(PosicionTablero pos){
 		GraphicsContext gc;
 		gc=tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
-		gc.setStroke(Color.BLACK);
+		if (elJuego.hayAlgo(transformar(pos.getFila(),pos.getColumna()))){
+			gc.setStroke(Color.RED);
+		}else{
+			gc.setStroke(Color.GREEN);
+		}
 		gc.setLineWidth(8);
 		gc.strokeRect(0,0,CASILLERO_ANCHO,CASILLERO_ALTO);
 	}
