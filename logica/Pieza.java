@@ -1,8 +1,9 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Pieza {
+public abstract class Pieza implements Serializable{
 		
 	private ColorPieza elColor;
 	private int cantMov;

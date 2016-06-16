@@ -1,6 +1,8 @@
 package logica;
 
-public class Casillero {
+import java.io.Serializable;
+
+public class Casillero implements Serializable{
 	private Pieza pieza;
 
 	public Casillero(Pieza pieza){

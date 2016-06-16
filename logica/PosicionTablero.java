@@ -1,8 +1,10 @@
 package logica;
 
+import java.io.Serializable;
+
 import excepcion.PosAjedrezInvalidaException;
 
-public class PosicionTablero {
+public class PosicionTablero implements Serializable{
 	
 	private int posX, posY;
 	

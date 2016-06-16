@@ -1,6 +1,8 @@
 package logica;
 
-public class Movimiento {
+import java.io.Serializable;
+
+public class Movimiento implements Serializable{
 
 	private int movX, movY;
 	/* comiendo: indica si se puede mover capturando en esa dirección

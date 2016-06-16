@@ -1,5 +1,6 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ Por esto, es la única clase que puede interactuar directamente con ellas, y deb
 administrar toda la información que éstas puedan proveerle para validar jugadas, hacerlas, revertirlas, coronar,
 saber si hay jaque, etc. El controlador (la clase juego) es el único que invoca directamente métodos de esta clase.
 */
-class Tablero {
+class Tablero implements Serializable{
 
 	private final static int SIZE_TABLERO=8;
 
