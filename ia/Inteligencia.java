@@ -133,6 +133,14 @@ public class Inteligencia {
 
 	@Deprecated
 	private void juegaPensando() {
+		if (elJuego.sePuedeEnrocarCorto()) {
+			elJuego.enrocarCorto();
+			return;
+		}
+		if (elJuego.sePuedeEnrocarLargo()) {
+			elJuego.enrocarLargo();
+			return;
+		}
 		List<PosicionAjedrez> posicionesDondeTengoPiezasQueSePuedenMover = new ArrayList<>();
 		for (byte fila = 1; fila <= 8; fila++) {
 			for (char columna = 'a'; columna <= 'h'; columna++) {
@@ -154,6 +162,8 @@ public class Inteligencia {
 			numeroAlAzar--;
 		}
 		elJuego.mover(posOrigen, iterador.next());
+		if (elJuego.hayAlgoParaCoronar())
+			elJuego.coronar(NombrePieza.DAMA);
 	}
 
 	private Element buscarJugada(List<Element> jugadas, Jugada laJugada) {
