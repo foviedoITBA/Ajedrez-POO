@@ -22,6 +22,8 @@ public class Juego {
 	
 	private Jugador jugadorBlanco,jugadorNegro;
 	private Jugador jugadorTurno;
+	
+	private boolean hayTiempo;
 
 	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
@@ -33,16 +35,26 @@ public class Juego {
 	/** Instancia una nueva partida lista para ser jugada
 	*/
 	public Juego() {
+		this(ColorPieza.BLANCO,false);
+	}
+	
+	public Juego(ColorPieza colorInicial, boolean hayTiempo){
 		elTablero = new Tablero();
 		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
 		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
 		jugadorNegro=new Jugador(ColorPieza.NEGRO);
-		jugadorTurno = jugadorBlanco;
+		
+		if(colorInicial == ColorPieza.BLANCO){
+			jugadorTurno = jugadorBlanco;
+		}else{
+			jugadorTurno = jugadorNegro;
+		}
+		
+		this.hayTiempo = hayTiempo;
+		jugadorTurno.iniciarTiempo();
 		hayCoronacionPendiente = false;
-		/**TEST**/
-		elTablero.imprimirTablero();
 	}
 	
 	//Agregar constructor para cargar una partida
@@ -234,6 +246,20 @@ public class Juego {
 	public void enrocarLargo() throws CoronacionPendienteException, EnroqueInvalidoException {
 		enrocar(true);		
 	}
+	
+	/** Informa el tiempo de juego que ha consumido en jugador blanco
+	@return cantidad de segundos consumidos
+	*/
+	public int dameTiempoBlancas(){
+		return jugadorBlanco.dameTiempo();
+	}
+	
+	/** Informa el tiempo de juego que ha consumido en jugador negro
+	@return cantidad de segundos consumidos
+	*/
+	public int dameTiempoNegras(){
+		return jugadorNegro.dameTiempo();
+	}
 
 	private void enrocar(boolean esLargo) throws CoronacionPendienteException, JugadaInvalidaException, EnroqueInvalidoException {
 		if (hayCoronacionPendiente)
@@ -255,11 +281,13 @@ public class Juego {
 	}
 
 	private void cambiarTurno() {
+		jugadorTurno.pausarTiempo();
 		if (jugadorTurno.equals(jugadorBlanco)){
 			jugadorTurno = jugadorNegro;
 		} else {
 			jugadorTurno = jugadorBlanco;
 		}
+		jugadorTurno.iniciarTiempo();
 	}
 	
 

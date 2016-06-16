@@ -3,6 +3,18 @@
 <Jugadas>
 	<e4 filaOrigen="2" columnaOrigen="e" filaDestino="4" columnaDestino="e" hacer="true">
 		<e5 filaOrigen="7" columnaOrigen="e" filaDestino="5" columnaDestino="e" hacer="true"> <!-- Open Game -->
+			<Df3 filaOrigen="1" columnaOrigen="d" filaDestino="3" columnaDestino="f" hacer="false">
+				<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+				</Cf6>
+			</Df3>
+			<Dh5 filaOrigen="1" columnaOrigen="d" filaDestino="5" columnaDestino="h" hacer="false">
+				<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+				</Cf6>
+			</Dh5>
+			<Ac4 filaOrigen="1" columnaOrigen="f" filaDestino="4" columnaDestino="c" hacer="false">
+				<Cf6 filaOrigen="8" columnaOrigen="g" filaDestino="6" columnaDestino="f" hacer="true">
+				</Cf6>
+			</Ac4>
 			<Cf3 filaOrigen="1" columnaOrigen="g" filaDestino="3" columnaDestino="f" hacer="true">
 				<Cc6 filaOrigen="8" columnaOrigen="b" filaDestino="6" columnaDestino="c" hacer="true">
 					<Ac4 filaOrigen="1" columnaOrigen="f" filaDestino="4" columnaDestino="c" hacer="true"> <!-- Italian game -->
