@@ -68,13 +68,18 @@ public class TableroPantallaJuego extends Pane {
 		ia = new Inteligencia(elJuego,Color.NEGRO);*/
 
 	}
-
-	public void deshacerJugada(){
+	
+	/**
+	 *  Este metodo deshace la jugada 
+	 */
+	public void deshacerJugada() {
 		if(elJuego.huboUnaJugada()){
 			elJuego.revertir();
+			tabla.removerJugada();
 			imprimirTablero();
-		}	
+		}
 	}
+
 	@Deprecated
 	private void  dibujarImagen(Image img, int fila, int col){
 		tablero[col][fila].getGraphicsContext2D().drawImage(img, 1.25, 1.25,60,60);//poner variables static
@@ -185,10 +190,10 @@ public class TableroPantallaJuego extends Pane {
 		}
 	}
 
-	private void imprimirTablero(){//poner variabler static
-		for(byte i=1;i<=8;i++){
-			for(char j='a';j<='h';j++){
-				PosicionAjedrez pos= new PosicionAjedrez(i, j);
+	public void imprimirTablero() {// poner variabler static
+		for (byte i = 1; i <= 8; i++) {
+			for (char j = 'a'; j <= 'h'; j++) {
+				PosicionAjedrez pos = new PosicionAjedrez(i, j);
 				borrarPieza(pos);
 				if(elJuego.hayAlgo(pos)){
 					dibujarPieza(elJuego.queHay(pos),pos);
@@ -206,8 +211,8 @@ public class TableroPantallaJuego extends Pane {
 
 	private void pintarCasilleros(PosicionTablero pos){
 		GraphicsContext gc;
-		gc=tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
-		if (elJuego.hayAlgo(transformar(pos.getFila(),pos.getColumna()))){
+		gc = tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
+		if(elJuego.hayAlgo(transformar(pos.getFila(),pos.getColumna()))){
 			gc.setStroke(Color.RED);
 		}else{
 			gc.setStroke(Color.GREEN);

@@ -1,8 +1,8 @@
-/* @font-face {
+/*  @font-face {
     font-family: Walkway-rounded;
     src: url("Walkwayrounded.ttf");
-}*/
-
+}
+*/
 .root{
 	-fx-background-color:#D3D3D3;
 	-fx-background-image: url('bg.jpg');
