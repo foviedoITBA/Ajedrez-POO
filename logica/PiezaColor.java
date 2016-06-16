@@ -1,6 +1,8 @@
 package logica;
 
-public class PiezaColor {
+import java.io.Serializable;
+
+public class PiezaColor implements Serializable{
 	private NombrePieza elNombre;
 	private ColorPieza elColor;
 	

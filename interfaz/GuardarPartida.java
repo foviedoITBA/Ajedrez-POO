@@ -29,7 +29,7 @@ public class GuardarPartida {
 		}));
 		Label label= new Label("Ingrese nombre de archivo");
 		TextField text= new TextField();
-		text.setMaxWidth(300);;
+		text.setMaxWidth(300);
 		
 		VBox vBox= new VBox(10);
 		HBox hBox= new HBox(10);
