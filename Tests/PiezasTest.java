@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 import logica.*;
 import static org.junit.Assert.*;
 

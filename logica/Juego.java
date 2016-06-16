@@ -22,6 +22,8 @@ public class Juego {
 	
 	private Jugador jugadorBlanco,jugadorNegro;
 	private Jugador jugadorTurno;
+	
+	private boolean hayTiempo;
 
 	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
@@ -33,17 +35,26 @@ public class Juego {
 	/** Instancia una nueva partida lista para ser jugada
 	*/
 	public Juego() {
+		this(ColorPieza.BLANCO,false);
+	}
+	
+	public Juego(ColorPieza colorInicial, boolean hayTiempo){
 		elTablero = new Tablero();
 		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
 		ahogado=false;
 		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
 		jugadorNegro=new Jugador(ColorPieza.NEGRO);
-		jugadorTurno = jugadorBlanco;
+		
+		if(colorInicial == ColorPieza.BLANCO){
+			jugadorTurno = jugadorBlanco;
+		}else{
+			jugadorTurno = jugadorNegro;
+		}
+		
+		this.hayTiempo = hayTiempo;
 		jugadorTurno.iniciarTiempo();
 		hayCoronacionPendiente = false;
-		/**TEST**/
-		elTablero.imprimirTablero();
 	}
 	
 	//Agregar constructor para cargar una partida

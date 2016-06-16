@@ -1,4 +1,4 @@
-package Tests;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,11 +12,10 @@ public class TableroTest {
 	@Test
 	public void testMovimiento() {
 		
-		Movimiento m = new Movimiento(10,10,true,true,false,10);//no tendria que poderse hacer
+		Movimiento m = new Movimiento(8,6,true,true,false,10);//no tendria que poderse hacer
 		System.out.println("EsComiendo:"+m.esComiendo()+"	EsSinComer:"+m.esSinComer());
-		new Movimiento(null);//podria validar que no sea null
-		assertEquals(m.dameMovX(),10);
-		assertEquals(m.dameMovY(),10);
+		assertEquals(m.dameMovX(),8);
+		assertEquals(m.dameMovY(),6);
 		assertEquals(m.esComiendo(),true);
 	}
 	
@@ -38,8 +37,6 @@ public class TableroTest {
 		Pieza peon = new Peon(ColorPieza.BLANCO);
 		assertEquals(peon.puedoCoronar(8),true);
 		tablero.moverPieza(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)8,'a'));
-		
-		tablero.coronar(NombrePieza.PEON,ColorPieza.BLANCO);//porque no puedo coronar??
-		assertEquals(tablero.moverPieza(new PosicionAjedrez((byte)-1, 'a'), new PosicionAjedrez((byte)3,'c')),null);
+		assertEquals(tablero.esMovimientoPosible(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)8,'a')),false);
 	}
 }

@@ -15,7 +15,6 @@ public class Movimiento {
 	private int cantidad;
 
 	public Movimiento(int movX, int movY, boolean comiendo, boolean sinComer, boolean saltando, int cantidad){
-		//habria que validar los parametros de entrada??
 		this.movX = movX;
 		this.movY = movY;
 		this.comiendo = comiendo;
