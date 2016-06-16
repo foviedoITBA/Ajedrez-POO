@@ -11,6 +11,7 @@ import logica.ColorPieza;
 import logica.Juego;
 
 public class PantallaJuego extends Pane{
+	Juego elJuego;
 	TableroPantallaJuego tablero;
 	TablaJugadas tablaJugadas;
 	EstadoDeJuego estadoDeJuego;
@@ -18,7 +19,9 @@ public class PantallaJuego extends Pane{
 	public PantallaJuego(int cantJugadores, ColorPieza color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
-		Juego elJuego=new Juego();
+		
+		elJuego=new Juego(color,hayTiempo);
+		
 		inicializarMenu();
 		tablaJugadas=new TablaJugadas();
 		botonEnroque = new BotonEnroque(elJuego);

@@ -134,16 +134,13 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void clickTablero(PosicionAjedrez clickeado){
-		System.out.println("turno de:"+turno);
 		if(seleccionado == null) {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno) {
 				return;
 			}
 			seleccionado=clickeado;
-			System.out.println("se selecciono un casillero "+seleccionado);//TESTTTT
 			movimientosPosibles=elJuego.dameMovimientos(seleccionado);
-			System.out.println(movimientosPosibles);//borrarrrrrr
-			pintarCasilleros(movimientosPosibles);//pintar casilleros
+			pintarCasilleros(movimientosPosibles);
 		}else{
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=turno){
 				if(movimientosPosibles.contains(clickeado)){
@@ -151,15 +148,9 @@ public class TableroPantallaJuego extends Pane {
 					tabla.agregarJugada(laJugada);
 					imprimirTablero();
 					seleccionado=null;
-					if(elJuego.hayJaqueMate()){
-						System.out.println("JAQUE MATE gana Jugador "+elJuego.dameTurno());
-					}
-					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
-					System.out.println("Se movio una pieza");///////borrrar
+					
 //					ia.juega();
-//					tabla.agregarJugada(elJuego.dameUltimaJugada());
-//					imprimirTablero();
-//					System.out.println((elJuego.hayJaque() ? "Sí" : "No") + " hay jaque");
+//					
 					
 					if(elJuego.hayAlgoParaCoronar()){
 						NombrePieza pieza = null;
@@ -175,7 +166,6 @@ public class TableroPantallaJuego extends Pane {
 				movimientosPosibles=elJuego.dameMovimientos(seleccionado);
 				imprimirTablero();
 				pintarCasilleros(movimientosPosibles);
-				//pintar casilleros
 			}
 		}
 	}
