@@ -16,11 +16,11 @@ public class EstadoDeJuego extends Pane {
 	
 	private Canvas img;
 	private Juego juego;
-	private BotonEnroque enroque;
+	//private BotonEnroque enroque;
 	
-	public EstadoDeJuego(Juego juego,BotonEnroque enroque){
+	public EstadoDeJuego(Juego juego){
 		this.juego = juego;
-		this.enroque = enroque;
+		//this.enroque = enroque;
 		this.setPrefSize(IMAGEN_ANCHO, IMAGEN_ALTO);
 		this.setTranslateX(DEFSAJE_X);
 		this.setTranslateY(DEFSAJE_Y);	
@@ -31,7 +31,7 @@ public class EstadoDeJuego extends Pane {
 	}
 	
 	public void actualizarEstado(){
-		enroque.actualizarEnroque();
+		//enroque.actualizarEnroque();
 		
 		if(juego.dameTurno() == ColorPieza.BLANCO){
 			this.getChildren().removeAll(img);

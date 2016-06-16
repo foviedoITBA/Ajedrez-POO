@@ -41,8 +41,13 @@ public class TablaJugadas extends Pane{
 		imprimirJugadas();
 	}
 	
-	public void removerJugada(Jugada jugada){
-		jugadas.remove(jugadas.size()-1);
+	public void removerJugada(){
+		int i=jugadas.size()-1;
+		if(!jugadas.isEmpty()){
+			this.getChildren().removeAll(number[i],label[i],canvas[i],comidas[i]);
+			jugadas.remove(jugadas.size()-1);
+			imprimirJugadas();
+		}
 	}
 	
 	public void imprimirJugadas(){

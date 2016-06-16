@@ -16,6 +16,7 @@ public class Inicio extends Pane {
 	public Inicio(){
 		super();
 		this.setPrefSize(700, 800);
+		
 		Label titulo = new MyLabel("",100,50,500,100);
 		titulo.setAlignment(Pos.TOP_CENTER);
 		titulo.setId("labelChess");

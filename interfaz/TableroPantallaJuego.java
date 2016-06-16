@@ -66,8 +66,11 @@ public class TableroPantallaJuego extends Pane implements Dimensiones {
 	 *  Este metodo deshace la jugada 
 	 */
 	public void deshacerJugada() {
-		elJuego.revertir();
-		imprimirTablero();
+		if(elJuego.huboUnaJugada()){
+			elJuego.revertir();
+			tabla.removerJugada();
+			imprimirTablero();
+		}
 	}
 
 	@Deprecated
@@ -185,7 +188,7 @@ public class TableroPantallaJuego extends Pane implements Dimensiones {
 		}
 	}
 
-	private void imprimirTablero() {// poner variabler static
+	public void imprimirTablero() {// poner variabler static
 		for (byte i = 1; i <= 8; i++) {
 			for (char j = 'a'; j <= 'h'; j++) {
 				PosicionAjedrez pos = new PosicionAjedrez(i, j);
@@ -207,7 +210,11 @@ public class TableroPantallaJuego extends Pane implements Dimensiones {
 	private void pintarCasilleros(PosicionTablero pos) {
 		GraphicsContext gc;
 		gc = tablero[pos.getColumna()][pos.getFila()].getGraphicsContext2D();
-		gc.setStroke(Color.BLACK);
+		if(elJuego.hayAlgo(transformar(pos.getFila(),pos.getColumna()))){
+			gc.setStroke(Color.RED);
+		}else{
+			gc.setStroke(Color.GREEN);
+		}
 		gc.setLineWidth(8);
 		gc.strokeRect(0, 0, CASILLERO_ANCHO, CASILLERO_ALTO);
 	}
