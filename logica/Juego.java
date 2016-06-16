@@ -294,31 +294,4 @@ public class Juego implements Serializable{
 	public void imprimirTablero() {
 		elTablero.imprimirTablero();
 	}
-
-	public boolean guardar(Juego juego,String nombreFile){
-		nombreFile = nombreFile+".txt";
-		try{
-			FileOutputStream file = new FileOutputStream(nombreFile,false);
-			ObjectOutputStream juegoGuardado = new ObjectOutputStream(file);
-			juegoGuardado.writeObject(juego);
-			juegoGuardado.close();
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	public static Juego cargar(String nombreFile) throws Exception{
-		nombreFile = nombreFile+".txt";
-		try{
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreFile));
-			Juego juegoRecuperado = (Juego) ois.readObject();
-			ois.close();
-			return juegoRecuperado;
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-			throw new Exception();
-		}	
-	}
 }

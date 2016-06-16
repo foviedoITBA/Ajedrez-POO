@@ -41,7 +41,7 @@ public class PantallaJuego extends Pane{
 		Button buttonGuardarPartida = new MyButton("Guardar", 130,670,200,50);
 			buttonGuardarPartida.getStyleClass().add("roundedButton");
 			buttonGuardarPartida.setOnAction(e->{
-				GuardarPartida.display();
+				GuardarPartida.display(elJuego);
 			});
 		
 		Button buttonDeshacer = new MyButton("Deshacer",360,670,200,50);
@@ -52,7 +52,7 @@ public class PantallaJuego extends Pane{
 			buttonMenu.getStyleClass().add("roundedButton");
 			buttonMenu.setOnAction(e ->{
 			if(ConfirmacionSalir.display()){
-				GuardarPartida.display();//Guardar Patidaaaaa
+				GuardarPartida.display(elJuego);//Guardar Patidaaaaa
 			}
 			((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio()));
 			});
