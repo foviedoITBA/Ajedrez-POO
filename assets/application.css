@@ -90,11 +90,11 @@
 }
 .paneEnroque .enroqueButton.enroqueCortoButton{
 	-fx-background-image: url('enroqueCortoButton.png');
-	-fx-opacity: 0;
+	-fx-opacity: 0.3;
 }
 .paneEnroque .enroqueButton.enroqueLargoButton{
 	-fx-background-image: url('enroqueLargoButton.png');
-	-fx-opacity: 0;
+	-fx-opacity: 0.3;
 }
 .paneEnroque .enroqueButton.show{
 	-fx-opacity: 1;

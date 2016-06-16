@@ -16,6 +16,7 @@ public class PantallaJuego extends Pane{
 	TablaJugadas tablaJugadas;
 	EstadoDeJuego estadoDeJuego;
 	BotonEnroque botonEnroque;
+	Reloj relojBlancas,relojNegras;
 	public PantallaJuego(int cantJugadores, ColorPieza color, boolean hayTiempo){
 		super();
 		this.setPrefSize(900, 800);
@@ -23,12 +24,14 @@ public class PantallaJuego extends Pane{
 		elJuego=new Juego(color,hayTiempo);
 		
 		inicializarMenu();
+		relojBlancas = new Reloj(elJuego,ColorPieza.BLANCO);
+		relojNegras = new Reloj(elJuego,ColorPieza.NEGRO);
 		tablaJugadas=new TablaJugadas();
 		botonEnroque = new BotonEnroque(elJuego);
 		estadoDeJuego = new EstadoDeJuego(elJuego,botonEnroque);
 		tablero= new TableroPantallaJuego(elJuego,estadoDeJuego,tablaJugadas,color);
 		
-		this.getChildren().addAll(tablero,estadoDeJuego,tablaJugadas,botonEnroque);
+		this.getChildren().addAll(tablero,estadoDeJuego,tablaJugadas,relojBlancas,relojNegras,botonEnroque);
 		
 		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 	}

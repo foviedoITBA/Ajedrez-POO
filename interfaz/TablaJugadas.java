@@ -9,7 +9,7 @@ public class TablaJugadas extends Pane{
 	public static double JUGADS_ALTO=150;
 	
 	private static double DEFSAJE_X=100+500+20;
-	private static double DEFSAJE_Y=150+150+40;
+	private static double DEFSAJE_Y=150+150+20;
 	private ArrayList<Jugada> jugadas;
 	private MyLabel label[],number[];
 	private PiezaImagen imagenes;
