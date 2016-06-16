@@ -9,23 +9,41 @@ import excepcion.CasilleroVacioException;
 import excepcion.CoronacionInvalidaException;
 import excepcion.EnroqueInvalidoException;
 
-public class Tablero {
+
+/**	Esta clase es el componente fundamental del modelo (en el sentido MVC) del programa de ajedrez.
+Es la representación del tablero físico y es la única que sabe dónde están ubicadas las piezas.
+Por esto, es la única clase que puede interactuar directamente con ellas, y debe consecuentemente
+administrar toda la información que éstas puedan proveerle para validar jugadas, hacerlas, revertirlas, coronar,
+saber si hay jaque, etc. El controlador (la clase juego) es el único que invoca directamente métodos de esta clase.
+*/
+class Tablero {
 
 	private final static int SIZE_TABLERO=8;
 
 	private Casillero[][] losCasilleros;	// Una matriz de casilleros, uno por cada escaque
 
-	public Tablero(){
+	/**	Crea un nuevo tablero con todas las piezas en las posiciones adecuadas
+	*/
+	Tablero(){
 		losCasilleros = new Casillero[SIZE_TABLERO][SIZE_TABLERO];
 		initTablero();
 	}
 
-	public boolean hayAlgo(PosicionAjedrez posAjedrez) {
+	/**	Permite saber si una posición está ocupada
+	@param posAjedrez La posición a inspeccionar
+	@return true si está ocupada
+	*/
+	boolean hayAlgo(PosicionAjedrez posAjedrez) {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		return !losCasilleros[posTablero.getX()][posTablero.getY()].isEmpty();
 	}
 	
-	public PiezaColor queHay(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
+	/**	Permite saber qué pieza y de qué color se encuentra ocupando una determinada posición
+	@param posAjedrez La posición a inspeccionar
+	@return Un objeto PiezaColor con el nombre de la pieza y el color
+	@throws CasilleroVacioException Se lanza si el casillero está vacío; debe censarse previamente para evitarlo
+	*/
+	PiezaColor queHay(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
 		if (laPieza == null){
@@ -36,8 +54,12 @@ public class Tablero {
 		return new PiezaColor(elNombre, elColor);
 	}
 
-	// Devuelve las posiciones a las que puede ir la pieza en posAjedrez
-	public Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
+	/**	Permite saber a qué posiciones puede ir la pieza que se encuentre en la posición solicitada
+	@param posAjedrez La posición a inspeccionar
+	@return Un Set de objetos PosicionAjedrez con todas las posiciones a las que puede ir la pieza
+	@throws CasilleroVacioException Se lanza si el casillero está vacío; debe censarse previamente para evitarlo
+	*/
+	Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		Pieza laPieza = losCasilleros[posTablero.getX()][posTablero.getY()].getPieza();
 		if (laPieza == null){
@@ -51,12 +73,18 @@ public class Tablero {
 		return lasPosicionesAjedrez;
 	}
 
-	public boolean esMovimientoPosible(PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
+	/**	Permite saber si es posible que la pieza en una determinada posición vaya a otra
+	@param posOrigen La posición en la que se encuentra la pieza que se desearía mover
+	@param posDestino La posición a la que se quiere saber si puede ir
+	@return true si el movimiento es posible
+	@throws CasilleroVacioException Se lanza si el casillero de posOrigen está vacío; debe censarse previamente para evitarlo
+	*/
+	boolean esMovimientoPosible(PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
 		PosicionTablero posOrigenT = transformarPosicion(posOrigen);
 		PosicionTablero posDestinoT = transformarPosicion(posDestino);
 		Pieza piezaMoviendo = losCasilleros[posOrigenT.getX()][posOrigenT.getY()].getPieza();
 		if (piezaMoviendo == null){
-			return false;
+			throw new CasilleroVacioException();
 		}
 		Set<PosicionTablero> posicionesPosibles = null;
 		posicionesPosibles = posicionesPosibles(posOrigenT);
@@ -66,7 +94,12 @@ public class Tablero {
 		return false;
 	}
 	
-	public Jugada moverPieza(PosicionAjedrez posOrigen, PosicionAjedrez posDestino){
+	/**	Realiza el movimiento de la pieza en una determinada posición a otra
+	@param posOrigen La posición de la pieza que se desea mover
+	@param posDestino La posición a la que se desea que vaya la pieza
+	@return Un objeto Jugada con la jugada realizada
+	*/
+	Jugada moverPieza(PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
 		PosicionTablero posOrigenT = transformarPosicion(posOrigen);
 		PosicionTablero posDestinoT = transformarPosicion(posDestino);
 		Casillero casOrigen = losCasilleros[posOrigenT.getX()][posOrigenT.getY()];
@@ -79,7 +112,10 @@ public class Tablero {
 		return new Jugada(posOrigen, posDestino, piezaMoviendo, piezaComida);
 	}
 
-	public void revertir(Jugada laJugada) {
+	/**	Permite revertir una determinada jugada
+	@param laJugada La jugada a revertir
+	*/
+	void revertir(Jugada laJugada) {
 		PosicionTablero posOrigenT = transformarPosicion(laJugada.damePosicionOrigen());
 		PosicionTablero posDestinoT = transformarPosicion(laJugada.damePosicionDestino());
 		Casillero casOrigen = losCasilleros[posOrigenT.getX()][posOrigenT.getY()];
@@ -98,15 +134,27 @@ public class Tablero {
 		}
 	}
 	
-	public boolean hayJaqueMate(ColorPieza perdedor) {
+	/**	Permite saber si un jugador está en jaque mate
+	@param perdedor El color de las piezas del jugador que se desea saber si está en jaque mate
+	@return true si está en jaque mate
+	*/
+	boolean hayJaqueMate(ColorPieza perdedor) {
 		return (hayJaque(perdedor) && !hayMovimientosPosibles(perdedor));
 	}
 
-	public boolean hayAhogado(ColorPieza ahogado) {
+	/**	Permite saber si un jugador está ahogado
+	@param ahogado El color de las piezas del jugador que se desea saber si está ahogado
+	@return true si está ahogado
+	*/
+	boolean hayAhogado(ColorPieza ahogado) {
 		return (!hayJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
-	public boolean hayJaque(ColorPieza jaqueado) {
+	/** Permite saber si un determinado jugador está en jaque
+	@param jaqueado El color de las piezas del jugador que se desea saber si está en jaque
+	@return true si está en jaque
+	*/
+	boolean hayJaque(ColorPieza jaqueado) {
 		PosicionTablero posRey = buscoAlRey(jaqueado);
 		boolean estaEnJaque = false;
 		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
@@ -122,7 +170,10 @@ public class Tablero {
 		return estaEnJaque;
 	}
 
-	public boolean hayAlgoParaCoronar() {
+	/**	Permite saber si hay alguna coronación pendiente por hacer (es decir, si se debe elegir una pieza)
+	@return true si hay coronación pendiente
+	*/
+	boolean hayAlgoParaCoronar() {
 		boolean hayAlgo = false;
 		for (int i = 0; i < SIZE_TABLERO && !hayAlgo; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !hayAlgo; j++) {
@@ -134,7 +185,12 @@ public class Tablero {
 		return hayAlgo;
 	}
 
-	public void coronar(NombrePieza laPieza, ColorPieza elColor) {
+	/**	Permite elegir el color y la pieza a coronar
+	@param laPieza El nombre de la pieza
+	@param elColor El color de la pieza
+	@throws CoronacionInvalidaException Se lanza si la coronación solicitada no es válida, ya sea por no haber coronación pendiente para ese jugador o por elegir una pieza inválida como un rey
+	*/
+	void coronar(NombrePieza laPieza, ColorPieza elColor) throws CoronacionInvalidaException {
 		boolean encontrado = false;
 		for (int i = 0; i < SIZE_TABLERO && !encontrado; i++) {
 			for (int j = 0; j < SIZE_TABLERO && !encontrado; j++) {
@@ -166,7 +222,11 @@ public class Tablero {
 			throw new CoronacionInvalidaException();
 	}
 
-	public boolean puedeEnrocarCorto(ColorPieza elColor) {
+	/** Informa si el jugador cutas piezas son de un dado color enrocar corto
+	@param elColor El color de las piezas que se desea saber si pueden enrocar corto
+	@return true si se puede enrocar corto
+	*/
+	boolean puedeEnrocarCorto(ColorPieza elColor) {
 		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
 		int colTorre = 7;
 		PosicionTablero posRey = buscoAlRey(elColor);
@@ -202,7 +262,11 @@ public class Tablero {
 		return true;		// Si todo se cumple, se puede enrocar
 	}
 
-	public boolean puedeEnrocarLargo(ColorPieza elColor) {
+	/** Informa si el jugador cutas piezas son de un dado color enrocar largo
+	@param elColor El color de las piezas que se desea saber si pueden enrocar largo
+	@return true si se puede enrocar largo
+	*/
+	boolean puedeEnrocarLargo(ColorPieza elColor) {
 		int fila = (elColor == ColorPieza.BLANCO ? 7 : 0);
 		int colTorre = 0;
 		PosicionTablero posDelRey = buscoAlRey(elColor);
@@ -239,13 +303,21 @@ public class Tablero {
 		return true;	// Si todo se cumple, se puede enrocar
 	}
 
-	public Jugada enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
+	/** Las piezas del color dado enrocan corto
+	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
+	*/
+	Jugada enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
 		if (!puedeEnrocarCorto(elColor))
 			throw new EnroqueInvalidoException();
 		return enrocar(elColor, false);
 	}
 
-	public Jugada enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
+	/** Las piezas del color dado enrocan corto
+	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
+	*/
+	Jugada enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
 		if (!puedeEnrocarLargo(elColor))	
 			throw new EnroqueInvalidoException();
 		return enrocar(elColor, true);
@@ -271,32 +343,6 @@ public class Tablero {
 		PosicionAjedrez posDestinoTorre = transformarPosicion(new PosicionTablero(fila, colDestinoTorre));
 		return new Jugada(posOrigenRey, posDestinoRey, elRey, null, posOrigenTorre, posDestinoTorre, laTorre);
 	}
-
-	/*private boolean elReyEstaEnJaque(Color perdedor) {
-		
-		PosicionTablero posRey = buscoAlRey(perdedor);
-
-		// Me fijo si hay alguna pieza del adversario que se la pueda comer
-		boolean estaEnJaque = false;
-		Color ganador = null;
-		if (perdedor == Color.BLANCO){
-			ganador = Color.NEGRO;
-		}else{
-			ganador = Color.BLANCO;
-		}
-		for (int i = 0; i < SIZE_TABLERO && !estaEnJaque; i++) {
-			for (int j = 0; j < SIZE_TABLERO && !estaEnJaque; j++) {
-				if (!losCasilleros[i][j].isEmpty() && losCasilleros[i][j].getPieza().dameColor() == ganador) {
-					if (analizoMovimientos(new PosicionTablero(i,j), true).contains(posRey)){
-						estaEnJaque = true;
-					}
-				}
-			}
-		}
-
-		return estaEnJaque;
-
-	}*/
 
 	private boolean hayMovimientosPosibles(ColorPieza perdedor) {
 		
@@ -331,7 +377,7 @@ public class Tablero {
 		return new PosicionAjedrez(laFila, laColumna);
 	}
 	
-	private void initTablero() { //coloco el tablero con las piezas en la posicion inicial
+	private void initTablero() {
 
 		losCasilleros[0][0]=new Casillero(new Torre(ColorPieza.NEGRO));
 		losCasilleros[0][1]=new Casillero(new Caballo(ColorPieza.NEGRO));
@@ -450,11 +496,8 @@ public class Tablero {
 				}else{
 					cont=false;
 				}
-
 			}
-
 		}
-
 		return movPosibles;
 	}
 
@@ -479,12 +522,12 @@ public class Tablero {
 	/***************SÓLO PARA TESTEAR**********************/
 	public void imprimirTablero(){
 		System.out.print("\n\n*************************************************************\n\n");
-		for(int i=0;i<SIZE_TABLERO;i++){
-			for(int j=0;j<SIZE_TABLERO;j++){
+		for(int i=0;i<SIZE_TABLERO;i++) {
+			for(int j=0;j<SIZE_TABLERO;j++) {
 
-				if(losCasilleros[i][j].isEmpty()){
+				if(losCasilleros[i][j].isEmpty()) {
 					System.out.print("0\t");
-				}else{
+				} else {
 					if (losCasilleros[i][j].getPieza() instanceof Torre)
 						System.out.print("T");
 					else if (losCasilleros[i][j].getPieza() instanceof Caballo)
@@ -499,16 +542,12 @@ public class Tablero {
 						System.out.print("P");
 					if(losCasilleros[i][j].getPieza().dameColor().equals(ColorPieza.BLANCO)){
 						System.out.print("(B)\t");
-					}else{
+					} else {
 						System.out.print("(N)\t");
 					}
 				}
-
 			}
 			System.out.print("\n");
 		}
-
 	}
-	
-
 }
