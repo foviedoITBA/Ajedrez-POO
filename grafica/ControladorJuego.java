@@ -31,8 +31,6 @@ public class ControladorJuego {
 			jugadorNegro= new JugadorHumano(elJuego,ColorPieza.NEGRO);
 		}
 		
-		//elTablero.imprimirTablero();
-		
 	}
 	
 	
@@ -46,15 +44,31 @@ public class ControladorJuego {
 	
 	
 	public void deshacerJugada(){
-		
+		if(elJuego.huboUnaJugada()){
+			if(esUnJugador){
+				elJuego.revertir();
+			}
+			elJuego.revertir();
+			
+			elTablero.imprimirTablero();
+			estado.actualizarEstado();
+		}
 	}
 	
 	public void enroqueLargo(){
-		
+		if(elJuego.sePuedeEnrocarLargo()){
+			elJuego.enrocarLargo();
+			elTablero.imprimirTablero();
+			estado.actualizarEstado();
+		}
 	}
 	
 	public void enroqueCorto(){
-		
+		if(elJuego.sePuedeEnrocarCorto()){
+			elJuego.enrocarCorto();
+			elTablero.imprimirTablero();
+			estado.actualizarEstado();
+		}
 	}
 	
 	public void jugar(PosicionAjedrez pos){

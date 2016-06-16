@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import javafx.geometry.Pos;
@@ -63,7 +64,7 @@ public class GuardarPartida {
 			ObjectOutputStream juegoGuardado = new ObjectOutputStream(file);
 			juegoGuardado.writeObject(juego);
 			juegoGuardado.close();
-		}catch(Exception e){
+		}catch(IOException e){
 			System.out.println(e.getMessage());
 		}
 	}

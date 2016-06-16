@@ -1,6 +1,7 @@
 package grafica;
 
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import logica.ColorPieza;
@@ -11,10 +12,14 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 	
 	private Canvas img;
 	private Juego juego;
+	private Button enroqueLargo;
+	private Button enroqueCorto;
 
 	
-	public EstadoDeJuego(Juego juego){
+	public EstadoDeJuego(Juego juego,Button enroqueLargo, Button enroqueCorto){
 		this.juego = juego;
+		this.enroqueCorto = enroqueCorto;
+		this.enroqueLargo = enroqueLargo;
 		this.setPrefSize(EST_ANCHO, EST_ALTO);
 		this.setTranslateX(DES_ESTADO_X);
 		this.setTranslateY(DES_ESTADO_Y);	
@@ -60,6 +65,19 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 			img = new MyCanvas(new Image("/assets/jaqueMate.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
 		}
+		
+		if(juego.sePuedeEnrocarCorto()){
+			enroqueCorto.getStyleClass().add("show");
+		}else{
+			enroqueCorto.getStyleClass().remove("show");
+		}
+		
+		if(juego.sePuedeEnrocarLargo()){
+			enroqueLargo.getStyleClass().add("show");
+		}else{
+			enroqueLargo.getStyleClass().remove("show");
+		}
+		
 	}
 	
 }

@@ -16,12 +16,20 @@ public class PantallaJuego extends Pane implements Dimensiones{
 	Tablero elTablero;
 	Juego elJuego;
 	EstadoDeJuego estado;
+	Button enroqueLargo;
+	Button enroqueCorto;
 	
 	
 	public PantallaJuego(int cantJugadores, ColorPieza colorElegido){
 		this.setPrefSize(900, 800);
+		
+		
+		enroqueCorto = new MyButton("",770,520,70,70);
+		enroqueLargo = new MyButton("",680,520,70,70);
+		
+		
 		elJuego= new Juego();
-		estado= new EstadoDeJuego(elJuego);
+		estado= new EstadoDeJuego(elJuego,enroqueLargo,enroqueCorto);
 		elTablero = new Tablero(elJuego);
 		controlador=new ControladorJuego(cantJugadores,colorElegido,elTablero,elJuego,estado);
 		
@@ -36,7 +44,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 		Button buttonGuardarPartida = new MyButton("Guardar", 130,670,200,50);
 			buttonGuardarPartida.getStyleClass().add("roundedButton");
 			buttonGuardarPartida.setOnAction(e->{
-				GuardarPartida.display();
+				GuardarPartida.display(elJuego);
 			});
 		
 		Button buttonDeshacer = new MyButton("Deshacer",360,670,200,50);
@@ -47,18 +55,18 @@ public class PantallaJuego extends Pane implements Dimensiones{
 			buttonMenu.getStyleClass().add("roundedButton");
 			buttonMenu.setOnAction(e ->{
 				if(ConfirmacionSalir.display()){
-					GuardarPartida.display();
+					GuardarPartida.display(elJuego);
 				}
 				((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio()));
 			});
 			
-		Button enroqueLargo = new MyButton("",680,520,70,70);
+//		enroqueLargo = new MyButton("",680,520,70,70);
 			enroqueLargo.setOnAction(e->controlador.enroqueLargo());
 			enroqueLargo.getStyleClass().add("enroqueButton");
 			enroqueLargo.getStyleClass().add("enroqueLargoButton");
 			
 			
-		Button enroqueCorto = new MyButton("",770,520,70,70);
+//		enroqueCorto = new MyButton("",770,520,70,70);
 			enroqueCorto.setOnAction(e->controlador.enroqueCorto());
 			enroqueCorto.getStyleClass().add("enroqueButton");
 			enroqueCorto.getStyleClass().add("enroqueCortoButton");

@@ -56,8 +56,6 @@ public class Juego implements Serializable{
 		hayCoronacionPendiente = false;
 	}
 
-	//Agregar constructor para cargar una partida
-
 	/** Permite conocer si hay alguna pieza en una determinana posición del tablero
 	@param posicion La posicion del tablero a inspeccionar
 	@return Devuelve si la posición está ocupada (true) o no (false)
