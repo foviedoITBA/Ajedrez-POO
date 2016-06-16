@@ -114,11 +114,8 @@ public class TableroPantallaJuego extends Pane {
 	}
 	
 	private void posicionTablero(double x, double y){
-		System.out.println("");//TEST bborrarrr
-		System.out.println("x:"+x+" y: "+y);//Test borrarrr
 		int fila= (int) ((y-DEFSAJE_Y)/CASILLERO_ALTO);
 		int columna= (int) ((x-DEFSAJE_X)/CASILLERO_ANCHO);
-		System.out.println("Click en Fila: "+fila+ "Columna: "+columna);//Test borrarrr
 		clickTablero(transformar(fila, columna));
 	}
 	

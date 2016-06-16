@@ -40,6 +40,7 @@ public class Juego {
 		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
 		jugadorNegro=new Jugador(ColorPieza.NEGRO);
 		jugadorTurno = jugadorBlanco;
+		jugadorTurno.iniciarTiempo();
 		hayCoronacionPendiente = false;
 		/**TEST**/
 		elTablero.imprimirTablero();
@@ -234,6 +235,20 @@ public class Juego {
 	public void enrocarLargo() throws CoronacionPendienteException, EnroqueInvalidoException {
 		enrocar(true);		
 	}
+	
+	/** Informa el tiempo de juego que ha consumido en jugador blanco
+	@return cantidad de segundos consumidos
+	*/
+	public int dameTiempoBlancas(){
+		return jugadorBlanco.dameTiempo();
+	}
+	
+	/** Informa el tiempo de juego que ha consumido en jugador negro
+	@return cantidad de segundos consumidos
+	*/
+	public int dameTiempoNegras(){
+		return jugadorNegro.dameTiempo();
+	}
 
 	private void enrocar(boolean esLargo) throws CoronacionPendienteException, JugadaInvalidaException, EnroqueInvalidoException {
 		if (hayCoronacionPendiente)
@@ -255,11 +270,13 @@ public class Juego {
 	}
 
 	private void cambiarTurno() {
+		jugadorTurno.pausarTiempo();
 		if (jugadorTurno.equals(jugadorBlanco)){
 			jugadorTurno = jugadorNegro;
 		} else {
 			jugadorTurno = jugadorBlanco;
 		}
+		jugadorTurno.iniciarTiempo();
 	}
 	
 
