@@ -12,23 +12,35 @@ import logica.Juego;
 import logica.PosicionAjedrez;
 
 public class PantallaJuego extends Pane implements Dimensiones{
-	ControladorJuego controlador;
-	Tablero elTablero;
-	Juego elJuego;
-	EstadoDeJuego estado;
-	Button enroqueLargo;
-	Button enroqueCorto;
-	
+	private ControladorJuego controlador;
+	private Tablero elTablero;
+	private Juego elJuego;
+	private EstadoDeJuego estado;
+	private Button enroqueLargo;
+	private Button enroqueCorto;
+	private int cantJugadores;
+	private ColorPieza colorElegido;
 	
 	public PantallaJuego(int cantJugadores, ColorPieza colorElegido){
-		this.setPrefSize(900, 800);
+		this(null,cantJugadores,colorElegido);
+	}
+	
+	public PantallaJuego(Juego juego,int cantJugadores, ColorPieza colorElegido){
+		this.cantJugadores = cantJugadores;
+		this.colorElegido = colorElegido;
 		
+		this.setPrefSize(900, 800);
+		this.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());
 		
 		enroqueCorto = new MyButton("",770,520,70,70);
 		enroqueLargo = new MyButton("",680,520,70,70);
 		
+		if(juego == null){
+			elJuego= new Juego();
+		}else{
+			elJuego = juego;
+		}
 		
-		elJuego= new Juego();
 		estado= new EstadoDeJuego(elJuego,enroqueLargo,enroqueCorto);
 		elTablero = new Tablero(elJuego);
 		controlador=new ControladorJuego(cantJugadores,colorElegido,elTablero,elJuego,estado);
@@ -44,7 +56,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 		Button buttonGuardarPartida = new MyButton("Guardar", 130,670,200,50);
 			buttonGuardarPartida.getStyleClass().add("roundedButton");
 			buttonGuardarPartida.setOnAction(e->{
-				GuardarPartida.display(elJuego);
+				GuardarPartida.display(elJuego, cantJugadores, colorElegido);
 			});
 		
 		Button buttonDeshacer = new MyButton("Deshacer",360,670,200,50);
@@ -55,7 +67,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 			buttonMenu.getStyleClass().add("roundedButton");
 			buttonMenu.setOnAction(e ->{
 				if(ConfirmacionSalir.display()){
-					GuardarPartida.display(elJuego);
+					GuardarPartida.display(elJuego, cantJugadores, colorElegido);
 				}
 				((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio()));
 			});

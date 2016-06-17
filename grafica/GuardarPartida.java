@@ -13,10 +13,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import logica.ColorPieza;
 import logica.Juego;
 
 public class GuardarPartida {
-	public static void display(Juego juego){
+	public static void display(Juego juego, int cantJugadores, ColorPieza color){
 		
 		Stage stage= new Stage();
 		
@@ -30,7 +31,7 @@ public class GuardarPartida {
 		guardar.getStyleClass().add("squareButton");
 		guardar.setOnAction(e->{
 			String fileName = file.getText();
-			guardar(juego,fileName);
+			guardar(juego, cantJugadores, color,fileName);
 			stage.close();
 		});
 
@@ -56,12 +57,14 @@ public class GuardarPartida {
 		stage.showAndWait();
 	}
 	
-	private static void guardar(Juego juego,String nombreFile){
-		nombreFile = nombreFile+".txt";
+	private static void guardar(Juego juego, int cantJugadores, ColorPieza color, String nombreFile){
+		nombreFile = nombreFile+".chess";
 		try{
 			FileOutputStream file = new FileOutputStream(nombreFile,false);
 			ObjectOutputStream juegoGuardado = new ObjectOutputStream(file);
 			juegoGuardado.writeObject(juego);
+			juegoGuardado.writeInt(cantJugadores);
+			juegoGuardado.writeObject(color);
 			juegoGuardado.close();
 		}catch(IOException e){
 			System.out.println(e.getMessage());
