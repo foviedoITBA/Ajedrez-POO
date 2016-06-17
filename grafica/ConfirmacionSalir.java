@@ -17,6 +17,7 @@ public class ConfirmacionSalir {
 		Stage stage= new Stage();
 
 		Button si= new Button("Si");
+		si.setPrefSize(150,50);
 		si.getStyleClass().add("alertaButton");
 		si.getStyleClass().add("squareButton");
 		si.setOnAction(e->{
@@ -25,6 +26,7 @@ public class ConfirmacionSalir {
 		});
 
 		Button no= new Button("No");
+		no.setPrefSize(150,50);
         no.getStyleClass().add("alertaButton");
 		no.getStyleClass().add("squareButton");
 		no.setOnAction((e->{

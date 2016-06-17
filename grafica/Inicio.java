@@ -8,7 +8,6 @@ import java.io.ObjectInputStream;
 
 import grafica.MyButton;
 import grafica.MyLabel;
-import grafica.OpcionesDosJugadores;
 import grafica.OpcionesUnJugador;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -41,7 +40,7 @@ public class Inicio extends Pane {
 
 		Button buttonDosJugadores = new MyButton("Dos Jugadores",200,320,300,100);
 		buttonDosJugadores.getStyleClass().add("roundedButton");
-		buttonDosJugadores.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene(new OpcionesDosJugadores())));
+		buttonDosJugadores.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene(new PantallaJuego(2,ColorPieza.BLANCO))));
 
 		Button buttonCargarPartida = new MyButton("Cargar Partida",200,440,300,100);
 		buttonCargarPartida.getStyleClass().add("roundedButton");

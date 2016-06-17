@@ -23,10 +23,10 @@ public class TablaJugadas extends Pane implements Dimensiones{
 		
 		jugadas= new ArrayList<>();
 		imagenes= new PiezaImagen();
-		canvas = new MyCanvas[10];
-		comidas = new MyCanvas[10];
-		label= new MyLabel[10];
-		number = new MyLabel[10];
+		canvas = new MyCanvas[TABLA_JUGADAS];
+		comidas = new MyCanvas[TABLA_JUGADAS];
+		label= new MyLabel[TABLA_JUGADAS];
+		number = new MyLabel[TABLA_JUGADAS];
 		fila=0;
 	}
 	
@@ -47,13 +47,13 @@ public class TablaJugadas extends Pane implements Dimensiones{
 	
 	public void imprimrJugada(){
 		int index;
-		if(jugadas.size()<10){
+		if(jugadas.size()<TABLA_JUGADAS){
 			index=0;
 		}else{
-			index=jugadas.size()-10;
+			index=jugadas.size()-TABLA_JUGADAS;
 		}
 		
-		for(fila=0; fila<jugadas.size() && fila<10;fila++, index++){
+		for(fila=0; fila<jugadas.size() && fila<TABLA_JUGADAS;fila++, index++){
 			Jugada jugada=jugadas.get(index);
 			int desfasajeX = 0, desfasajeY = fila/2;
 			if(jugada.damePiezaColorMovida().dameColor() == ColorPieza.NEGRO){
