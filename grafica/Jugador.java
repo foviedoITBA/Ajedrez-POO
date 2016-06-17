@@ -8,4 +8,6 @@ interface Jugador {
 	public void jugar(PosicionAjedrez pos);
 	
 	public ColorPieza dameColor();
+
+	public boolean huboUnaJugada();
 }

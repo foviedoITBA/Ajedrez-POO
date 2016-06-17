@@ -59,11 +59,13 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 			this.getChildren().remove(img);
 			img = new MyCanvas(new Image("/assets/ahogado.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
+			Ganaste.display("Ahogado", juego.dameTurno());
 		}
 		if(juego.hayJaqueMate()){
 			this.getChildren().remove(img);
 			img = new MyCanvas(new Image("/assets/jaqueMate.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
+			Ganaste.display("Jaque mate", juego.dameTurno());
 		}
 		
 		if(juego.sePuedeEnrocarCorto()){

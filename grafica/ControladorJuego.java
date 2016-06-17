@@ -9,14 +9,16 @@ public class ControladorJuego {
 	private Juego elJuego;
 	private final boolean esUnJugador;
 	private Tablero elTablero;
-	EstadoDeJuego estado;
+	private EstadoDeJuego estado;
+	private TablaJugadas tabla;
 	
 	
-	public ControladorJuego (int cantJugadores,ColorPieza colorElegido, Tablero tablero,Juego elJuego,EstadoDeJuego estado){
+	public ControladorJuego (int cantJugadores,ColorPieza colorElegido, Tablero tablero,Juego elJuego,EstadoDeJuego estado,TablaJugadas tabla){
 		this.elJuego=elJuego;
 		esUnJugador = (cantJugadores == 1);
 		elTablero = tablero;
 		this.estado=estado;
+		this.tabla=tabla;
 		
 		if(esUnJugador){
 			if(colorElegido == ColorPieza.BLANCO){
@@ -47,9 +49,10 @@ public class ControladorJuego {
 		if(elJuego.huboUnaJugada()){
 			if(esUnJugador){
 				elJuego.revertir();
+				tabla.removerJugada();
 			}
 			elJuego.revertir();
-			
+			tabla.removerJugada();
 			elTablero.imprimirTablero();
 			estado.actualizarEstado();
 		}
@@ -85,8 +88,9 @@ public class ControladorJuego {
 			}
 		}
 		estado.actualizarEstado();
-		//imprimo tabla jugadas
-		
+		if(jugadorTurno.huboUnaJugada()){
+			tabla.agregarJugada(elJuego.dameUltimaJugada());
+		}
 	}
 	
 	

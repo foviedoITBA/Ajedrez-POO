@@ -31,7 +31,7 @@ public class Inicio extends Pane {
 
 		Button buttonCargarPartida = new MyButton("Cargar Partida",200,440,300,100);
 		buttonCargarPartida.getStyleClass().add("roundedButton");
-		buttonCargarPartida.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene(new PantallaJuego())));
+		//buttonCargarPartida.setOnAction(e -> ((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene(new PantallaJuego())));
 		
 		Button buttonSalir = new MyButton("Salir",200,560,300,100);
 		buttonSalir.getStyleClass().add("roundedButton");

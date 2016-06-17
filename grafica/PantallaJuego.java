@@ -16,6 +16,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 	Tablero elTablero;
 	Juego elJuego;
 	EstadoDeJuego estado;
+	TablaJugadas tabla;
 	Button enroqueLargo;
 	Button enroqueCorto;
 	
@@ -31,7 +32,8 @@ public class PantallaJuego extends Pane implements Dimensiones{
 		elJuego= new Juego();
 		estado= new EstadoDeJuego(elJuego,enroqueLargo,enroqueCorto);
 		elTablero = new Tablero(elJuego);
-		controlador=new ControladorJuego(cantJugadores,colorElegido,elTablero,elJuego,estado);
+		tabla= new TablaJugadas();
+		controlador=new ControladorJuego(cantJugadores,colorElegido,elTablero,elJuego,estado,tabla);
 		
 		inicializarMenu();
 	}
@@ -73,7 +75,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 			
 		this.setOnMouseClicked( e->controlador.jugar( convertirClick( e.getSceneX() , e.getSceneY() ) ) );
 
-		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,buttonMenu,enroqueCorto,enroqueLargo,elTablero,estado);
+		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,buttonMenu,enroqueCorto,enroqueLargo,elTablero,estado,tabla);
 	}
 	
 	private PosicionAjedrez convertirClick(double x, double y){

@@ -25,4 +25,9 @@ class JugadorInteligencia implements Jugador {
 		return elColor;
 	}
 
+	@Override
+	public boolean huboUnaJugada() {
+		return true;
+	}
+
 }

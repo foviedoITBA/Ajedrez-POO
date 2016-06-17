@@ -12,15 +12,18 @@ class JugadorHumano implements Jugador {
 	private ColorPieza elColor;
 	private PosicionAjedrez seleccionado;
 	private Set<PosicionAjedrez> movimientosPosibles;
+	private boolean huboJugada;
 	
 	JugadorHumano(Juego elJuego, ColorPieza elColor) {
 		this.elJuego = elJuego;
 		this.elColor = elColor;
 		seleccionado=null;
+		huboJugada=false;
 	}
 	
 	@Override
 	public void jugar(PosicionAjedrez clickeado) {
+		huboJugada=false;
 		if(seleccionado == null) {
 			if(!elJuego.hayAlgo(clickeado)|| elJuego.queHay(clickeado).dameColor()!=elJuego.dameTurno()) {
 				return;
@@ -33,6 +36,7 @@ class JugadorHumano implements Jugador {
 				if(movimientosPosibles.contains(clickeado)){
 					elJuego.mover(seleccionado, clickeado);
 					seleccionado=null;
+					huboJugada=true;
 
 					if(elJuego.hayAlgoParaCoronar()){
 						NombrePieza pieza = null;
@@ -60,6 +64,11 @@ class JugadorHumano implements Jugador {
 	
 	public Set<PosicionAjedrez> dameCasillerrosPintar(){
 		return movimientosPosibles;
+	}
+
+	@Override
+	public boolean huboUnaJugada() {
+		return huboJugada;
 	}
 	
 
