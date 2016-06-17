@@ -8,30 +8,15 @@ class Jugador implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private ColorPieza color;
-	private int tiempoAcumulado;
-	private long tiempoInicio;
 	
 	public Jugador(ColorPieza color){
 		this.color=color;
-		tiempoAcumulado=0;
 	}
 	
 	public ColorPieza dameColor() {
 		return color;
-	}
-	
-	public void iniciarTiempo(){
-		tiempoInicio = System.nanoTime();
-	}
-	
-	public void pausarTiempo(){
-		long tiempoFinal = System.nanoTime();
-		tiempoAcumulado += (tiempoFinal - tiempoInicio)/1000000000;//lo paso a segundos
-	}
-	
-	public int dameTiempo(){
-		return tiempoAcumulado;
 	}
 
 	@Override

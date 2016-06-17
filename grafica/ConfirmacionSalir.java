@@ -11,7 +11,8 @@ import javafx.stage.Stage;
 
 public class ConfirmacionSalir {
 
-	static boolean resp;
+	private static boolean resp;
+	
 	public static boolean display(){
 		Stage stage= new Stage();
 

@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 import logica.ColorPieza;
 
 public class MensajeGanaste {
+	
+	final static int STAGE_ANCHO = 400;
+	final static int STAGE_ALTO = 300;
+	
 	static boolean resp;
 	
 	public static boolean display(ColorPieza turno){
@@ -40,8 +44,8 @@ public class MensajeGanaste {
 
 		hBox.getChildren().addAll(menu);
 		vBox.getChildren().addAll(label,hBox);
-		stage.setHeight(300);
-		stage.setWidth(400);
+		stage.setHeight(STAGE_ALTO);
+		stage.setWidth(STAGE_ANCHO);
 		Scene scene= new Scene(vBox);
 		
 		scene.getStylesheets().add("/assets/application.css");

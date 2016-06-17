@@ -102,7 +102,7 @@ public class PantallaJuego extends Pane implements Dimensiones{
 	}
 	
 	private PosicionAjedrez aPosAjedrez(int fila, int columna){
-		byte laFila = (byte) (8 - fila);
+		byte laFila = (byte) (TABLERO_FILAS - fila);
 		char laColumna = (char) (columna + 'a');
 		return new PosicionAjedrez(laFila, laColumna);
 	}

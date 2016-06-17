@@ -50,7 +50,7 @@ public class Tablero extends Pane implements Dimensiones {
 	}
 	
 	public void imprimirTablero() {
-		for (byte i = 1; i <= 8; i++) {
+		for (byte i = 1; i <= TABLERO_FILAS; i++) {
 			for (char j = 'a'; j <= 'h'; j++) {
 				PosicionAjedrez pos = new PosicionAjedrez(i, j);
 				borrarPieza(pos);
@@ -62,7 +62,7 @@ public class Tablero extends Pane implements Dimensiones {
 	}
 	
 	private PosicionAjedrez transformar(int fila, int columna){
-		byte laFila = (byte) (8 - fila);
+		byte laFila = (byte) (TABLERO_FILAS - fila);
 		char laColumna = (char) (columna + 'a');
 		return new PosicionAjedrez(laFila, laColumna);
 	}
@@ -70,7 +70,7 @@ public class Tablero extends Pane implements Dimensiones {
 	private PosicionTablero transformar(PosicionAjedrez posAjedrez) {
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
-		int laFila = 8 - fila;
+		int laFila = TABLERO_FILAS - fila;
 		int laColumna = columna - 'a';
 		return new PosicionTablero(laFila, laColumna);
 	}

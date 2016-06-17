@@ -47,13 +47,5 @@ public class PosicionTablero implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	/**PARA TESTING**/
-	
-	public String toString(){
-		return "x: "+posX+"y: "+posY;
-	}
-	
 
 }

@@ -7,6 +7,7 @@ public class PiezaColor implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private NombrePieza elNombre;
 	private ColorPieza elColor;
 	

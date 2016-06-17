@@ -8,6 +8,7 @@ public class Jugada implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private PosicionAjedrez posOrigen, posDestino;
 	private Pieza laPiezaMovida, laPiezaComida;
 	private PosicionAjedrez posOrigenExtra, posDestinoExtra;
@@ -68,9 +69,5 @@ public class Jugada implements Serializable{
 
 	Pieza damePiezaComida() {
 		return laPiezaComida;
-	}
-
-	public String toString() {
-		return "DE " + posOrigen.toString() + " A " + posDestino.toString();
 	}
 }

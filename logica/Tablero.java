@@ -370,7 +370,7 @@ class Tablero implements Serializable{
 	private PosicionTablero transformarPosicion(PosicionAjedrez posAjedrez) {
 		byte fila = posAjedrez.dameFila();
 		char columna = posAjedrez.dameColumna();
-		int laFila = 8 - fila;
+		int laFila = SIZE_TABLERO - fila;
 		int laColumna = columna - 'a';
 		return new PosicionTablero(laFila, laColumna);
 	}
@@ -378,7 +378,7 @@ class Tablero implements Serializable{
 	private PosicionAjedrez transformarPosicion(PosicionTablero posTablero) {
 		int fila = posTablero.getX();
 		int columna = posTablero.getY();
-		byte laFila = (byte) (8 - fila);
+		byte laFila = (byte) (SIZE_TABLERO - fila);
 		char laColumna = (char) (columna + 'a');
 		return new PosicionAjedrez(laFila, laColumna);
 	}

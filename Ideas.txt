@@ -1,7 +1,3 @@
 Cosas que faltan:
 
-Poder guardar y cargar el juego
 Inteligencia artificial (jugar aperturas y pensar)
-Interfaz
-Jugar por tiempo
-Tests

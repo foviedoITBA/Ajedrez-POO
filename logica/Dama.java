@@ -9,6 +9,7 @@ public class Dama extends Pieza {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	private static List<Movimiento> movimientos;
 	
 	static {
