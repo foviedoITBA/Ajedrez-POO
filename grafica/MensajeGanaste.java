@@ -12,10 +12,10 @@ import logica.ColorPieza;
 
 public class MensajeGanaste {
 	
-	final static int STAGE_ANCHO = 400;
-	final static int STAGE_ALTO = 300;
+	private final static int STAGE_ANCHO = 400;
+	private final static int STAGE_ALTO = 300;
 	
-	static boolean resp;
+	private static boolean resp;
 	
 	public static boolean display(ColorPieza turno){
 		Stage stage= new Stage();

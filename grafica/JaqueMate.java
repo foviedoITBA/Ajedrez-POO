@@ -26,6 +26,15 @@ public class JaqueMate {
 		stage.setResizable(false);
 		
 		mp.play();
+		mp.setOnEndOfMedia(new Runnable() {
+
+			@Override
+			public void run() {
+				mp.stop();
+				stage.close();
+			}
+			
+		});
 		
 		//stage.close();
 		
