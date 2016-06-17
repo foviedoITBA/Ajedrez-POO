@@ -102,3 +102,14 @@
 	-fx-font-size:1em;
     -fx-padding:2em;
 }
+.alertaButton{
+	-fx-font-size:1em;
+    -fx-padding:2em;
+}
+.alertaLabel{
+	-fx-font-size:10pt;
+	-fx-text-fill:#B01313;
+}
+.confirmLabel{
+	-fx-font-size:10pt;
+}

@@ -16,29 +16,34 @@ public class ConfirmacionSalir {
 		Stage stage= new Stage();
 
 		Button si= new Button("Si");
+		si.getStyleClass().add("alertaButton");
+		si.getStyleClass().add("squareButton");
 		si.setOnAction(e->{
 			resp=true;
 			stage.close();
 		});
 
 		Button no= new Button("No");
+        no.getStyleClass().add("alertaButton");
+		no.getStyleClass().add("squareButton");
 		no.setOnAction((e->{
 			resp=false;
 			stage.close();
 		}));
 
 		Label label= new Label("¿Desea guardar la partida antes de salir?");
-		VBox vBox= new VBox(20);
+		label.getStyleClass().add("confirmLabel");
+		VBox vBox= new VBox(0);
 		HBox hBox= new HBox(10);
 		hBox.setAlignment(Pos.CENTER);
 		vBox.setAlignment(Pos.CENTER);
 
 		hBox.getChildren().addAll(si,no);
 		vBox.getChildren().addAll(label,hBox);
-		stage.setHeight(100);
+		stage.setHeight(150);
 		stage.setWidth(400);
 		Scene scene= new Scene(vBox);
-		//scene.getStylesheets().add("../assets/application.css");
+        scene.getStylesheets().add("/assets/application.css");
 
 		stage.setScene(scene);
 		stage.initModality(Modality.APPLICATION_MODAL);
