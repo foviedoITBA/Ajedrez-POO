@@ -11,19 +11,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.Stack;
-  
-import org.jdom2.Content;
+ 
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.jdom2.util.IteratorIterable;
 
 import excepcion.ImposibleCargarJugadasException;
 
-import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
@@ -46,7 +42,6 @@ public class Inteligencia {
 	private Random randomGenerator;
 	private boolean pensando;
 	private int jugadasHechas;
-	private int jugadasHechasSinPensar;
 
 	public Inteligencia(Juego elJuego, ColorPieza queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
@@ -69,7 +64,6 @@ public class Inteligencia {
 		randomGenerator = new Random();
 		pensando = false;
 		jugadasHechas = 0;
-		jugadasHechasSinPensar = 0;
 	}
 
 	public void juega() {
@@ -88,14 +82,12 @@ public class Inteligencia {
 			respuestas = selector.getChildren();
 			selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
 			jugadasHechas = 1;
-			jugadasHechasSinPensar = 1;
 			hacerJugada(selector);
 			return;
 		}
 		while(elJuego.cuantasJugadasVan() < jugadasHechas + 1) { // Si se revirtió el juego, tiene que volver por el árbol
 			selector = selector.getParentElement();
 			jugadasHechas--;
-			jugadasHechasSinPensar--;
 		}
 		respuestas = selector.getChildren();
 		ultimaJugada = elJuego.dameUltimaJugada();
@@ -118,7 +110,6 @@ public class Inteligencia {
 			else {
 				selector = respuestas.get(randomGenerator.nextInt(respuestas.size()));
 				jugadasHechas += 2;
-				jugadasHechasSinPensar += 2;
 				hacerJugada(selector);
 			}
 		}
@@ -132,7 +123,6 @@ public class Inteligencia {
 		pensando = true;
 	}
 
-	@Deprecated
 	private void juegaPensando() {
 		if (elJuego.sePuedeEnrocarCorto()) {
 			elJuego.enrocarCorto();
@@ -276,6 +266,8 @@ public class Inteligencia {
 				return PUNTAJE_TORRE;
 			case DAMA:
 				return PUNTAJE_DAMA;
+			case REY:
+				return PUNTAJE_JAQUE_MATE;
 		}
 		return 0;
 	}
