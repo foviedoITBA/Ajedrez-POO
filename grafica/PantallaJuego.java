@@ -75,18 +75,22 @@ public class PantallaJuego extends Pane implements Dimensiones{
 				((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene( new Inicio()));
 			});
 			
-//		enroqueLargo = new MyButton("",680,520,70,70);
+
 			enroqueLargo.setOnAction(e->controlador.enroqueLargo());
 			enroqueLargo.getStyleClass().add("enroqueButton");
 			enroqueLargo.getStyleClass().add("enroqueLargoButton");
 			
-			
-//		enroqueCorto = new MyButton("",770,520,70,70);
 			enroqueCorto.setOnAction(e->controlador.enroqueCorto());
 			enroqueCorto.getStyleClass().add("enroqueButton");
 			enroqueCorto.getStyleClass().add("enroqueCortoButton");
 			
-		this.setOnMouseClicked( e->controlador.jugar( convertirClick( e.getSceneX() , e.getSceneY() ) ) );
+		this.setOnMouseClicked( e->{
+			double x=e.getSceneX();
+			double y=e.getSceneY();
+			if(x>DES_TABLERO_X && x<DES_TABLERO_X+TABLERO_ANCHO && y>DES_TABLERO_Y && y<DES_TABLERO_Y+TABLERO_ALTO){
+				controlador.jugar( convertirClick( x , y ) );
+			}
+		} );
 
 		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,buttonMenu,enroqueCorto,enroqueLargo,elTablero,estado,tabla);
 	}

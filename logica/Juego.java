@@ -1,9 +1,5 @@
 package logica;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayDeque;
 
@@ -33,7 +29,6 @@ public class Juego implements Serializable{
 	private Jugador jugadorBlanco,jugadorNegro;
 	private Jugador jugadorTurno;
 
-	private boolean hayTiempo;
 
 	private  ArrayDeque<Jugada> registro; // Ésta es una pila donde se guardan las jugadas a medida que se hacen
 
@@ -56,7 +51,6 @@ public class Juego implements Serializable{
 		jugadorBlanco=new Jugador(ColorPieza.BLANCO);
 		jugadorNegro=new Jugador(ColorPieza.NEGRO);
 		jugadorTurno = jugadorBlanco;
-		this.hayTiempo = hayTiempo;
 		jugadorTurno.iniciarTiempo();
 		hayCoronacionPendiente = false;
 	}
@@ -119,9 +113,6 @@ public class Juego implements Serializable{
 				}
 			}
 
-			/**TEST**/
-			elTablero.imprimirTablero();
-
 			return laJugada;
 		} else {
 			throw new JugadaInvalidaException();
@@ -148,8 +139,6 @@ public class Juego implements Serializable{
 		jaqueMate = false;
 		ahogado = false;
 
-		/**TEST**/
-		elTablero.imprimirTablero();
 	}
 
 	/** Permite saber si hay jaque mate
@@ -293,8 +282,4 @@ public class Juego implements Serializable{
 	}
 
 
-	/***********************************************SÓLO PARA TEST*****************************************/
-	public void imprimirTablero() {
-		elTablero.imprimirTablero();
-	}
 }

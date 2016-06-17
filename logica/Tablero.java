@@ -525,35 +525,4 @@ class Tablero implements Serializable{
 		return posRey;
 	}
 
-	/***************SÓLO PARA TESTEAR**********************/
-	public void imprimirTablero(){
-		System.out.print("\n\n*************************************************************\n\n");
-		for(int i=0;i<SIZE_TABLERO;i++) {
-			for(int j=0;j<SIZE_TABLERO;j++) {
-
-				if(losCasilleros[i][j].isEmpty()) {
-					System.out.print("0\t");
-				} else {
-					if (losCasilleros[i][j].getPieza() instanceof Torre)
-						System.out.print("T");
-					else if (losCasilleros[i][j].getPieza() instanceof Caballo)
-						System.out.print("C");
-					else if (losCasilleros[i][j].getPieza() instanceof Alfil)
-						System.out.print("A");
-					else if (losCasilleros[i][j].getPieza() instanceof Dama)
-						System.out.print("D");
-					else if (losCasilleros[i][j].getPieza() instanceof Rey)
-						System.out.print("R");
-					else
-						System.out.print("P");
-					if(losCasilleros[i][j].getPieza().dameColor().equals(ColorPieza.BLANCO)){
-						System.out.print("(B)\t");
-					} else {
-						System.out.print("(N)\t");
-					}
-				}
-			}
-			System.out.print("\n");
-		}
-	}
 }

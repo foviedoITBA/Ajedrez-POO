@@ -2,9 +2,6 @@ package grafica;
 
 import java.util.ArrayList;
 
-import interfaz.MyCanvas;
-import interfaz.MyLabel;
-import interfaz.PiezaImagen;
 import javafx.scene.layout.Pane;
 import logica.ColorPieza;
 import logica.Jugada;
