@@ -182,9 +182,11 @@ public class Inteligencia {
 			laMovida.sumarPuntos(puntaje(laComida.dameNombre()));
 		if (elJuego.hayJaqueMate()) {
 			laMovida.sumarPuntos(PUNTAJE_JAQUE_MATE);
+			elJuego.revertir();
 			return;
 		}
 		if (elJuego.hayAhogado()) {
+			elJuego.revertir();
 			return;
 		}
 		Stack<Movida> lasRespuestas = new Stack<>();
