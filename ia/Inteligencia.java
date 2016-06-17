@@ -52,7 +52,7 @@ public class Inteligencia {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
 		colorAdversario = (elColor == ColorPieza.BLANCO ? ColorPieza.NEGRO : ColorPieza.BLANCO);
-		jugadasXML = "ia/Jugadas.xml";
+		jugadasXML = "src/ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		
