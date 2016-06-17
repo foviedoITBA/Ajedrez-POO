@@ -88,3 +88,17 @@
 .enroqueButton.show{
 	-fx-opacity: 1;
 }
+
+.ventanaAhogadoTitle{
+	-fx-background-image: url('ventanaAhogadoTitle.png');
+}
+.ventanaGanarBlancasTitle{
+	-fx-background-image: url('jaqueMateBlancoTitle.png');
+}
+.ventanaGanarNegrasTitle{
+	-fx-background-image: url('jaqueMateNegroTitle.png');
+}
+.ventanaAhogadoButton,.ventanaGanarButton{
+	-fx-font-size:1em;
+    -fx-padding:2em;
+}

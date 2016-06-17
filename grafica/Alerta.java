@@ -13,14 +13,15 @@ public class Alerta {
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(250);
+        window.setHeight(150);
+		window.setWidth(400);
 
         Label label = new Label();
         label.setText(message);
         Button cerrar = new Button("Cerrar");
         cerrar.setOnAction(e -> window.close());
 
-        VBox layout = new VBox(10);
+        VBox layout = new VBox(30);
         layout.getChildren().addAll(label, cerrar);
         layout.setAlignment(Pos.CENTER);
 

@@ -8,45 +8,37 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import logica.ColorPieza;
 
-public class Ganaste {
+public class MensajeAhogado {
 	static boolean resp;
 	
-	public static boolean display(String mensaje, ColorPieza turno){
+	public static boolean display(){
 		Stage stage= new Stage();
 
-		Button si= new Button("Jugar de Nuevo");
-		si.setOnAction(e->{
+		Button menu= new Button("Menu Principal");
+		menu.getStyleClass().add("ventanaAhogadoButton");
+		menu.getStyleClass().add("roundedButton");
+		menu.setOnAction((e->{
 			resp=true;
 			stage.close();
-		});
-
-		Button no= new Button("Menu Principal");
-		no.setOnAction((e->{
-			resp=false;
-			stage.close();
 		}));
-		String ganador;
-		if(turno==ColorPieza.BLANCO){
-			ganador="negro";
-		}else{
-			ganador="blanco";
-		}
 		
-
-		Label label= new Label(mensaje+ " gana jugador: "+ganador+" ¿Desea voler a jugar?");
-		VBox vBox= new VBox(20);
+		
+		Label label= new Label("");
+		label.setPrefSize(300, 180);
+		label.getStyleClass().add("ventanaAhogadoTitle");
+		VBox vBox= new VBox(0);
 		HBox hBox= new HBox(10);
 		hBox.setAlignment(Pos.CENTER);
 		vBox.setAlignment(Pos.CENTER);
 
-		hBox.getChildren().addAll(si,no);
+		hBox.getChildren().addAll(menu);
 		vBox.getChildren().addAll(label,hBox);
-		stage.setHeight(100);
+		stage.setHeight(300);
 		stage.setWidth(400);
 		Scene scene= new Scene(vBox);
-		//scene.getStylesheets().add("../assets/application.css");
+		
+		scene.getStylesheets().add("/assets/application.css");
 
 		stage.setScene(scene);
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -54,5 +46,6 @@ public class Ganaste {
 		stage.showAndWait();
 
 		return resp;
-}
 	}
+}
+

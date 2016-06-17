@@ -1,5 +1,6 @@
 package grafica;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -31,8 +32,10 @@ public class GuardarPartida {
 		guardar.getStyleClass().add("squareButton");
 		guardar.setOnAction(e->{
 			String fileName = file.getText();
-			guardar(juego, cantJugadores, color,fileName);
-			stage.close();
+			if(guardar(juego, cantJugadores, color,fileName)){
+				stage.close();
+			}
+			
 		});
 
 		Button cancelar= new Button("Cancelar");
@@ -57,8 +60,9 @@ public class GuardarPartida {
 		stage.showAndWait();
 	}
 	
-	private static void guardar(Juego juego, int cantJugadores, ColorPieza color, String nombreFile){
+	private static boolean guardar(Juego juego, int cantJugadores, ColorPieza color, String nombreFile){
 		nombreFile = nombreFile+".chess";
+		
 		try{
 			FileOutputStream file = new FileOutputStream(nombreFile,false);
 			ObjectOutputStream juegoGuardado = new ObjectOutputStream(file);
@@ -66,8 +70,13 @@ public class GuardarPartida {
 			juegoGuardado.writeInt(cantJugadores);
 			juegoGuardado.writeObject(color);
 			juegoGuardado.close();
+		}catch(FileNotFoundException e){
+			Alerta.display("Oh oh! Algo salio mal...", "El archivo cargado no se puede leer.");
+			return false;
 		}catch(IOException e){
-			System.out.println(e.getMessage());
+			Alerta.display("Oh oh! Algo salio mal...", "Se ha producido un error al intentar cargar el archivo.");
+			return false;
 		}
+		return true;
 	}
 }
