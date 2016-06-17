@@ -33,6 +33,8 @@ public class Jugada implements Serializable{
 	}
 
 	public PiezaColor damePiezaColorComida() {
+		if (laPiezaComida == null)
+			return null;
 		return new PiezaColor(laPiezaComida.dameNombre(),laPiezaComida.dameColor());
 	}
 	

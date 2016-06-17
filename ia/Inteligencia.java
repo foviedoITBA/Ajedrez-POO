@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.Stack;
   
 import org.jdom2.Content;
 import org.jdom2.Document;
@@ -28,8 +29,16 @@ import java.util.Random;
 
 public class Inteligencia {
 
+	private static final int PUNTAJE_PEON = 1;
+	private static final int PUNTAJE_CABALLO = 3;
+	private static final int PUNTAJE_ALFIL = 3;
+	private static final int PUNTAJE_TORRE = 5;
+	private static final int PUNTAJE_DAMA = 9;
+	private static final int PUNTAJE_JAQUE_MATE = 100;
+
 	private Juego elJuego;
 	private ColorPieza elColor;
+	private ColorPieza colorAdversario;
 	private String jugadasXML;
 	private SAXBuilder jdomBuilder;
 	private Document jugadasDocument;
@@ -42,7 +51,8 @@ public class Inteligencia {
 	public Inteligencia(Juego elJuego, ColorPieza queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
-		jugadasXML = "src/ia/Jugadas.xml";
+		colorAdversario = (elColor == ColorPieza.BLANCO ? ColorPieza.NEGRO : ColorPieza.BLANCO);
+		jugadasXML = "ia/Jugadas.xml";
 		jdomBuilder = new SAXBuilder();
 		jugadasDocument = null;
 		
@@ -63,8 +73,15 @@ public class Inteligencia {
 	}
 
 	public void juega() {
-		if (elJuego.hayJaqueMate() || elJuego.hayAhogado())
-			return;
+		//freno la ejecucion entre 2 y 5 segundos para que la ia no juegue tan rapido
+		Random rand = new Random();
+		int time = (rand.nextInt(3) + 2 ) * 1000;
+		try {
+			Thread.sleep(time);
+		} catch(InterruptedException ex) {
+		    Thread.currentThread().interrupt();
+		}
+		
 		if (pensando == false)
 			juegaSinPensar();
 		else
@@ -134,7 +151,7 @@ public class Inteligencia {
 			elJuego.enrocarLargo();
 			return;
 		}
-		List<PosicionAjedrez> posicionesDondeTengoPiezasQueSePuedenMover = new ArrayList<>();
+		Stack<Movida> posiblesMovidas = new Stack<>();
 		for (byte fila = 1; fila <= 8; fila++) {
 			for (char columna = 'a'; columna <= 'h'; columna++) {
 				PosicionAjedrez laPosicion = new PosicionAjedrez(fila, columna);
@@ -142,23 +159,92 @@ public class Inteligencia {
 					continue;
 				if (elJuego.queHay(laPosicion).dameColor() != this.elColor)
 					continue;
-				Set<PosicionAjedrez> losDestinos = elJuego.dameMovimientos(laPosicion);
-				if (!losDestinos.isEmpty())
-					posicionesDondeTengoPiezasQueSePuedenMover.add(laPosicion);
+				Set<PosicionAjedrez> posicionesPosibles = elJuego.dameMovimientos(laPosicion);
+				if (posicionesPosibles.isEmpty())
+					continue;
+				Iterator<PosicionAjedrez> iterador = posicionesPosibles.iterator();
+				while(iterador.hasNext()) {
+					Movida unaMovida = new Movida(0, laPosicion, iterador.next());
+					analizarMovida(unaMovida);
+					posiblesMovidas.push(unaMovida);
+				}
 			}
 		}
-		PosicionAjedrez posOrigen = posicionesDondeTengoPiezasQueSePuedenMover.get(randomGenerator.nextInt(posicionesDondeTengoPiezasQueSePuedenMover.size()));
-		int numeroAlAzar = randomGenerator.nextInt(elJuego.dameMovimientos(posOrigen).size());
-		Iterator<PosicionAjedrez> iterador = elJuego.dameMovimientos(posOrigen).iterator();
-		while(numeroAlAzar >= 1) {
-			iterador.next();
-			numeroAlAzar--;
+		Movida laMejor = posiblesMovidas.pop();
+		Movida aux = null;
+		while(!posiblesMovidas.empty()) {
+			aux = posiblesMovidas.pop();
+			if (laMejor.damePuntaje() < aux.damePuntaje())
+				laMejor = aux;
 		}
-		elJuego.mover(posOrigen, iterador.next());
-		if (elJuego.hayAlgoParaCoronar())
-			elJuego.coronar(NombrePieza.DAMA);
+		hacerMovida(laMejor);
 	}
 
+	private void analizarMovida(Movida laMovida) {
+		Jugada laJugada = elJuego.mover(laMovida.damePosOrigen(), laMovida.damePosDestino());
+		if (elJuego.hayAlgoParaCoronar()) {
+			elJuego.coronar(NombrePieza.DAMA);
+			laMovida.sumarPuntos(PUNTAJE_DAMA - PUNTAJE_PEON);
+		}
+		PiezaColor laComida = laJugada.damePiezaColorComida();
+		if (laComida != null)
+			laMovida.sumarPuntos(puntaje(laComida.dameNombre()));
+		if (elJuego.hayJaqueMate()) {
+			laMovida.sumarPuntos(PUNTAJE_JAQUE_MATE);
+			return;
+		}
+		if (elJuego.hayAhogado()) {
+			return;
+		}
+		Stack<Movida> lasRespuestas = new Stack<>();
+		for (byte fila = 1; fila <= 8; fila++) {
+			for (char columna = 'a'; columna <= 'h'; columna++) {
+				PosicionAjedrez laPosicion = new PosicionAjedrez(fila, columna);
+				if (!elJuego.hayAlgo(laPosicion))
+					continue;
+				if (elJuego.queHay(laPosicion).dameColor() != colorAdversario)
+					continue;
+				Set<PosicionAjedrez> posicionesPosibles = elJuego.dameMovimientos(laPosicion);
+				if (posicionesPosibles.isEmpty())
+					continue;
+				Iterator<PosicionAjedrez> iterador = posicionesPosibles.iterator();
+				while(iterador.hasNext()) {
+					Movida unaRespuesta = new Movida(0, laPosicion, iterador.next());
+					Jugada laOtraJugada = elJuego.mover(unaRespuesta.damePosOrigen(), unaRespuesta.damePosDestino());
+					if (elJuego.hayAlgoParaCoronar()) {
+						elJuego.coronar(NombrePieza.DAMA);
+						unaRespuesta.sumarPuntos(PUNTAJE_DAMA - PUNTAJE_PEON);
+					}
+					PiezaColor laOtraComida = laOtraJugada.damePiezaColorComida();
+					if (laOtraComida != null) {
+						unaRespuesta.sumarPuntos(puntaje(laOtraComida.dameNombre()));
+					}
+					lasRespuestas.push(unaRespuesta);
+					if (elJuego.hayJaqueMate()) {
+						unaRespuesta.sumarPuntos(PUNTAJE_JAQUE_MATE);
+					}
+					elJuego.revertir();
+				}
+			}
+		}
+		Movida laMejorRespuesta = lasRespuestas.pop();
+		Movida aux = null;
+		while(!lasRespuestas.empty()) {
+			aux = lasRespuestas.pop();
+			if (laMejorRespuesta.damePuntaje() < aux.damePuntaje())
+				laMejorRespuesta = aux;
+		}
+		laMovida.restarPuntos(laMejorRespuesta.damePuntaje());
+		elJuego.revertir();
+	}
+
+	private void hacerMovida(Movida laMovida) {
+		elJuego.mover(laMovida.damePosOrigen(), laMovida.damePosDestino());
+		if (elJuego.hayAlgoParaCoronar()) {
+			elJuego.coronar(NombrePieza.DAMA);
+		}
+	}
+	
 	private Element buscarJugada(List<Element> jugadas, Jugada laJugada) {
 		String filaOrigen = Character.toString((char)(((char) laJugada.damePosicionOrigen().dameFila()) + '0'));
 		String columnaOrigen = Character.toString(laJugada.damePosicionOrigen().dameColumna());
@@ -184,4 +270,53 @@ public class Inteligencia {
 		PosicionAjedrez posDestino = new PosicionAjedrez(filaDestino, columnaDestino);
 		elJuego.mover(posOrigen, posDestino);
 	}
+
+	private int puntaje(NombrePieza pieza) {
+		switch(pieza) {
+			case PEON:
+				return PUNTAJE_PEON;
+			case CABALLO:
+				return PUNTAJE_CABALLO;
+			case ALFIL:
+				return PUNTAJE_ALFIL;
+			case TORRE:
+				return PUNTAJE_TORRE;
+			case DAMA:
+				return PUNTAJE_DAMA;
+		}
+		return 0;
+	}
+
+	class Movida {
+		private int puntaje;
+		private PosicionAjedrez posOrigen;
+		private PosicionAjedrez posDestino;
+
+		Movida(int puntaje, PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
+			this.puntaje = puntaje;
+			this.posOrigen = posOrigen;
+			this.posDestino = posDestino;
+		}
+
+		int damePuntaje() {
+			return puntaje;
+		}
+
+		PosicionAjedrez damePosOrigen() {
+			return posOrigen;
+		}
+
+		PosicionAjedrez damePosDestino() {
+			return posDestino;
+		}
+
+		void sumarPuntos(int puntos) {
+			puntaje += puntos;
+		}
+
+		void restarPuntos(int puntos) {
+			puntaje -= puntos;
+		}
+	}
+
 }
