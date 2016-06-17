@@ -7,7 +7,7 @@ public class EmptyRegisterException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public EmptyRegisterException() {
-		super();
+		super("El registro esta vacio");
 	}
 	
 	public EmptyRegisterException(String msg){

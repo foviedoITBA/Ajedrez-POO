@@ -8,7 +8,7 @@ public class PosAjedrezInvalidaException extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 
 	public PosAjedrezInvalidaException(){
-		super();
+		super("Posicion invalida");
 	}
 	
 	public PosAjedrezInvalidaException(String msg){

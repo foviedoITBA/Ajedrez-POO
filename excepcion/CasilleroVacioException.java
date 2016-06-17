@@ -8,7 +8,7 @@ public class CasilleroVacioException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public CasilleroVacioException(){
-		super();
+		super("Casillero vacio");
 	}
 	
 	public CasilleroVacioException(String msg){
