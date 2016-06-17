@@ -2,10 +2,12 @@ package logica;
 
 import java.io.Serializable;
 
-import excepcion.PosAjedrezInvalidaException;
-
 public class PosicionTablero implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int posX, posY;
 	
 	public PosicionTablero(int posX, int posY){

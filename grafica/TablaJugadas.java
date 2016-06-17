@@ -15,6 +15,7 @@ public class TablaJugadas extends Pane implements Dimensiones{
 	private MyLabel label[],number[];
 	private PiezaImagen imagenes;
 	private MyCanvas canvas[],comidas[];
+	private int fila;
 	
 	public TablaJugadas(){
 		this.setPrefSize(JUGADAS_ANCHO, JUGADS_ALTO);
@@ -29,6 +30,7 @@ public class TablaJugadas extends Pane implements Dimensiones{
 		comidas = new MyCanvas[10];
 		label= new MyLabel[10];
 		number = new MyLabel[10];
+		fila=0;
 	}
 	
 	public void agregarJugada(Jugada jugada){
@@ -37,6 +39,12 @@ public class TablaJugadas extends Pane implements Dimensiones{
 	}
 	
 	public void removerJugada(){
+		if(!jugadas.isEmpty()){
+			jugadas.remove(jugadas.size()-1);
+			fila--;
+			this.getChildren().removeAll(number[fila],label[fila],canvas[fila],comidas[fila]);
+			imprimrJugada();
+		}
 		
 	}
 	
@@ -48,24 +56,22 @@ public class TablaJugadas extends Pane implements Dimensiones{
 			index=jugadas.size()-10;
 		}
 		
-		for(int i=0;i<jugadas.size() && i<10;i++, index++){
+		for(fila=0; fila<jugadas.size() && fila<10;fila++, index++){
 			Jugada jugada=jugadas.get(index);
-			int desfasajeX = 0, desfasajeY = i/2;
-			if(jugada.damePiezaColorMovida().dameColor() == ColorPieza.BLANCO){
-				desfasajeY = i/2;
-			}else{//agrego en segunda columna
+			int desfasajeX = 0, desfasajeY = fila/2;
+			if(jugada.damePiezaColorMovida().dameColor() == ColorPieza.NEGRO){
 				desfasajeX = 120;
-				desfasajeY = (i-1)/2;
 			}
 
-			this.getChildren().removeAll(number[i],label[i],canvas[i],comidas[i]);
-			canvas[i]= new MyCanvas(imagenes.dameImagen(jugada.damePiezaColorMovida()),28+desfasajeX,30*desfasajeY + 5,18,18);
+			this.getChildren().removeAll(number[fila],label[fila],canvas[fila],comidas[fila]);
+			canvas[fila]= new MyCanvas(imagenes.dameImagen(jugada.damePiezaColorMovida()),28+desfasajeX,30*desfasajeY + 5,18,18);
 			if(jugada.hayPiezaComida()){
-				comidas[i]= new MyCanvas(imagenes.dameImagen(jugada.damePiezaColorComida()),100+desfasajeX,30*desfasajeY + 5,18,18);
-				this.getChildren().add(comidas[i]);
+				comidas[fila]= new MyCanvas(imagenes.dameImagen(jugada.damePiezaColorComida()),100+desfasajeX,30*desfasajeY + 5,18,18);
+				this.getChildren().add(comidas[fila]);
 			}
-			label[i]=new MyLabel(jugada.damePosicionOrigen()+" - "+jugada.damePosicionDestino(),50+desfasajeX,30*desfasajeY + 5,80,20);
-			this.getChildren().addAll(/*number[i],*/label[i],canvas[i]);
+			number[fila]=new MyLabel((index+1)+".",10+desfasajeX,30*desfasajeY + 5,20,20);
+			label[fila]=new MyLabel(jugada.damePosicionOrigen()+" - "+jugada.damePosicionDestino(),50+desfasajeX,30*desfasajeY + 5,80,20);
+			this.getChildren().addAll(number[fila],label[fila],canvas[fila]);
 		}
 	}
 }

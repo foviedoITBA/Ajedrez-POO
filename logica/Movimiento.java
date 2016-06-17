@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Movimiento implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int movX, movY;
 	/* comiendo: indica si se puede mover capturando en esa dirección
 	 * sinComer: indica si se puede mover sin capturar en esa dirección

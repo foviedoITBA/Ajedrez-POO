@@ -19,6 +19,11 @@ saber si hay jaque, etc. El controlador (la clase juego) es el único que invoca
 */
 class Tablero implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private final static int SIZE_TABLERO=8;
 
 	private Casillero[][] losCasilleros;	// Una matriz de casilleros, uno por cada escaque

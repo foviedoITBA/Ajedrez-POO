@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 class Jugador implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ColorPieza color;
 	private int tiempoAcumulado;
 	private long tiempoInicio;

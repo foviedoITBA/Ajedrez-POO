@@ -5,6 +5,10 @@ import java.util.List;
 
 public abstract class Pieza implements Serializable{
 		
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ColorPieza elColor;
 	private int cantMov;
 	/* Para poder enrocar, hace falta que no se hayan movido ni el rey ni la torre que enroca.

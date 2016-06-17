@@ -23,6 +23,11 @@ import java.util.Set;
  */
 public class Juego implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Tablero elTablero; // Esta es una referencia al tablero
 
 	private Jugador jugadorBlanco,jugadorNegro;

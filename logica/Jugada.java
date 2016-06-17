@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class Jugada implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private PosicionAjedrez posOrigen, posDestino;
 	private Pieza laPiezaMovida, laPiezaComida;
 	private PosicionAjedrez posOrigenExtra, posDestinoExtra;

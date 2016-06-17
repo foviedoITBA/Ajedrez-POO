@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Peon extends Pieza {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/* Los movimientos de los peones no son miembros de clase
 	 * porque el peón se mueve distinto según si ya se movió o no
 	 * y según el color, entonces es una característica de cada peón.

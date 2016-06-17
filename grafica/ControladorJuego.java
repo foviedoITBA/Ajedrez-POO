@@ -47,7 +47,8 @@ public class ControladorJuego {
 	
 	public void deshacerJugada(){
 		if(elJuego.huboUnaJugada()){
-			if(esUnJugador){
+			actualizoJugadorTurno();
+			if(esUnJugador && jugadorTurno instanceof JugadorHumano){
 				elJuego.revertir();
 				tabla.removerJugada();
 			}
@@ -61,6 +62,7 @@ public class ControladorJuego {
 	public void enroqueLargo(){
 		if(elJuego.sePuedeEnrocarLargo()){
 			elJuego.enrocarLargo();
+			tabla.agregarJugada(elJuego.dameUltimaJugada());
 			elTablero.imprimirTablero();
 			estado.actualizarEstado();
 		}
@@ -69,6 +71,7 @@ public class ControladorJuego {
 	public void enroqueCorto(){
 		if(elJuego.sePuedeEnrocarCorto()){
 			elJuego.enrocarCorto();
+			tabla.agregarJugada(elJuego.dameUltimaJugada());
 			elTablero.imprimirTablero();
 			estado.actualizarEstado();
 		}

@@ -3,6 +3,10 @@ package logica;
 import java.io.Serializable;
 
 public class Casillero implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Pieza pieza;
 
 	public Casillero(Pieza pieza){
