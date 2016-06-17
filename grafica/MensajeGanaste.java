@@ -8,42 +8,43 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import logica.ColorPieza;
 
-public class ConfirmacionSalir {
-
+public class MensajeGanaste {
 	static boolean resp;
-	public static boolean display(){
+	
+	public static boolean display(ColorPieza turno){
 		Stage stage= new Stage();
 
-		Button si= new Button("Si");
-		si.getStyleClass().add("alertaButton");
-		si.getStyleClass().add("squareButton");
-		si.setOnAction(e->{
+		Button menu= new Button("Menu Principal");
+		menu.getStyleClass().add("ventanaGanarButton");
+		menu.getStyleClass().add("roundedButton");
+		menu.setOnAction((e->{
 			resp=true;
-			stage.close();
-		});
-
-		Button no= new Button("No");
-        no.getStyleClass().add("alertaButton");
-		no.getStyleClass().add("squareButton");
-		no.setOnAction((e->{
-			resp=false;
 			stage.close();
 		}));
 
-		Label label= new Label("¿Desea guardar la partida antes de salir?");
-		label.getStyleClass().add("confirmLabel");
+		Label label= new Label("");
+		label.setPrefSize(300, 180);
+		
+		if(turno==ColorPieza.BLANCO){
+			label.getStyleClass().add("ventanaGanarNegrasTitle");
+		}else{
+			label.getStyleClass().add("ventanaGanarBlancasTitle");
+		}
+		
 		VBox vBox= new VBox(0);
 		HBox hBox= new HBox(10);
 		hBox.setAlignment(Pos.CENTER);
 		vBox.setAlignment(Pos.CENTER);
 
-		hBox.getChildren().addAll(si,no);
+		hBox.getChildren().addAll(menu);
 		vBox.getChildren().addAll(label,hBox);
-		stage.setHeight(150);
+		stage.setHeight(300);
 		stage.setWidth(400);
 		Scene scene= new Scene(vBox);
-        scene.getStylesheets().add("/assets/application.css");
+		
+		scene.getStylesheets().add("/assets/application.css");
 
 		stage.setScene(scene);
 		stage.initModality(Modality.APPLICATION_MODAL);
@@ -51,7 +52,5 @@ public class ConfirmacionSalir {
 		stage.showAndWait();
 
 		return resp;
-
-
 	}
 }

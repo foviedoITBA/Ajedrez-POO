@@ -1,9 +1,11 @@
 package grafica;
 
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import logica.ColorPieza;
 import logica.Juego;
 
@@ -59,14 +61,18 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 			this.getChildren().remove(img);
 			img = new MyCanvas(new Image("/assets/ahogado.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
-			Ganaste.display("Ahogado", juego.dameTurno());
+			if(MensajeAhogado.display()){
+				((Stage)(this.getScene().getWindow())).setScene(new Scene(new Inicio()));
+			}
 		}
 		if(juego.hayJaqueMate()){
 			this.getChildren().remove(img);
 			img = new MyCanvas(new Image("/assets/jaqueMate.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
 			JaqueMate.display();
-			Ganaste.display("Jaque mate", juego.dameTurno());
+			if(MensajeGanaste.display(juego.dameTurno())){
+				((Stage)(this.getScene().getWindow())).setScene(new Scene(new Inicio()));
+			}
 		}
 		
 		if(juego.sePuedeEnrocarCorto()){

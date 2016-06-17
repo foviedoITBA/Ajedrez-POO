@@ -2,6 +2,7 @@ package grafica;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -46,7 +47,7 @@ public class Inicio extends Pane {
 		buttonCargarPartida.getStyleClass().add("roundedButton");
 		buttonCargarPartida.setOnAction(e -> {
 			String nombreArchivo = pedirArchivo();
-			if(cargar(nombreArchivo)){
+			if(nombreArchivo != null && cargar(nombreArchivo)){
 				((Stage)(((Node) e.getSource()).getScene().getWindow())).setScene(new Scene(new PantallaJuego(juego,cantJugadores,colorElegido)));
 			}
 		});
@@ -63,7 +64,10 @@ public class Inicio extends Pane {
 	private String pedirArchivo(){
 		FileChooser fileChooser = new FileChooser();
 		File file = fileChooser.showOpenDialog(new Stage());
-		return file.getName();
+		if(file != null){
+			return file.getName();
+		}
+		return null;
 	}
 	
 	private boolean cargar(String nombreArchivo){
@@ -78,11 +82,16 @@ public class Inicio extends Pane {
 			
 			juegoCargado.close();
 			
+		} catch (FileNotFoundException e){
 			
-		} catch (IOException | ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alerta.display("Oh oh! Algo salio mal...", "El archivo cargado no se puede leer.");
 			return false;
+			
+		} catch (ClassNotFoundException | IOException e) {
+			
+			Alerta.display("Oh oh! Algo salio mal...", "Se ha producido un error al intentar cargar el archivo.");
+			return false;
+			
 		}
 		return true;
 		
