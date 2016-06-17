@@ -69,7 +69,6 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 			this.getChildren().remove(img);
 			img = new MyCanvas(new Image("/assets/jaqueMate.png"),0,0,EST_ANCHO,EST_ALTO);
 			this.getChildren().add(img);
-			JaqueMate.display();
 			if(MensajeGanaste.display(juego.dameTurno())){
 				((Stage)(this.getScene().getWindow())).setScene(new Scene(new Inicio()));
 			}
