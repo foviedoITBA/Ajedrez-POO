@@ -3,11 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo de una Pieza del tipo Alfil.
+ */
 public class Alfil extends Pieza {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private static List<Movimiento> movimientos;
@@ -23,7 +23,11 @@ public class Alfil extends Pieza {
 		movimientos.add(arribaIzquierda);
 		movimientos.add(abajoIzquierda);
 	}
-		
+	
+	/**
+	 * Crea una pieza del tipo Alfil.
+	 * @param color Recibe el color de la pieza.
+	 */
 	public Alfil(ColorPieza color){
 		super(color);
 	}

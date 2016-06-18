@@ -14,7 +14,7 @@ class Jugador implements Serializable{
 	
 	/**
 	 * Crea un jugador con el color indicado.
-	 * @param color - El color de las piezas del jugador.
+	 * @param color El color de las piezas del jugador.
 	 */
 	public Jugador(ColorPieza color){
 		this.color=color;

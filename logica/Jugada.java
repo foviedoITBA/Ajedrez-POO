@@ -120,7 +120,7 @@ public class Jugada implements Serializable{
 
 	/**
 	 * Indica la pieza extra que se ha movido en el enroque. M&eacute;todo solo disponible para el paquete logica.
-	 * @return Devuelve la @see Pieza que se movi&oacute en el enroque;
+	 * @return Devuelve la @see Pieza que se movi&oacute; en el enroque;
 	 */
 	Pieza damePiezaMovidaExtra() {
 		return piezaExtra;

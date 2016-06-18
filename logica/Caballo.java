@@ -3,11 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo de una Pieza del tipo Caballo.
+ */
 public class Caballo extends Pieza{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private static List<Movimiento> movimientos;
@@ -32,6 +32,10 @@ public class Caballo extends Pieza{
 		movimientos.add(dosArribaUnoIzquierda);
 	}
 
+	/**
+	 * Crea una pieza del tipo Caballo.
+	 * @param color Recibe el color de la pieza.
+	 */
 	public Caballo(ColorPieza color){
 		super(color);
 	}

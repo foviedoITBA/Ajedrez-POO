@@ -3,11 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo de una Pieza del tipo  Peon.
+ */
 public class Peon extends Pieza {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	/* Los movimientos de los peones no son miembros de clase
@@ -18,6 +18,10 @@ public class Peon extends Pieza {
 	private Movimiento adelante;
 	private int avance; // Cambia según si es blanco o negro
 	
+	/**
+	 * Crea una pieza del tipo Peon.
+	 * @param color Recibe el color de la pieza.
+	 */
 	public Peon(ColorPieza color) {
 		super(color);
 		movimientos = new ArrayList<>(3);
