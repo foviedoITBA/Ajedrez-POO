@@ -23,6 +23,12 @@ import excepcion.ImposibleCargarJugadasException;
 import java.util.ListIterator;
 import java.util.Random;
 
+/**	Esta clase modela una inteligencia artificial para el ajedrez
+	Tiene dos modos de decisión de jugadas:
+	inicialmente, utiliza un árbol de jugadas predefinidas cargadas
+	desde un XML con la librería Jdom; en cuanto éstas se agotan, comienza a utilizar un
+	algoritmo basado en la regla de decisión minimax para determinar su siguiente jugada.
+*/
 public class Inteligencia {
 
 	private static final int PUNTAJE_PEON = 1;
@@ -43,6 +49,11 @@ public class Inteligencia {
 	private boolean pensando;
 	private int jugadasHechas;
 
+	/**	Construye una nueva inteligencia artificial lista para jugar. Como espera que el juego esté en su estado inicial, no se puede instanciar en medio de un juego.
+	@param elJuego Una referencia a la instancia del controlador de que se está utilizando para el juego.
+	@param queColorEs El color que le toca ser a la IA.
+	@throws ImposibleCargarJugadasException Se lanza en caso de que no se pueda cargar el XML con jugadas predefinidas.
+	*/
 	public Inteligencia(Juego elJuego, ColorPieza queColorEs) throws ImposibleCargarJugadasException {
 		this.elJuego = elJuego;
 		elColor = queColorEs;
@@ -66,6 +77,8 @@ public class Inteligencia {
 		jugadasHechas = 0;
 	}
 
+	/**	Hace que la inteligencia realice una jugada
+	*/
 	public void juega() {
 		if (pensando == false)
 			juegaSinPensar();
