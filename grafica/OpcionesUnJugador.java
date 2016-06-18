@@ -14,7 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
@@ -23,8 +22,7 @@ import logica.ColorPieza;
 
 public class OpcionesUnJugador extends Pane{
 	
-	private Label titulo,tiempoLabel,blancaLabel,negraLabel;
-	private CheckBox tiempo;
+	private Label titulo,blancaLabel,negraLabel;
 	private Button iniciarJuego;
 	private RadioButton blanca,negra;
 
