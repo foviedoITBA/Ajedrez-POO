@@ -1,5 +1,8 @@
 package grafica;
-
+/**
+ * La clase MyLabel es una nueva clase descendiente de Label. 
+ * En su constructor recibe: un texto, posicion en x, posicion en y, ancho y alto.
+ */
 import javafx.scene.control.Label;
 
 public class MyLabel extends Label {

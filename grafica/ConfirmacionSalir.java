@@ -1,5 +1,10 @@
 package grafica;
-
+/**
+ * La clase ConfirmacionSalir es la clase de ofrece la posibilidad de abandonar la partida o seguirla.
+ * Tiene como unica variable un boolean resp, el cual representa la confirmacion y negaciones de abandonar 
+ * la partida. Esta variable privada statica es tambien variable de retorno del metodo display().
+ * Los botones si y no son los responsables de la asignacion buleana a la variable reps dependiendo de las acciones del jugador.
+ */
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

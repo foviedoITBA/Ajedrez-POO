@@ -1,31 +1,57 @@
 package tests;
 
 import static org.junit.Assert.*;
+/**
+ * La clase JuegoTest en la encargada de testear la clase Juego, {@link logica.Juego}
+ */
 
 import java.util.Set;
 
 import org.junit.Test;
 
 import logica.*;
-
 public class JuegoTest {
 
 	@Test
 	public void TestJuego(){
+		Juego juegoNull = null;
+		try{
+			juegoNull.cuantasJugadasVan();
+			juegoNull.dameMovimientos(new PosicionAjedrez((byte)2,'d'));
+			juegoNull.dameMovimientos(null);
+			juegoNull.dameTurno();
+			juegoNull.enrocarCorto();
+			juegoNull.enrocarLargo();
+			juegoNull.mover(new PosicionAjedrez((byte)2,'d'), new PosicionAjedrez((byte)4,'d'));
+			juegoNull.mover(null, null);
+			juegoNull.enrocarLargo();
+			juegoNull.revertir();
+			juegoNull.coronar(NombrePieza.DAMA);
+			juegoNull.coronar(null);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		/*
+		 * este try catch fue colocado para probar si alguno de estos metodos tira una excepcion
+		 * al ejecutarse debido a que juegoNull es null. Todos los metodos devuelven null en este caso. 
+		 */
+		
 		Juego juego = new Juego();
 		assertTrue(juego.huboUnaJugada()==false);
 		juego.mover(new PosicionAjedrez((byte)2,'d'), new PosicionAjedrez((byte)4,'d'));
 		juego.mover(new PosicionAjedrez((byte)7,'e'), new PosicionAjedrez((byte)5,'e'));
 		juego.mover(new PosicionAjedrez((byte)4,'d'), new PosicionAjedrez((byte)5,'e'));
-		/* 
-		 * hago tres movimientos en el juego
-		 */
 		assertEquals(juego.cuantasJugadasVan(),3);
 		assertEquals(juego.dameTurno(),ColorPieza.NEGRO);
 		assertEquals(juego.hayAhogado(),false);
 		assertEquals(juego.huboUnaJugada(),true);
 		juego.revertir();
 		assertEquals(juego.huboUnaJugada(),true);
+		/*
+		 * creo una nueva instancia de juego y juego tres veces para representar un juego posible
+		 * testeo los metodos de juego a los cuales puedo acceder desde la instancia creada  para
+		 * corroborar lo que devuelven cada una
+		 */
 		try{
 			juego.mover(new PosicionAjedrez((byte)4,'d'), new PosicionAjedrez((byte)7,'d'));
 			juego.queHay(new PosicionAjedrez((byte)4,'d'));
@@ -34,7 +60,9 @@ public class JuegoTest {
 			System.out.println(e.getMessage());
 		}
 		/*
-		 * trato de moverme aa una posicion invalida
+		 * envuelvo en un try catch las acciones que podrian tirar excepciones para comprobar que
+		 * son las excepciones adecuadas a cada caso.
+		 * Realizo un movimiento invalido para corroborar el mensaje de la excepcion
 		 */
 		assertEquals(juego.hayAlgo(new PosicionAjedrez((byte)5,'e')),true);
 		assertEquals(juego.hayAlgo(new PosicionAjedrez((byte)5,'d')),false);
@@ -94,7 +122,7 @@ public class JuegoTest {
 		juegoAhogado.revertir();
 		assertEquals(juegoAhogado.hayAhogado(),false);
 		/* 
-		 * muevo las piezas de juego2 de tal forma que haya ahogado
+		 * muevo las piezas de juegoAhogado de tal forma que haya ahogado
 		 * pregunto
 		 * deshago una partida entonces se que no hay ahogado
 		 * pregunto 
@@ -114,7 +142,7 @@ public class JuegoTest {
 		juegoCoronar.coronar(NombrePieza.DAMA);
 		assertEquals(juegoCoronar.hayAlgoParaCoronar(),false);
 		/*
-		 * muevo las piezas de juego3 de tal forma que se corone a un peon
+		 * muevo las piezas de juegoCoronar de tal forma que se corone a un peon
 		 * pregunto
 		 * corono, y no hay mas nada para coronar
 		 * pregunto
@@ -133,7 +161,7 @@ public class JuegoTest {
 		assertEquals(juegoJaqueMate.hayJaqueMate(),false);
 		assertEquals(juegoJaqueMate.hayJaque(),false);
 		/*
-		 * muevo las piezas de juego4 de tal forma que haya jaqueMate
+		 * muevo las piezas de juegoJaqueMate de tal forma que haya jaqueMate
 		 * pregunto
 		 * revierto
 		 * pregunto
@@ -154,7 +182,7 @@ public class JuegoTest {
 		assertEquals(juegoJaque.hayJaqueMate(),false);
 		assertEquals(juegoJaque.hayJaque(),false);
 		/*
-		 * muevo las piezas de juego4 de tal forma que haya jaque pero no jaqueMate
+		 * muevo las piezas de juegoJaque de tal forma que haya jaque pero no jaqueMate
 		 * pregunto
 		 * revierto
 		 * pregunto

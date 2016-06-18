@@ -1,5 +1,11 @@
 package grafica;
-
+/**
+ * La clase CoronacionPieza extiende la clase Pane. Esta clase tiene una variable privada estatica de tipo NombrePieza 
+ * llamada seleccionada, la cual representa la pieza a la que se quiere coronar un peon.
+ * Por el metodo display() se crea un nuevo Stage, el cual contendra: un label titulo, siendo la imagen del nombre del juego,
+ * los botones torre, alfil, caballo y dama, para que el jugador elija a que pieza desear coronar y la variable seleccionada
+ * sera tambien variable de retorno de este mismo metodo.
+ */
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -2,6 +2,8 @@ package logica;
 
 import java.io.Serializable;
 
+import excepcion.JugadaInvalidaException;
+
 public class PosicionTablero implements Serializable{
 	
 	/**
@@ -11,8 +13,15 @@ public class PosicionTablero implements Serializable{
 	private int posX, posY;
 	
 	public PosicionTablero(int posX, int posY){
+		if(!esValido(posX,posY)){
+			throw new JugadaInvalidaException();
+		}
 		this.posX=posX;
 		this.posY=posY;
+	}
+	
+	private boolean esValido(int posX, int posY){
+		return (posX < 0 || posX > 7 || posY < 0 || posY > 7)?false:true;
 	}
 	
 	public int getX(){

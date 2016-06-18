@@ -1,7 +1,10 @@
+
+/**
+ * Esta clase comprueba el buen funcionamiento de la clase Pieza y todos sus descendientes al igual que sus respectivos metodos. 
+ */
 package tests;
 import logica.*;
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 public class PiezasTest {
 
@@ -62,7 +65,6 @@ public class PiezasTest {
 			assertEquals(mov.esComiendo(),true);
 			assertEquals(mov.esSaltando(),true);
 		}
-		
 	}
 	
 	@Test

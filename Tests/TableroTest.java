@@ -3,8 +3,9 @@ package tests;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-
-import excepcion.CoronacionInvalidaException;
+/**
+ * La clase TableroTest es la encargada de testear las clases Movimiento, {@link logica.Movimiento} y Casillero {@link logica.Casillero}
+ */
 import logica.*;
 public class TableroTest {
 	
@@ -12,7 +13,7 @@ public class TableroTest {
 	@Test
 	public void testMovimiento() {
 		
-		Movimiento m = new Movimiento(8,6,true,true,false,10);//no tendria que poderse hacer
+		Movimiento m = new Movimiento(7,4,true,true,false,10);
 		System.out.println("EsComiendo:"+m.esComiendo()+"	EsSinComer:"+m.esSinComer());
 		assertEquals(m.dameMovX(),8);
 		assertEquals(m.dameMovY(),6);
@@ -30,14 +31,4 @@ public class TableroTest {
 		c.addPieza(rey);
 		assertEquals(c.getPieza(),rey);
 	}
-	
-//	@Test
-//	public void testTablero()
-//	//no lo puedo hacer porque tablero es privado
-//		Tablero tablero = new Tablero();
-//		Pieza peon = new Peon(ColorPieza.BLANCO);
-//		assertEquals(peon.puedoCoronar(8),true);
-//		tablero.moverPieza(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)8,'a'));
-//		assertEquals(tablero.esMovimientoPosible(new PosicionAjedrez((byte)2,'a'), new PosicionAjedrez((byte)8,'a')),false);
-//	}
 }

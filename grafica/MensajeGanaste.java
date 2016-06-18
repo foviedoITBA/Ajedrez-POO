@@ -1,5 +1,8 @@
 package grafica;
-
+/**
+ * La clase MensajeGanaste es la encargada de comunicarle al jugador que gano o perdio la partida mediante el metodo display() el cual
+ * toma como parametro el color del ultimo jugador que jugo, el ganador.
+ */
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

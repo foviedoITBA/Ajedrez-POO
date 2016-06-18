@@ -1,5 +1,7 @@
 package grafica;
-
+/**
+ * La clase Main es la clase principal, encargada de llamar al metodo start y comenzar el juego.
+ */
 
 import javafx.application.Application;
 import javafx.scene.Scene;

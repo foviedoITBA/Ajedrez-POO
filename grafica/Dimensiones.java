@@ -1,5 +1,8 @@
 package grafica;
-
+/**
+ *La interfaz Dimensiones fue creada con el objetivo de reducir la cantidad de apariciones 
+ *de las mismas constantes en el codigo. Contiene constantes de posiciones en x, en y, anchos y altos.
+ */
 public interface Dimensiones {
 	final static double DES_TABLERO_X=100;
 	final static double DES_TABLERO_Y=150;

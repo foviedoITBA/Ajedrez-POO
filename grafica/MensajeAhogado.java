@@ -1,5 +1,9 @@
 package grafica;
-
+/**
+ * La clase MensajeAhogado tiene como finalidad comunicar al jugador que la partida finalizo sin ganador alguno
+ * ya que no se pueden llevar a cabo mas movimientos. El metodo display() es el encargado de destinar el mensaje 
+ * mediante la escena correspondiente.
+ */
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
