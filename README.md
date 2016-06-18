@@ -5,3 +5,5 @@ Es necesario compilar el juego agregando todos los archivos .jar de la carpeta m
 Esto se puede hacer facilmente desde eclipse dirigiendose a las propiedades del proyecto->Java Build Path->Libraries->Add External JARs
 
 El metodo main del juego se encuentra en el paquete grafica, en la clase Main.java
+
+Cuadno se elige el modo de un jugador, para que la IA juegue hay que clickear el tablero.
