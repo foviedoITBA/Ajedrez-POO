@@ -7,6 +7,10 @@ import logica.ColorPieza;
 import logica.NombrePieza;
 import logica.PiezaColor;
 
+/**
+ * Pieza Imagen es un HashMap que dada una {@link PiezaColor} devuelve su Imagen
+ *
+ */
 public class PiezaImagen {
 	HashMap<PiezaColor,Image> imagenes;
 	public PiezaImagen(){

@@ -9,6 +9,12 @@ import javafx.stage.Stage;
 import logica.ColorPieza;
 import logica.Juego;
 
+/**
+ *  Clase que es un panel que muestra de quien es el turno, si es jaque, hubo jaque mate o
+ *  hay que coronar.
+ * @author segundofarina
+ *
+ */
 public class EstadoDeJuego extends Pane implements Dimensiones {
 	
 	
@@ -30,7 +36,9 @@ public class EstadoDeJuego extends Pane implements Dimensiones {
 		
 		actualizarEstado();
 	}
-	
+	/**
+	 * actualiza en el turno actual el estado del juego
+	 */
 	public void actualizarEstado(){	
 		if(juego.dameTurno() == ColorPieza.BLANCO){
 			this.getChildren().removeAll(img);

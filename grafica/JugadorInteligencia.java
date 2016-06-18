@@ -4,7 +4,11 @@ import ia.Inteligencia;
 import logica.ColorPieza;
 import logica.Juego;
 import logica.PosicionAjedrez;
-
+/**
+ * Clase que implementa Jugador y crea una inteligenia artificial y 
+ * su metodo jugar hace que la ia juegue
+ *
+ */
 class JugadorInteligencia implements Jugador {
 
 	private Inteligencia ia;
