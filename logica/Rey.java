@@ -3,11 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo de una Pieza del tipo Rey.
+ */
 public class Rey extends Pieza {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static List<Movimiento> movimientos;
 
@@ -32,6 +32,10 @@ public class Rey extends Pieza {
 		// Faltaría implementar la posibilidad de enroque
 	}
 	
+	/**
+	 * Crea una pieza del tipo Rey.
+	 * @param color Recibe el color de la pieza.
+	 */
 	public Rey(ColorPieza color){
 		super(color);
 	}

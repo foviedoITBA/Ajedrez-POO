@@ -3,11 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Modelo de una Pieza del tipo Dama.
+ */
 public class Dama extends Pieza {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	private static List<Movimiento> movimientos;
@@ -31,7 +31,11 @@ public class Dama extends Pieza {
 		movimientos.add(izquierda);
 		movimientos.add(derecha);
 	}
-
+	
+	/**
+	 * Crea una pieza del tipo Dama.
+	 * @param color Recibe el color de la pieza.
+	 */
 	public Dama(ColorPieza color){
 		super(color);
 	}

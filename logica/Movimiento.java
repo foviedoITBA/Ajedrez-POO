@@ -2,25 +2,29 @@ package logica;
 
 import java.io.Serializable;
 
+/**
+ * Modelo de un movimiento que puede realizar cada pieza.
+ * En este se almacena toda la informaci&oacute;n de como se desplazan las piezas por el tablero,
+ * incluyendo direcci&oacute;n, y en que casos se puede mover hacia esa direcci&oacute;n.
+ */
 public class Movimiento implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private int movX, movY;
-	/* comiendo: indica si se puede mover capturando en esa dirección
-	 * sinComer: indica si se puede mover sin capturar en esa dirección
-	 * (Los peones se mueven sin comer hacia adelante pero comiendo en diagonal)
-	 * saltando: indica si necesita tener casilleros libres en el medio o no
-	 * (El caballo puede saltar, mientras que el alfil no)
-	 * unaVez: indica cuántas veces se puede mover en esa dirección
-	 * (El Rey tiene el mismo movimiento que la dama, salvo que el rey lo hace una vez y la dama todas las que quiera
-	*/
+
 	private boolean comiendo, sinComer, saltando;
 	private int cantidad;
 
+	/**
+	 * Crea un Movimiento en el que se especifica como y en que casos se puede mover una pieza.
+	 * @param movX Indica el sentido en el que se puede mover en X.
+	 * @param movY Indica el sentido en el que se puede mover en Y.
+	 * @param comiendo Indica si se puede mover capturando en esa direcci&oacute;n
+	 * @param sinComer Indica si se puede mover sin capturar en esa direcci&oacute;n
+	 * @param saltando Indica si necesita tener casilleros libres en el medio o no.
+	 * @param cantidad Indica cu&aacute;ntas veces se puede mover en esa direcci&oacute;n
+	 */
 	public Movimiento(int movX, int movY, boolean comiendo, boolean sinComer, boolean saltando, int cantidad){
 		this.movX = movX;
 		this.movY = movY;
@@ -30,34 +34,66 @@ public class Movimiento implements Serializable{
 		this.cantidad = cantidad;
 	}
 
+	/**
+	 * Crea un Movimiento en base a un Movimiento.
+	 * @param otroMovimiento Recibe un Movimiento.
+	 */
 	public Movimiento(Movimiento otroMovimiento) {
 		this(otroMovimiento.movX,otroMovimiento.movY,otroMovimiento.comiendo,otroMovimiento.sinComer,otroMovimiento.saltando,otroMovimiento.cantidad);
 	}
 	
+	/**
+	 * Indica el Movimiento en el sentido X.
+	 * @return Devuelve la direcci&oacute;n del movimiento.
+	 */
 	public int dameMovX(){
 		return movX;
 	}
 	
+	/**
+	 * Indica el Movimiento en el sentido Y.
+	 * @return Devuelve la direcci&oacute;n del movimiento.
+	 */
 	public int dameMovY(){
 		return movY;
 	}
 	
+	/**
+	 * Indica si se mueve comiendo.
+	 * @return Devuelve <tt>true</tt> si se mueve comiendo, sino devuelve <tt>false</tt>.
+	 */
 	public boolean esComiendo() {
 		return comiendo;
 	}
 
+	/**
+	 * Indica si se mueve sin comer.
+	 * @return Devuelve <tt>true</tt> si se mueve sin comer, sino devuelve <tt>false</tt>.
+	 */
 	public boolean esSinComer() {
 		return sinComer;
 	}
 
+	/**
+	 * Indica si se mueve saltando.
+	 * @return Devuelve <tt>true</tt> si se mueve saltando, sino devuelve <tt>false</tt>.
+	 */
 	public boolean esSaltando() {
 		return saltando;
 	}
 
+	/**
+	 * Indica si se mueve una sola vez en cada direcci&oacute;n.
+	 * @return Devuelve <tt>true</tt> si se mueve una sola vez, sino devuelve <tt>false</tt>.
+	 */
 	public boolean esUnaVez() {
 		return 1==cantidad;
 	}
 
+	/**
+	 * Indica la cantidad de veces que se puede mover en una misma direcci&oacute;n.
+	 * @return Devuelve la cantidad de veces que se puede mover.
+	 */
 	public int cantidadDeVeces(){
 		return cantidad;
 	}

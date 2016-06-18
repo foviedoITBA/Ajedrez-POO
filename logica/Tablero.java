@@ -307,8 +307,9 @@ class Tablero implements Serializable{
 	}
 
 	/** Las piezas del color dado enrocan corto
-	@throws CoronacionPendienteException Se lanza si todav&iacute;a est&aacute; pendiente coronar
 	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
+	@param elColor Recibe el color a enrocar.
+	@return Devuelve la jugada enrocada.
 	*/
 	Jugada enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
 		if (!puedeEnrocarCorto(elColor))
@@ -317,8 +318,9 @@ class Tablero implements Serializable{
 	}
 
 	/** Las piezas del color dado enrocan corto
-	@throws CoronacionPendienteException Se lanza si todav&iacute;a est&aacute; pendiente coronar
 	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
+	@param elColor Recibe el color a enrocar.
+	@return Devuelve la jugada enrocada.
 	*/
 	Jugada enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {
 		if (!puedeEnrocarLargo(elColor))	
