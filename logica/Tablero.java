@@ -12,16 +12,13 @@ import excepcion.EnroqueInvalidoException;
 
 
 /**	Esta clase es el componente fundamental del modelo (en el sentido MVC) del programa de ajedrez.
-Es la representación del tablero físico y es la única que sabe dónde están ubicadas las piezas.
-Por esto, es la única clase que puede interactuar directamente con ellas, y debe consecuentemente
-administrar toda la información que éstas puedan proveerle para validar jugadas, hacerlas, revertirlas, coronar,
-saber si hay jaque, etc. El controlador (la clase juego) es el único que invoca directamente métodos de esta clase.
+Es la representaci&oacute;n del tablero f&iacute;sico y es la &uacute;nica que sabe d&oacute;nde est&aacute;n ubicadas las piezas.
+Por esto, es la &uacute;nica clase que puede interactuar directamente con ellas, y debe consecuentemente
+administrar toda la informaci&oacute;n que &eacute;stas puedan proveerle para validar jugadas, hacerlas, revertirlas, coronar,
+saber si hay jaque, etc. El controlador (la clase juego) es el &uacute;nico que invoca directamente m&eacute;todos de esta clase.
 */
 class Tablero implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private final static int SIZE_TABLERO=8;
@@ -35,19 +32,19 @@ class Tablero implements Serializable{
 		initTablero();
 	}
 
-	/**	Permite saber si una posición está ocupada
-	@param posAjedrez La posición a inspeccionar
-	@return true si está ocupada
+	/**	Permite saber si una posici&oacute;n est&aacute; ocupada
+	@param posAjedrez La posici&oacute;n a inspeccionar
+	@return true si est&aacute; ocupada
 	*/
 	boolean hayAlgo(PosicionAjedrez posAjedrez) {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
 		return !losCasilleros[posTablero.getX()][posTablero.getY()].isEmpty();
 	}
 	
-	/**	Permite saber qué pieza y de qué color se encuentra ocupando una determinada posición
-	@param posAjedrez La posición a inspeccionar
+	/**	Permite saber qu&eacute; pieza y de qu&eacute; color se encuentra ocupando una determinada posici&oacute;n
+	@param posAjedrez La posici&oacute;n a inspeccionar
 	@return Un objeto PiezaColor con el nombre de la pieza y el color
-	@throws CasilleroVacioException Se lanza si el casillero está vacío; debe censarse previamente para evitarlo
+	@throws CasilleroVacioException Se lanza si el casillero est&aacute; vac&iacute;o; debe censarse previamente para evitarlo
 	*/
 	PiezaColor queHay(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
@@ -60,10 +57,10 @@ class Tablero implements Serializable{
 		return new PiezaColor(elNombre, elColor);
 	}
 
-	/**	Permite saber a qué posiciones puede ir la pieza que se encuentre en la posición solicitada
-	@param posAjedrez La posición a inspeccionar
+	/**	Permite saber a qu&eacute; posiciones puede ir la pieza que se encuentre en la posici&oacute;n solicitada
+	@param posAjedrez La posici&oacute;n a inspeccionar
 	@return Un Set de objetos PosicionAjedrez con todas las posiciones a las que puede ir la pieza
-	@throws CasilleroVacioException Se lanza si el casillero está vacío; debe censarse previamente para evitarlo
+	@throws CasilleroVacioException Se lanza si el casillero est&aacute; vac&iacute;o; debe censarse previamente para evitarlo
 	*/
 	Set<PosicionAjedrez> damePosicionesPosibles(PosicionAjedrez posAjedrez) throws CasilleroVacioException {
 		PosicionTablero posTablero = transformarPosicion(posAjedrez);
@@ -79,11 +76,11 @@ class Tablero implements Serializable{
 		return lasPosicionesAjedrez;
 	}
 
-	/**	Permite saber si es posible que la pieza en una determinada posición vaya a otra
-	@param posOrigen La posición en la que se encuentra la pieza que se desearía mover
-	@param posDestino La posición a la que se quiere saber si puede ir
+	/**	Permite saber si es posible que la pieza en una determinada posici&oacute;n vaya a otra
+	@param posOrigen La posici&oacute;n en la que se encuentra la pieza que se desear&iacute;a mover
+	@param posDestino La posici&oacute;n a la que se quiere saber si puede ir
 	@return true si el movimiento es posible
-	@throws CasilleroVacioException Se lanza si el casillero de posOrigen está vacío; debe censarse previamente para evitarlo
+	@throws CasilleroVacioException Se lanza si el casillero de posOrigen est&aacute; vac&iacute;o; debe censarse previamente para evitarlo
 	*/
 	boolean esMovimientoPosible(PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
 		PosicionTablero posOrigenT = transformarPosicion(posOrigen);
@@ -100,9 +97,9 @@ class Tablero implements Serializable{
 		return false;
 	}
 	
-	/**	Realiza el movimiento de la pieza en una determinada posición a otra
-	@param posOrigen La posición de la pieza que se desea mover
-	@param posDestino La posición a la que se desea que vaya la pieza
+	/**	Realiza el movimiento de la pieza en una determinada posici&oacute;n a otra
+	@param posOrigen La posici&oacute;n de la pieza que se desea mover
+	@param posDestino La posici&oacute;n a la que se desea que vaya la pieza
 	@return Un objeto Jugada con la jugada realizada
 	*/
 	Jugada moverPieza(PosicionAjedrez posOrigen, PosicionAjedrez posDestino) {
@@ -140,25 +137,25 @@ class Tablero implements Serializable{
 		}
 	}
 	
-	/**	Permite saber si un jugador está en jaque mate
-	@param perdedor El color de las piezas del jugador que se desea saber si está en jaque mate
-	@return true si está en jaque mate
+	/**	Permite saber si un jugador est&aacute; en jaque mate
+	@param perdedor El color de las piezas del jugador que se desea saber si est&aacute; en jaque mate
+	@return true si est&aacute; en jaque mate
 	*/
 	boolean hayJaqueMate(ColorPieza perdedor) {
 		return (hayJaque(perdedor) && !hayMovimientosPosibles(perdedor));
 	}
 
-	/**	Permite saber si un jugador está ahogado
-	@param ahogado El color de las piezas del jugador que se desea saber si está ahogado
-	@return true si está ahogado
+	/**	Permite saber si un jugador est&aacute; ahogado
+	@param ahogado El color de las piezas del jugador que se desea saber si est&aacute; ahogado
+	@return true si est&aacute; ahogado
 	*/
 	boolean hayAhogado(ColorPieza ahogado) {
 		return (!hayJaque(ahogado) && !hayMovimientosPosibles(ahogado));
 	}
 
-	/** Permite saber si un determinado jugador está en jaque
-	@param jaqueado El color de las piezas del jugador que se desea saber si está en jaque
-	@return true si está en jaque
+	/** Permite saber si un determinado jugador est&aacute; en jaque
+	@param jaqueado El color de las piezas del jugador que se desea saber si est&aacute; en jaque
+	@return true si est&aacute; en jaque
 	*/
 	boolean hayJaque(ColorPieza jaqueado) {
 		PosicionTablero posRey = buscoAlRey(jaqueado);
@@ -176,8 +173,8 @@ class Tablero implements Serializable{
 		return estaEnJaque;
 	}
 
-	/**	Permite saber si hay alguna coronación pendiente por hacer (es decir, si se debe elegir una pieza)
-	@return true si hay coronación pendiente
+	/**	Permite saber si hay alguna coronaci&oacute;n pendiente por hacer (es decir, si se debe elegir una pieza)
+	@return true si hay coronaci&oacute;n pendiente
 	*/
 	boolean hayAlgoParaCoronar() {
 		boolean hayAlgo = false;
@@ -194,7 +191,7 @@ class Tablero implements Serializable{
 	/**	Permite elegir el color y la pieza a coronar
 	@param laPieza El nombre de la pieza
 	@param elColor El color de la pieza
-	@throws CoronacionInvalidaException Se lanza si la coronación solicitada no es válida, ya sea por no haber coronación pendiente para ese jugador o por elegir una pieza inválida como un rey
+	@throws CoronacionInvalidaException Se lanza si la coronaci&oacute;n solicitada no es v&aacute;lida, ya sea por no haber coronaci&oacute;n pendiente para ese jugador o por elegir una pieza inv&aacute;lida como un rey
 	*/
 	void coronar(NombrePieza laPieza, ColorPieza elColor) throws CoronacionInvalidaException {
 		boolean encontrado = false;
@@ -310,7 +307,7 @@ class Tablero implements Serializable{
 	}
 
 	/** Las piezas del color dado enrocan corto
-	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws CoronacionPendienteException Se lanza si todav&iacute;a est&aacute; pendiente coronar
 	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
 	*/
 	Jugada enrocarCorto(ColorPieza elColor) throws EnroqueInvalidoException {
@@ -320,7 +317,7 @@ class Tablero implements Serializable{
 	}
 
 	/** Las piezas del color dado enrocan corto
-	@throws CoronacionPendienteException Se lanza si todavía está pendiente coronar
+	@throws CoronacionPendienteException Se lanza si todav&iacute;a est&aacute; pendiente coronar
 	@throws EnroqueInvalidoException Se lanza si no es posible enrocar corto; se debe censar previamente para prevenirlo
 	*/
 	Jugada enrocarLargo(ColorPieza elColor) throws EnroqueInvalidoException {

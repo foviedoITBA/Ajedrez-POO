@@ -2,19 +2,28 @@ package logica;
 
 import java.io.Serializable;
 
+/**
+ * Modelo de un jugador donde se indica el color de sus piezas.
+ * 
+ */
 class Jugador implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private ColorPieza color;
 	
+	/**
+	 * Crea un jugador con el color indicado.
+	 * @param color - El color de las piezas del jugador.
+	 */
 	public Jugador(ColorPieza color){
 		this.color=color;
 	}
 	
+	/**
+	 * Devuelve el color de las piezas del jugador. 
+	 * @return El @see ColorPieza del jugador.
+	 */
 	public ColorPieza dameColor() {
 		return color;
 	}

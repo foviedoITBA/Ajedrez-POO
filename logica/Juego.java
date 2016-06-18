@@ -19,9 +19,6 @@ import java.util.Set;
  */
 public class Juego implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private Tablero elTablero; // Esta es una referencia al tablero
@@ -39,11 +36,8 @@ public class Juego implements Serializable{
 
 	/** Instancia una nueva partida lista para ser jugada
 	 */
-	public Juego() {
-		this(false);
-	}
 	
-	public Juego(boolean hayTiempo){
+	public Juego(){
 		elTablero = new Tablero();
 		registro = new ArrayDeque<Jugada>();
 		jaqueMate=false;
