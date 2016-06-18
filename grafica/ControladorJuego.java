@@ -4,6 +4,12 @@ import logica.ColorPieza;
 import logica.Juego;
 import logica.PosicionAjedrez;
 
+/**
+ * Clase que adimitstra las entradas del usurario y verifica con el {@link Juego} el flujo
+ * del juego 
+ * 
+ *
+ */
 public class ControladorJuego {
 	private Jugador jugadorBlanco, jugadorNegro, jugadorTurno;
 	private Juego elJuego;
@@ -12,7 +18,15 @@ public class ControladorJuego {
 	private EstadoDeJuego estado;
 	private TablaJugadas tabla;
 	
-	
+	/**
+	 * Constructor del Juego que si es un jugador 
+	 * @param cantJugadores
+	 * @param colorElegido
+	 * @param tablero referencia al {@link Tablero}
+	 * @param elJuego referencia al Juego
+	 * @param estado referencia al {@link EstadoDeJuego}
+	 * @param tabla refercnia a la {@link TablaJugadas}
+	 */
 	public ControladorJuego (int cantJugadores,ColorPieza colorElegido, Tablero tablero,Juego elJuego,EstadoDeJuego estado,TablaJugadas tabla){
 		this.elJuego=elJuego;
 		esUnJugador = (cantJugadores == 1);
@@ -35,7 +49,9 @@ public class ControladorJuego {
 		
 	}
 	
-	
+	/**
+	 * actualiza el juagador con el turno actual
+	 */
 	private void actualizoJugadorTurno(){
 		if(elJuego.dameTurno() == ColorPieza.BLANCO){
 			jugadorTurno = jugadorBlanco;
@@ -44,7 +60,10 @@ public class ControladorJuego {
 		}
 	}
 	
-	
+	/**
+	 * Método que deshcae la jugada y en caso de jugar contra una inteligencia artificial lo
+	 * hace dos veces.
+	 */
 	public void deshacerJugada(){
 		if(elJuego.huboUnaJugada()){
 			actualizoJugadorTurno();
@@ -59,6 +78,9 @@ public class ControladorJuego {
 		}
 	}
 	
+	/**
+	 * Metodo que si es posible hace el enroque largo
+	 */
 	public void enroqueLargo(){
 		if(elJuego.sePuedeEnrocarLargo()){
 			elJuego.enrocarLargo();
@@ -68,6 +90,9 @@ public class ControladorJuego {
 		}
 	}
 	
+	/**
+	 * Metodo que si es posible hace el enroque corto
+	 */
 	public void enroqueCorto(){
 		if(elJuego.sePuedeEnrocarCorto()){
 			elJuego.enrocarCorto();
@@ -77,6 +102,10 @@ public class ControladorJuego {
 		}
 	}
 	
+	/**
+	 * Hace que el jugador con el turno actual juegue y luego imprime la jugada
+	 * @param pos
+	 */
 	public void jugar(PosicionAjedrez pos){
 		actualizoJugadorTurno();
 

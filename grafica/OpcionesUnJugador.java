@@ -23,7 +23,6 @@ public class OpcionesUnJugador extends Pane{
 	RadioButton blanca,negra;
 
 	private ColorPieza color;
-//	private boolean hayTiempo;
 	
 	public OpcionesUnJugador(){
 		
@@ -57,13 +56,6 @@ public class OpcionesUnJugador extends Pane{
 				blanca.setSelected(true);
 			}
 		});
-		
-
-//		tiempoLabel = new MyLabel("Juego con limite de tiempo",180,340,340,60);
-//		tiempoLabel.setPadding(new Insets(25));
-//		tiempoLabel.getStyleClass().add("squareButton");
-//		
-//		tiempo = new MyCheckBox(470,353,100,50);
 
 		iniciarJuego = new MyButton(" Jugar ",225,490,250,60);
 		iniciarJuego.getStyleClass().add("roundedButton");
@@ -81,8 +73,6 @@ public class OpcionesUnJugador extends Pane{
 			}else{
 				color=ColorPieza.NEGRO;
 			}
-			
-		//	hayTiempo = tiempo.isSelected();
 			
 			Scene escena = new Scene(new PantallaJuego(1,color));
 			escena.getStylesheets().add(getClass().getResource("../assets/application.css").toExternalForm());

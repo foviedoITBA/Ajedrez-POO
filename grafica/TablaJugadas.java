@@ -6,6 +6,12 @@ import javafx.scene.layout.Pane;
 import logica.ColorPieza;
 import logica.Jugada;
 
+/**
+ * TablaJugadas es el panel que muestra en pantalla las ultimas diez jugadas 
+ * que se hicieronConsta de un array que guarda las {@link Jugada}s del Juego,
+ * y vectores de Label y canvas para dibujar las imagenes;
+ *
+ */
 public class TablaJugadas extends Pane implements Dimensiones{
 	
 	private ArrayList<Jugada> jugadas;
@@ -14,6 +20,9 @@ public class TablaJugadas extends Pane implements Dimensiones{
 	private MyCanvas canvas[],comidas[];
 	private int fila;
 	
+	/**
+	 * Constructor que incializa variables
+	 */
 	public TablaJugadas(){
 		this.setPrefSize(JUGADAS_ANCHO, JUGADS_ALTO);
 		this.setTranslateX(DES_JUGADAS_X);
@@ -29,12 +38,18 @@ public class TablaJugadas extends Pane implements Dimensiones{
 		number = new MyLabel[TABLA_JUGADAS];
 		fila=0;
 	}
-	
+	/**
+	 * Guarda la jugada en el array e imprime la tabla
+	 * @param jugada a guardar
+	 */
 	public void agregarJugada(Jugada jugada){
 		jugadas.add(jugada);
 		imprimrJugada();
 	}
 	
+	/**
+	 * Remueve la ultima jugada del array y borra la ultima jugada impresa
+	 */
 	public void removerJugada(){
 		if(!jugadas.isEmpty()){
 			jugadas.remove(jugadas.size()-1);
@@ -45,6 +60,10 @@ public class TablaJugadas extends Pane implements Dimensiones{
 		
 	}
 	
+	/**
+	 *  Imprime las ultimas diez jugadas en dos columnas diferenciando en una columna
+	 *  piezas negras y otra piezas blancas.
+	 */
 	public void imprimrJugada(){
 		int index;
 		if(jugadas.size()<TABLA_JUGADAS){

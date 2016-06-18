@@ -10,7 +10,13 @@ import javafx.stage.Stage;
 import logica.ColorPieza;
 import logica.Juego;
 import logica.PosicionAjedrez;
-
+/**
+ * PantallaJuego es la pantalla de juego principal donde se grafican los
+ * distintos botones de la pantalla, el {@link Tablero}, la {@link TablaJugadas} y el
+ * {@link EstadoDeJuego} y crea al {@link Juego}
+ * 
+ *
+ */
 public class PantallaJuego extends Pane implements Dimensiones{
 
 	private ControladorJuego controlador;
@@ -23,10 +29,24 @@ public class PantallaJuego extends Pane implements Dimensiones{
 	private int cantJugadores;
 	private ColorPieza colorElegido;
 	
+	/**
+	 *  Constructor para crear una pantalla de Juego con un juego nuevo
+	 *  se llama a si mismo con un juego null para indicar que hay que crear un juego nuevo
+	 * @param cantJugadores cantidad de jugadores humanos
+	 * @param colorElegido color de piezas que elijio el usuario en caso
+	 * 			de ser dos jugadores es blanco.
+	 */
 	public PantallaJuego(int cantJugadores, ColorPieza colorElegido){
 		this(null,cantJugadores,colorElegido);
 	}
 	
+	/**
+	 * Constructor que inicializa el Juego si es null como un juego nuevo sino como el pasado 
+	 * por parametro.
+	 * @param juego
+	 * @param cantJugadores
+	 * @param colorElegido
+	 */
 	public PantallaJuego(Juego juego,int cantJugadores, ColorPieza colorElegido){
 		this.cantJugadores = cantJugadores;
 		this.colorElegido = colorElegido;
@@ -51,6 +71,9 @@ public class PantallaJuego extends Pane implements Dimensiones{
 		inicializarMenu();
 	}
 	
+	/**
+	 * crea los botones y valida los clicks hechos en el tablero
+	 */
 	private void inicializarMenu(){
 		Label titulo = new MyLabel("",200,20,500,100);
 			titulo.setAlignment(Pos.TOP_CENTER);
@@ -95,12 +118,23 @@ public class PantallaJuego extends Pane implements Dimensiones{
 		this.getChildren().addAll(titulo,buttonGuardarPartida,buttonDeshacer,buttonMenu,enroqueCorto,enroqueLargo,elTablero,estado,tabla);
 	}
 	
+	/**
+	 * Convierte de una posicion de pixeles a {@link PosicionAjedrez}
+	 * @param x
+	 * @param y
+	 * @return PosicionAjedrez
+	 */
 	private PosicionAjedrez convertirClick(double x, double y){
 		int fila= (int) ((y-DES_TABLERO_Y)/CASILLERO_ALTO);
 		int columna= (int) ((x-DES_TABLERO_X)/CASILLERO_ANCHO);
 		return aPosAjedrez(fila, columna);
 	}
-	
+	/**
+	 * Convierte de una poscion de Tablero a una {@link PosicionAjedrez}
+	 * @param fila
+	 * @param columna
+	 * @return
+	 */
 	private PosicionAjedrez aPosAjedrez(int fila, int columna){
 		byte laFila = (byte) (TABLERO_FILAS - fila);
 		char laColumna = (char) (columna + 'a');
